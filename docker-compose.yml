@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  node-app:
+    build: .
+    image: beehave-node-api
+    env_file:
+      - .env
+    command: yarn dev 
+    ports:
+      - '4000:4000'
+    volumes:
+      - .:/usr/src/beehave-node-api
+    networks:
+      - node-network
+
+networks:
+  node-network:
+    driver: bridge
