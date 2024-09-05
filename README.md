@@ -1,4 +1,4 @@
-# Node.js Rest API boilerplate for beehive
+# Node.js Rest API boilerplate
 
 Node.js, express, Typescript and mongoDB project boilerplate
 
