@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 const copy = promisify(ncp);
 
-async function copyFiles(source, destination) {
+async function copyFiles(source:any, destination:any) {
   return copy(source, destination);
 };
 
