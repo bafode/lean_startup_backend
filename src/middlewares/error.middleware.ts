@@ -10,7 +10,7 @@ const errorConverter = (err: any, req: Request, res: Response, next: NextFunctio
   if (!(error instanceof ApiError)) {
     const statusCode =
       error.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
-    const message = error.message || httpStatus[statusCode];
+    const message = error.message ;
     error = new ApiError(statusCode, message, false, err.stack);
   }
   next(error);
