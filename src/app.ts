@@ -37,6 +37,7 @@ app.use(compression());
 
 // Serve static files from the 'uploads' directory
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Enable request logging for development and production debugging
   app.use(morgan("dev"));
