@@ -38,9 +38,9 @@ app.use(compression());
 // Serve static files from the 'uploads' directory
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
-if (process.env.NODE_ENV === "development") {
+// Enable request logging for development and production debugging
   app.use(morgan("dev"));
-}
+
 
 // enable cors
 app.use(cors());
