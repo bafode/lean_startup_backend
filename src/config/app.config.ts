@@ -69,4 +69,9 @@ export default {
   email: {
     sendgridAPIKey: envVars.SENDGRID_API_KEY,
   },
+  cloudinary: {
+    cloud_name: envVars.CLOUDINARY_CLOUD_NAME,
+    api_key: envVars.CLOUDINARY_API_KEY,
+    api_secret: envVars.CLOUDINARY_API_SECRET,
+  },
 };
