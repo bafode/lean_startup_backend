@@ -13,10 +13,10 @@ const createPost = catchReq(async (req: IAppRequest, res: Response) => {
     throw new ApiError(httpStatus.BAD_REQUEST, "No files uploaded");
   }
   const files: Express.Multer.File[] = req.files as Express.Multer.File[];
+ 
+  // Map over the files and extract their Cloudinary URLs
   data.media = files.map((file: Express.Multer.File) => {
-    const isImage = file.mimetype.startsWith("image/");
-    const pathPrefix = isImage ? "uploads/images" : "uploads/files";
-    return `${pathPrefix}/${file.filename}`;
+    return file.path; // The Cloudinary URL is in the `path` property of each file
   });
   const post = await postService.createPost(data);
   res.status(httpStatus.CREATED).send({
@@ -52,9 +52,10 @@ const updatePost = catchReq(async (req: Request, res: Response) => {
 
   if (req.files) {
     const files: Express.Multer.File[] = req.files as Express.Multer.File[];
-    updatedPostData.media = files.map(
-      (file: Express.Multer.File) => `uploads/images/${file.filename}`
-    );
+    // Map over the files and extract their Cloudinary URLs
+    updatedPostData.media = files.map((file: Express.Multer.File) => {
+      return file.path; // Cloudinary URL is available in the `path` property
+    });
   }
 
   const post = await postService.updatePostById(
