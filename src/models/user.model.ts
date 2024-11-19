@@ -32,7 +32,7 @@ const userSchema: Schema<IUserDocument> = new Schema(
     },
     avatar: {
       type: String,
-      default:'uploads/default.png'
+      default:'https://res.cloudinary.com/dtqimnssm/image/upload/v1730063749/images/media-1730063756706.jpg'
     },
     description: {
       type: String,
@@ -57,6 +57,26 @@ const userSchema: Schema<IUserDocument> = new Schema(
     accountClosed: {
       type: Boolean,
       default: false,
+    },
+    city: {
+      type: String,
+      default: 'No city'
+    },
+    school: {
+      type: String,
+      default: 'No school'
+    },
+    fieldOfStudy: {
+      type: String,
+      default: 'No field of study'
+    },
+    levelOfStudy: {
+      type: String,
+      default: 'No level of study'
+    },
+    categories: {
+      type: [String],
+      default: [],
     },
   },
   {

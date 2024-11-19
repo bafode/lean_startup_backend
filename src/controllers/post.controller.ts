@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { postService } from "../services";
+import { postService, userService } from "../services";
 import { IPost, IAppRequest, IComment } from "../types";
 import { ApiError, catchReq, pick } from "../utils";
 import httpStatus from "http-status";
@@ -71,8 +71,12 @@ const deletePost = catchReq(async (req: Request, res: Response) => {
 });
 
 
-const addCommentToPost = catchReq(async (req: Request, res: Response) => {
+const addCommentToPost = catchReq(async (req: IAppRequest, res: Response) => {
   const data: IComment = req.body;
+  const loggedInUser = await userService.getUserById(req.user.toString());
+  data.userFirstName = loggedInUser.firstname;
+  data.userLastName = loggedInUser.lastname;
+  data.userAvatar = loggedInUser.avatar;
   const post = await postService.addCommentToPost(req.params.postId, data);
   res.status(httpStatus.CREATED).send(post);
 });

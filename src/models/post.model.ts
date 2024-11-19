@@ -16,10 +16,20 @@ const postCommentSchema: Schema<IComment> = new Schema({
     trim: true,
     required: [true, "Please provide comment content"],
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: EModelNames.USER,
-    required: [true, "Please provide user"],
+  userFirstName: {
+    type: String,
+    trim: true,
+    required: [true, "Please provide user first name"],
+  },
+  userLastName: {
+    type: String,
+    trim: true,
+    required: [true, "Please provide user last name"],
+  },
+  userAvatar: {
+    type: String,
+    trim: true,
+    required: [true, "Please provide user avatar"],
   },
 
 });
@@ -77,6 +87,7 @@ postSchema.plugin(toJSON);
 postSchema.plugin(paginate);
 postCommentSchema.plugin(toJSON);
 postCommentSchema.plugin(paginate);
+
 
 const Post = mongoose.model<IPost, IPostModel>(EModelNames.POST, postSchema);
 

@@ -54,7 +54,6 @@ const addComment = {
   }),
   body: Joi.object().keys({
     content: Joi.string().required(),
-    user: Joi.string().custom(validation.objectId),
   }),
 
 };

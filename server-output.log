@@ -31,3 +31,203 @@
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-06 21:11:53"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-06 21:12:43"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-06 21:16:00"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-22 10:01:11"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 14:23:15"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sat, 26 Oct 2024 12:24:16 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-26 14:24:23"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 14:26:40"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sat, 26 Oct 2024 12:27:29 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-26 14:27:36"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sat, 26 Oct 2024 12:31:36 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-26 14:31:43"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 15:03:19"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 15:17:24"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sat, 26 Oct 2024 13:19:15 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-26 15:19:22"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sat, 26 Oct 2024 13:38:17 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-26 15:38:25"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 18:41:57"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 18:43:08"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 18:45:50"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 18:48:13"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sat, 26 Oct 2024 16:48:40 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-26 18:48:47"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 18:57:40"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sat, 26 Oct 2024 17:11:58 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-26 19:12:05"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-26 19:13:08"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sat, 26 Oct 2024 17:14:53 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-26 19:14:59"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sun, 27 Oct 2024 15:36:47 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-27 16:36:56"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sun, 27 Oct 2024 16:04:36 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-27 17:04:44"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:08:30"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:09:37"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sun, 27 Oct 2024 20:14:55 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-27 21:15:03"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:15:50"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:17:29"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Sun, 27 Oct 2024 20:18:16 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-27 21:18:24"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:21:04"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:28:49"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:30:41"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-27 21:32:58"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:34:27"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-27 21:35:22"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:37:38"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:38:45"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-27 21:39:31"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:43:54"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:48:56"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-27 21:49:20"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:49:50"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:50:06"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 21:59:50"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-27 22:00:22"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-27 22:04:52"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-27 22:18:17"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:33:02"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-28 18:34:18"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-28 18:36:50"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:37:46"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-28 18:38:03"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:40:48"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-28 18:41:08"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:44:27"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:45:11"}
+{"code":403,"level":"warn","message":"Error: Forbidden\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":"from","help":null,"message":"The from address does not match a verified Sender Identity. Mail cannot be sent until this error is resolved. Visit https://sendgrid.com/docs/for-developers/sending-email/sender-identity/ to see the Sender Identity requirements"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"281","content-type":"application/json","date":"Mon, 28 Oct 2024 17:46:38 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Forbidden\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-28 18:46:38"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:48:08"}
+{"code":403,"level":"warn","message":"Error: Forbidden\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":"from","help":null,"message":"The from address does not match a verified Sender Identity. Mail cannot be sent until this error is resolved. Visit https://sendgrid.com/docs/for-developers/sending-email/sender-identity/ to see the Sender Identity requirements"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"281","content-type":"application/json","date":"Mon, 28 Oct 2024 17:48:39 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Forbidden\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-28 18:48:39"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:49:14"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-28 18:49:41"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:50:55"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:51:40"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-28 18:53:29"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-28 18:54:37"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-28 18:55:06"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-29 07:37:10"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-29 08:08:37"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-29 08:10:23"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-29 08:13:03"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-29 08:14:39"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-29 09:45:19"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-29 20:02:48"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-29 20:15:25"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-30 15:01:05"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-30 15:07:18"}
+{"level":"warn","message":"Error: Provide at least one of to, cc or bcc\n    at Mail.addTo (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\helpers\\classes\\mail.js:254:13)\n    at Mail.fromData (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\helpers\\classes\\mail.js:114:12)\n    at new Mail (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\helpers\\classes\\mail.js:46:12)\n    at Function.create (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\helpers\\classes\\mail.js:594:12)\n    at MailService.send (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\mail\\src\\classes\\mail-service.js:194:25)\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\src\\services\\email.service.ts:16:10\n    at Generator.next (<anonymous>)\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\src\\services\\email.service.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\src\\services\\email.service.ts:4:12)","stack":"Error: Provide at least one of to, cc or bcc\n    at Mail.addTo (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\helpers\\classes\\mail.js:254:13)\n    at Mail.fromData (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\helpers\\classes\\mail.js:114:12)\n    at new Mail (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\helpers\\classes\\mail.js:46:12)\n    at Function.create (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\helpers\\classes\\mail.js:594:12)\n    at MailService.send (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\mail\\src\\classes\\mail-service.js:194:25)\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\src\\services\\email.service.ts:16:10\n    at Generator.next (<anonymous>)\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\src\\services\\email.service.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\src\\services\\email.service.ts:4:12)","timestamp":"2024-10-30 15:07:49"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-30 15:09:15"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-30 15:10:11"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-30 15:11:58"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-30 15:12:24"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-30 15:12:53"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-30 15:14:50"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-30 15:15:09"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-30 15:15:25"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-30 15:43:36"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-30 15:44:57"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 08:44:04"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-10-31 08:54:27"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:15:24"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:18:30"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:20:08"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:22:41"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:28:30"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:29:05"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:31:02"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:33:22"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:33:35"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:34:32"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:36:35"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:36:46"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:38:31"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:38:58"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:40:14"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:40:25"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:41:03"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:41:14"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:41:53"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:42:12"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:43:20"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:44:26"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:45:06"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:47:14"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:48:43"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:52:04"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:52:18"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:55:24"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 12:55:32"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 13:00:25"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 13:01:10"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 13:01:27"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 13:01:58"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 13:03:53"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 13:14:13"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 13:17:55"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-10-31 13:18:19"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-02 14:34:52"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-07 15:48:57"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-07 15:49:58"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-15 11:48:24"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-15 13:50:24"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 14:52:18"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 16:52:30"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 16:52:43"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 16:57:56"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 17:07:21"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 17:17:13"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 17:30:25"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 17:34:14"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 17:36:00"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 17:42:08"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 17:42:30"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 17:45:09"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 18:18:54"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:04:19"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:16:28"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:29:05"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:34:48"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:38:34"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:40:10"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:44:08"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:44:35"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:45:38"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-16 19:45:50"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-17 13:54:17"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-17 16:03:38"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-17 16:08:20"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-17 16:08:59"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com ","timestamp":"2024-11-17 16:09:02"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-17 16:09:34"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-17 16:12:44"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-17 16:14:37"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-17 16:42:36"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 14:15:24"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 14:22:18"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 14:46:20"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 14:53:56"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 15:00:14"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 21:27:06"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 21:35:21"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 21:59:08"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 22:08:04"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 22:12:34"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 22:13:55"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 22:22:36"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 22:31:46"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 23:15:07"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:17:41"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:20:44"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:21:39"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:23:16"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:28:52"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:29:04"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:30:36"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:31:06"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:35:10"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 23:39:23"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-18 23:52:50"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:57:04"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:57:17"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-18 23:57:38"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 00:00:08"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-19 09:52:26"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 10:02:46"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-19 10:41:57"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 10:50:38"}
+{"level":"info","message":"📧 Email Sent to camara@cr434.com","timestamp":"2024-11-19 10:58:11"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 11:00:43"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 11:01:05"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 11:01:25"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-19 11:12:18"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 12:37:47"}

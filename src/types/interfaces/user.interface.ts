@@ -35,17 +35,38 @@ export interface IStatus {
   accountClosed: boolean;
 }
 
+export interface ICity{
+  city: string;
+}
+export interface ISchool { 
+  school: string;
+}
+export interface IFieldOfStudy {
+  fieldOfStudy: string;
+}
+
+export interface ILevelOfStudy {
+  levelOfStudy: string;
+}
+export interface ICategories {
+  categories: string[];
+}
 export interface IUser extends
   Partial<IFirstname>,
   Partial<ILastname>,
   Partial<IEmail>,
   Partial<IAvatar>,
-   Partial<IDescription>,
+  Partial<IDescription>,
   Partial<IGender>,
   Partial<IRole>,
   Partial<IIsEmailVerified>,
   Partial<IStatus>,
-  Partial<IPassword>
+  Partial<IPassword>,
+  Partial<ICity>,
+  Partial<ISchool>,
+  Partial<IFieldOfStudy>,
+  Partial<ILevelOfStudy>,
+  Partial<ICategories>
 {}
 
 export interface IUserDocument extends mongoose.Document, IUser

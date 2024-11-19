@@ -4,10 +4,16 @@ import { validation } from '.';
 
 const register = {
   body: Joi.object().keys({
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
+    firstName: Joi.string().allow(null),
+    lastName: Joi.string().allow(null),
     email: Joi.string().required().email(),
-    password: Joi.string().required().custom(validation.password),
+    password: Joi.string().custom(validation.password).allow(null),
+    type: Joi.number().allow(null),
+    description: Joi.string().allow(null),
+    phone: Joi.string().allow(null),
+    avatar: Joi.string().uri().allow(null),
+    open_id: Joi.string().allow(null),
+    online: Joi.boolean().allow(null),
     gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
     role: Joi.forbidden(),
     isEmailVerified: Joi.forbidden(),
@@ -18,7 +24,15 @@ const register = {
 const login = {
   body: Joi.object().keys({
     email: Joi.string().required(),
-    password: Joi.string().required(),
+    password: Joi.string().allow(null),
+    type: Joi.number().allow(null),
+    firstName: Joi.string().allow(null),
+    lastName: Joi.string().allow(null),
+    description: Joi.string().allow(null),
+    phone: Joi.string().allow(null),
+    avatar: Joi.string().uri().allow(null),
+    open_id: Joi.string().allow(null),
+    online: Joi.boolean().allow(null),
   }),
 };
 
