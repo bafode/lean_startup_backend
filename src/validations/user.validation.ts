@@ -44,6 +44,11 @@ const updateUser = {
       description: Joi.string(),
       gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
       role: Joi.forbidden(),
+      city: Joi.string(),
+      school: Joi.string(),
+      fieldOfStudy: Joi.string(),
+      levelOfStudy: Joi.string(),
+      categories: Joi.array().items(Joi.string()).unique().allow(null),
     })
     .min(1),
 };

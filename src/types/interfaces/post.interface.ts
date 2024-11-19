@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import mongoose from "mongoose";
 export interface IComment {
   content: string;
-  user: mongoose.Schema.Types.ObjectId;
+  userFirstName: string;
+  userLastName: string;
+  userAvatar: string;
 }
 
 export interface IPost {

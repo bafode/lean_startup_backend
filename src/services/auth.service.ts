@@ -3,6 +3,7 @@ import { tokenService, userService } from './';
 import { Token, User } from '../models';
 import { ApiError } from '../utils';
 import { ETokenType, IUser } from '../types';
+import { number } from 'joi';
 
 
 const register = async (user: IUser) => {
@@ -12,13 +13,18 @@ const register = async (user: IUser) => {
   return User.create(user);
 };
 
-const login = async (email: string, password: string) => {
+const login = async (email: string, password: string, type: number) => {
   const user = await userService.getOneUser({ email });
-  if (!user || !(await user.isPasswordMatch(password))) {
+
+  if (!user) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
+  }
+  if (type === 1 && !(await user.isPasswordMatch(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
   return user;
 };
+
 
 
 /**
@@ -70,7 +76,7 @@ const verifyEmail = async (verifyEmailToken: string) => {
     await Token.deleteMany({ user: user.id, type: ETokenType.VERIFY_EMAIL });
     await userService.updateUserById(user.id, { isEmailVerified: true });
   } catch (error) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Email verification failed');
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Email verification failed '+error);
   }
 };
 

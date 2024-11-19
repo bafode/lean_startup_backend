@@ -1,24 +1,29 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { authService, tokenService, emailService } from "../services";
+import { authService, tokenService, emailService,userService } from "../services";
 import { ETokenType, EUserRole, IUser } from "../types";
 import { catchReq } from "../utils";
 
 const register = catchReq(async (req: Request, res: Response) => {
+  console.log(req.body);
   const data: IUser = req.body;
   data.role = EUserRole.USER;
   const user = await authService.register(req.body)
-  const token = await tokenService.generateVerifyEmailCode(user.id);
-  await emailService.sendVerificationEmail(req.body.email, token);
+  const verificationCode = await tokenService.generateVerifyEmailCode(user.id);
+  await emailService.sendVerificationEmail(req.body.email, verificationCode);
+  const tokens = await tokenService.generateAuthTokens(user.id);
   res.status(httpStatus.CREATED).send({
     code: httpStatus.CREATED,
     message: "User Registered Successfully",
+    user,
+    tokens,
   });
 });
 
 const login = catchReq(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await authService.login(email, password);
+  console.log(req.body);
+   const { email, password,type } = req.body;
+  const user = await authService.login(email, password,type);
   const tokens = await tokenService.generateAuthTokens(user.id);
   res.send({
     code: httpStatus.OK,
@@ -60,10 +65,11 @@ const resetPassword = catchReq(async (req, res) => {
 });
 
 const sendVerificationEmail = catchReq(async (req, res) => {
-  const verifyEmailToken = await tokenService.generateVerifyEmailCode(
+  const token = await tokenService.generateVerifyEmailCode(
     req.user
   );
-  await emailService.sendVerificationEmail(req.user.email, verifyEmailToken);
+  const loggedUser = await userService.getUserById(req.user);
+  await emailService.sendVerificationEmail(loggedUser.email, token);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
