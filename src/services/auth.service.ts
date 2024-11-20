@@ -52,9 +52,12 @@ const refreshAuth = async (refreshToken: string) => {
   }
 };
 
-const resetPassword = async (userId: string, newPassword: string) => {
+const resetPassword = async (token: string, newPassword: string) => {
+  console.log('reset password', token);
+  const verifyEmailTokenDoc = await tokenService.verifyCode(token, ETokenType.RESET_PASSWORD);
+  const user = await userService.getUserById(verifyEmailTokenDoc.user.toString());
   try {
-    await userService.updateUserById(userId, { password: newPassword });
+    await userService.updateUserById(user.id, { password: newPassword });
   } catch (error) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Password reset failed');
   }

@@ -24,17 +24,41 @@ const sendEmail = async (to: string, from: string, subject: string, text: string
 };
 
 
-const sendResetPasswordEmail = async (to: string, newPassword: string) => {
-  const subject = '🔐 Reset password';
-  const text = `Dear user,
-  Here your new password: ${newPassword}
-  If you did not request any password resets, then please let us now.`;
-  const html = `<p>Dear user,
-  Here your new password: <b>${newPassword}</b>
-  If you did not request any password resets, then please let us now.<p>`;
-  await sendEmail(to, 'nodeApp', subject, text, html);
-};
+const sendResetPasswordEmail = async (to: string, token: number) => {
+  const subject = '🔐 Réinitialisation de votre mot de passe';
+  const text = `Bonjour,
+  Vous avez demandé à réinitialiser votre mot de passe. Voici votre code de vérification : ${token}.
+  Si vous n'êtes pas à l'origine de cette demande, veuillez ignorer cet e-mail.`;
 
+  const html = `
+       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f8f8f8;">
+        <div style="background-color: #5e17eb; padding: 20px; border-top-left-radius: 10px; border-top-right-radius: 10px; text-align: center;">
+          <h2 style="color: #ffffff; margin: 0;">Réinitialisation de votre mot de passe</h2>
+        </div>
+        <div style="padding: 20px;">
+          <p style="font-size: 16px; color: #333;">Bonjour,</p>
+          <p style="font-size: 16px; color: #333; line-height: 1.6;">
+            Vous avez demandé à réinitialiser votre mot de passe. Pour continuer, veuillez utiliser le code de vérification ci-dessous :
+          </p>
+          <div style="text-align: center; margin: 20px 0;">
+            <span style="display: inline-block; font-size: 24px; color: #5e17eb; font-weight: bold; padding: 15px 25px; border: 2px solid #5e17eb; border-radius: 5px; background-color: #e5f7ef;">${token}</span>
+          </div>
+          <p style="font-size: 16px; color: #333; line-height: 1.6;">
+            Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet e-mail. Aucun changement ne sera apporté à votre compte.
+          </p>
+          <p style="font-size: 16px; color: #333; margin-top: 30px;">
+            Si vous avez besoin d'assistance supplémentaire, n'hésitez pas à nous contacter.
+          </p>
+          <p style="font-size: 16px; color: #333; margin-top: 30px;">Cordialement,<br>L'équipe Beehive</p>
+        </div>
+        <div style="background-color: #ffaf35; padding: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; text-align: center;">
+          <p style="font-size: 14px; color: #ffffff; margin: 0;">Nous sommes là pour vous aider à protéger votre compte.</p>
+        </div>
+      </div> 
+  `;
+
+  await sendEmail(to, 'beehiveappcontact@gmail.com', subject, text, html);
+};
 
 const sendVerificationEmail = async (to: string, token: number) => {
   const subject = 'Vérification de votre adresse e-mail';

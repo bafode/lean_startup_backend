@@ -155,6 +155,15 @@ const generateVerifyEmailCode = async (userId: string) => {
   await saveToken(verifyTelCode.toString(), userId, expires, ETokenType.VERIFY_EMAIL);
   return verifyTelCode;
 };
+
+const generateResetPasswordCode = async (email: string) => {
+  const user = await userService.getOneUser({ email });
+  const userId = user.id;
+  const expires = moment().add(config.jwt.verifyEmailExpirationMinutes, 'minutes');
+  const verifyTelCode = generateCode();
+  await saveToken(verifyTelCode.toString(), userId, expires, ETokenType.RESET_PASSWORD);
+  return verifyTelCode;
+};
 const verifyCode = async (code: string, type: ETokenType) => {
   let tokenDoc: ITokenDocument | any = {};
   tokenDoc = await Token.findOne({ token: code, type });
@@ -172,5 +181,6 @@ export default {
   generateResetPasswordToken,
   generateVerifyEmailToken,
   generateVerifyEmailCode,
+  generateResetPasswordCode,
   verifyCode,
 };

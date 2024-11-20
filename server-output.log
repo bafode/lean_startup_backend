@@ -231,3 +231,31 @@
 {"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 11:01:25"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-19 11:12:18"}
 {"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 12:37:47"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-19 15:08:37"}
+{"code":401,"level":"warn","message":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","response":{"body":{"errors":[{"field":null,"help":null,"message":"The provided authorization grant is invalid, expired, or revoked"}]},"headers":{"access-control-allow-headers":"Authorization, Content-Type, On-behalf-of, x-sg-elas-acl","access-control-allow-methods":"POST","access-control-allow-origin":"https://sendgrid.api-docs.io","access-control-max-age":"600","connection":"keep-alive","content-length":"116","content-type":"application/json","date":"Tue, 19 Nov 2024 14:08:53 GMT","server":"nginx","strict-transport-security":"max-age=600; includeSubDomains","x-no-cors-reason":"https://sendgrid.com/docs/Classroom/Basics/API/cors.html"}},"stack":"Error: Unauthorized\n    at C:\\Users\\camarab\\Desktop\\lean-startup\\lean_startup_backend\\node_modules\\@sendgrid\\client\\src\\classes\\client.js:167:29\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-11-19 15:08:57"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-19 15:36:13"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-19 16:20:06"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 09:46:45"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 09:47:32"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 09:59:58"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:04:21"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:08:05"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:11:34"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:12:53"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:18:52"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:20:39"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:21:35"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-20 10:22:57"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:24:35"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-20 10:24:46"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:26:38"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:28:36"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:32:12"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:37:11"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 10:37:27"}
+{"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-11-20 11:06:05"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-20 11:06:18"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-20 11:06:31"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-20 11:06:56"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-20 11:25:42"}
+{"level":"info","message":"📧 Email Sent to bafodecamara1998@gmail.com","timestamp":"2024-11-20 11:27:50"}

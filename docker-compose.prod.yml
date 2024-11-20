@@ -1,6 +1,11 @@
-version: '3'
+version: '3.8'
 
 services:
   node-app:
+    build: .
     container_name: res-node-beehive-backend-prod
     command: yarn start
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
