@@ -48,20 +48,23 @@ const refreshTokens = catchReq(async (req, res) => {
 
 const forgotPassword = catchReq(async (req, res) => {
 
-  const resetPasswordToken = await tokenService.generateResetPasswordToken(
-    req.body.email
-  );
-  await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
-  res.status(httpStatus.NO_CONTENT).send();
+
+  const verificationCode = await tokenService.generateResetPasswordCode(req.body.email);
+  await emailService.sendResetPasswordEmail(req.body.email, verificationCode);
+  res.status(httpStatus.OK).send({
+    code: httpStatus.OK,
+    message: "Si un compte existe avec cet email, un email de réinitialisation de mot de passe a été envoyé",
+  });
 });
 
 const resetPassword = catchReq(async (req, res) => {
-  const token = await tokenService.verifyToken(
-    req.query.token,
-    ETokenType.RESET_PASSWORD
+  await authService.resetPassword(req.body.token, req.body.password);
+  res.status(httpStatus.OK).send(
+    {
+      code: httpStatus.OK,
+      message: "Mot de passe réinitialisé avec succès",
+    }
   );
-  await authService.resetPassword(token.user.toString(), req.body.password);
-  res.status(httpStatus.NO_CONTENT).send();
 });
 
 const sendVerificationEmail = catchReq(async (req, res) => {
