@@ -29,3 +29,10 @@ export enum ETokenType {
   RESET_PASSWORD = "resetPassword",
   VERIFY_EMAIL = "verifyEmail",
 }
+
+export enum EAuthType { 
+  EMAIL = "email",
+  GOOGLE = "google",
+  FACEBOOK = "facebook",
+  Apple = "apple",
+}

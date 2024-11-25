@@ -1,7 +1,7 @@
 import { Schema, model, Model, FilterQuery } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { toJSON, paginate } from './plugins';
-import { EGender, EModelNames, EUserRole, IPaginateOption, IUserDocument } from '../types';
+import { EAuthType, EGender, EModelNames, EUserRole, IPaginateOption, IUserDocument } from '../types';
 
 interface IUserModel extends Model<IUserDocument> {
   // statics
@@ -78,6 +78,23 @@ const userSchema: Schema<IUserDocument> = new Schema(
       type: [String],
       default: [],
     },
+    phone: {
+      type: String,
+      default: 'No phone'
+    },
+    online: {
+      type: Boolean,
+      default: false,
+    },
+    open_id: {
+      type: String,
+      default: 'No openID'
+    },
+    authType: {
+      type: String,
+      enum: EAuthType,
+      default: EAuthType.EMAIL,
+    },
   },
   {
     timestamps: true,
@@ -108,7 +125,7 @@ userSchema.methods.isPasswordMatch = async function (password: string) {
 userSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
-  if (user.isModified('password')) {
+  if (user.isModified('password') && user.get('authType') === EAuthType.EMAIL) {
     const hashedPass = await bcrypt.hash(user.get('password'), 8);
     user.set('password', hashedPass);
   }

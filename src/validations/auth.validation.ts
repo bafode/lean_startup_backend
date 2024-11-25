@@ -4,11 +4,11 @@ import { validation } from '.';
 
 const register = {
   body: Joi.object().keys({
-    firstName: Joi.string().allow(null),
-    lastName: Joi.string().allow(null),
+    firstname: Joi.string().allow(null).empty(''),
+    lastname: Joi.string().allow(null).empty(''),
     email: Joi.string().required().email(),
     password: Joi.string().custom(validation.password).allow(null),
-    type: Joi.number().allow(null),
+    authType: Joi.string().allow(null),
     description: Joi.string().allow(null),
     phone: Joi.string().allow(null),
     avatar: Joi.string().uri().allow(null),
@@ -25,9 +25,9 @@ const login = {
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().allow(null),
-    type: Joi.number().allow(null),
-    firstName: Joi.string().allow(null),
-    lastName: Joi.string().allow(null),
+    authType: Joi.string().allow(null),
+    firstname: Joi.string().allow(null).empty(''),
+    lastname: Joi.string().allow(null).empty(''),
     description: Joi.string().allow(null),
     phone: Joi.string().allow(null),
     avatar: Joi.string().uri().allow(null),
