@@ -1,10 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response} from "express";
 
 import { postService, userService } from "../services";
 import { IPost, IAppRequest, IComment } from "../types";
 import { ApiError, catchReq, pick } from "../utils";
 import httpStatus from "http-status";
-import { ObjectId } from "mongoose";
 
 const createPost = catchReq(async (req: IAppRequest, res: Response) => {
   let data: IPost = { ...req.body };
@@ -39,12 +38,12 @@ const getPostsByAuthorId = catchReq(async (req: IAppRequest, res: Response) => {
   res.send(result);
 });
 
-const getOnePost = catchReq(async (req: Request, res: Response) => {
+const getOnePost = catchReq(async (req: Request, res: Response) => {  
   const post = await postService.getPostById(req.params.postId);
   if (!post) {
     throw new ApiError(httpStatus.NOT_FOUND, "Post not found");
   }
-  res.send(post);
+  res.status(httpStatus.OK).send(post);
 });
 
 const updatePost = catchReq(async (req: Request, res: Response) => {

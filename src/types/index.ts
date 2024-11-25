@@ -4,6 +4,7 @@ export {
   EModelNames,
   EUserRole,
   ETokenType,
+  EAuthType,
 } from "./enums/app.enum";
 
 // interfaces

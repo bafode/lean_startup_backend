@@ -2,8 +2,7 @@ import httpStatus from 'http-status';
 import { tokenService, userService } from './';
 import { Token, User } from '../models';
 import { ApiError } from '../utils';
-import { ETokenType, IUser } from '../types';
-import { number } from 'joi';
+import { EAuthType, ETokenType, IUser } from '../types';
 
 
 const register = async (user: IUser) => {
@@ -13,13 +12,13 @@ const register = async (user: IUser) => {
   return User.create(user);
 };
 
-const login = async (email: string, password: string, type: number) => {
+const login = async (email: string, password: string, authType: string) => {
   const user = await userService.getOneUser({ email });
 
   if (!user) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
-  if (type === 1 && !(await user.isPasswordMatch(password))) {
+  if (authType === EAuthType.EMAIL && !(await user.isPasswordMatch(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
   return user;

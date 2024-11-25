@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { EGender, EUserRole } from '..';
+import { EAuthType, EGender, EUserRole } from '..';
 
 export interface IUserID {
   id: string;
@@ -51,6 +51,19 @@ export interface ILevelOfStudy {
 export interface ICategories {
   categories: string[];
 }
+export interface IPhone { 
+  phone: string;
+}
+export interface IOnline {
+  online: boolean;
+}
+export interface IOpenID { 
+  open_id: string;
+}
+export interface IAuthType{
+  authType: EAuthType;
+}
+
 export interface IUser extends
   Partial<IFirstname>,
   Partial<ILastname>,
@@ -66,7 +79,11 @@ export interface IUser extends
   Partial<ISchool>,
   Partial<IFieldOfStudy>,
   Partial<ILevelOfStudy>,
-  Partial<ICategories>
+  Partial<ICategories>,
+  Partial<IPhone>,
+  Partial<IOnline>,
+  Partial<IOpenID>,
+  Partial<IAuthType>
 {}
 
 export interface IUserDocument extends mongoose.Document, IUser

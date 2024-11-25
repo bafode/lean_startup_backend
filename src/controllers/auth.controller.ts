@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { authService, tokenService, emailService,userService } from "../services";
-import { ETokenType, EUserRole, IUser } from "../types";
+import { EAuthType, EUserRole, IUser } from "../types";
 import { catchReq } from "../utils";
 
 const register = catchReq(async (req: Request, res: Response) => {
-  console.log(req.body);
   const data: IUser = req.body;
   data.role = EUserRole.USER;
-  const user = await authService.register(req.body)
-  const verificationCode = await tokenService.generateVerifyEmailCode(user.id);
-  await emailService.sendVerificationEmail(req.body.email, verificationCode);
+  data.authType = req.body.authType || EAuthType.EMAIL;
+  const user = await authService.register(data);
+  if (data.authType === EAuthType.EMAIL) {
+    const verificationCode = await tokenService.generateVerifyEmailCode(user.id);
+    await emailService.sendVerificationEmail(req.body.email, verificationCode);
+  }
   const tokens = await tokenService.generateAuthTokens(user.id);
   res.status(httpStatus.CREATED).send({
     code: httpStatus.CREATED,
@@ -21,9 +23,9 @@ const register = catchReq(async (req: Request, res: Response) => {
 });
 
 const login = catchReq(async (req, res) => {
-  console.log(req.body);
-   const { email, password,type } = req.body;
-  const user = await authService.login(email, password,type);
+  const { email, password } = req.body;
+  let authType = req.body.authType || EAuthType.EMAIL;
+  const user = await authService.login(email, password, authType);
   const tokens = await tokenService.generateAuthTokens(user.id);
   res.send({
     code: httpStatus.OK,

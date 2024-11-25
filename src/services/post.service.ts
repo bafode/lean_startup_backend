@@ -1,5 +1,5 @@
 import { ApiError } from "../utils";
-import { IComment, IPaginateOption, IPost } from "../types";
+import { EModelNames, IComment, IPaginateOption, IPost } from "../types";
 import { Post } from "../models";
 import mongoose, { FilterQuery } from "mongoose";
 import httpStatus from "http-status";
@@ -8,10 +8,11 @@ const getPosts = async (
   filter: FilterQuery<IPost>,
   options: IPaginateOption
 ) => {
-  options.sortBy = "createdAt:desc";
+   options.sortBy = "createdAt:desc";
   options.populate = [
-    { path: "author", select: "firstname lastname email avatar" },
-    { path: "likes", select: "firstname lastname email avatar" },
+    { path: "author", select: "firstname lastname email avatar", model: EModelNames.USER },
+    {path: "likes", select: "firstname lastname email avatar", model: EModelNames.USER},
+    // { path: "likes", select: "firstname lastname email avatar" },
   ];
   const posts = await Post.paginate(filter, options);
   return posts;
@@ -23,7 +24,9 @@ const getPostByAuthorId = async (authorId: string) => {
 };
 
 const getPostById = async (id: string) => {
+  console.log(id);
   return await Post.findById(id).populate([
+    { path: "likes", select: "firstname lastname email avatar" },
     { path: "author", select: "firstname lastname email avatar" },
   ]);
 };
@@ -82,7 +85,10 @@ const toggleLikePost = async (postId: string, userId: mongoose.Schema.Types.Obje
     post.likes.push(userId);
   }
   await post.save();
-  return post;
+  return post.populate([
+    { path: "likes", select: "firstname lastname email avatar" },
+    { path: "author", select: "firstname lastname email avatar" },
+  ]);
 }
 
 export default {
