@@ -23,9 +23,12 @@ const register = (user) => __awaiter(void 0, void 0, void 0, function* () {
     }
     return models_1.User.create(user);
 });
-const login = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
+const login = (email, password, authType) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield _1.userService.getOneUser({ email });
-    if (!user || !(yield user.isPasswordMatch(password))) {
+    if (!user) {
+        throw new utils_1.ApiError(http_status_1.default.UNAUTHORIZED, 'Incorrect email or password');
+    }
+    if (authType === types_1.EAuthType.EMAIL && !(yield user.isPasswordMatch(password))) {
         throw new utils_1.ApiError(http_status_1.default.UNAUTHORIZED, 'Incorrect email or password');
     }
     return user;
@@ -54,9 +57,12 @@ const refreshAuth = (refreshToken) => __awaiter(void 0, void 0, void 0, function
         throw new utils_1.ApiError(http_status_1.default.UNAUTHORIZED, 'Refresh token error');
     }
 });
-const resetPassword = (userId, newPassword) => __awaiter(void 0, void 0, void 0, function* () {
+const resetPassword = (token, newPassword) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('reset password', token);
+    const verifyEmailTokenDoc = yield _1.tokenService.verifyCode(token, types_1.ETokenType.RESET_PASSWORD);
+    const user = yield _1.userService.getUserById(verifyEmailTokenDoc.user.toString());
     try {
-        yield _1.userService.updateUserById(userId, { password: newPassword });
+        yield _1.userService.updateUserById(user.id, { password: newPassword });
     }
     catch (error) {
         throw new utils_1.ApiError(http_status_1.default.UNAUTHORIZED, 'Password reset failed');
@@ -79,7 +85,7 @@ const verifyEmail = (verifyEmailToken) => __awaiter(void 0, void 0, void 0, func
         yield _1.userService.updateUserById(user.id, { isEmailVerified: true });
     }
     catch (error) {
-        throw new utils_1.ApiError(http_status_1.default.UNAUTHORIZED, 'Email verification failed');
+        throw new utils_1.ApiError(http_status_1.default.UNAUTHORIZED, 'Email verification failed ' + error);
     }
 });
 exports.default = {

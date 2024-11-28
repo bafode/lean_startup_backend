@@ -19,17 +19,24 @@ const utils_1 = require("../utils");
 const register = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     data.role = types_1.EUserRole.USER;
-    const user = yield services_1.authService.register(req.body);
-    const token = yield services_1.tokenService.generateVerifyEmailCode(user.id);
-    yield services_1.emailService.sendVerificationEmail(req.body.email, token);
+    data.authType = req.body.authType || types_1.EAuthType.EMAIL;
+    const user = yield services_1.authService.register(data);
+    if (data.authType === types_1.EAuthType.EMAIL) {
+        const verificationCode = yield services_1.tokenService.generateVerifyEmailCode(user.id);
+        yield services_1.emailService.sendVerificationEmail(req.body.email, verificationCode);
+    }
+    const tokens = yield services_1.tokenService.generateAuthTokens(user.id);
     res.status(http_status_1.default.CREATED).send({
         code: http_status_1.default.CREATED,
         message: "User Registered Successfully",
+        user,
+        tokens,
     });
 }));
 const login = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
-    const user = yield services_1.authService.login(email, password);
+    let authType = req.body.authType || types_1.EAuthType.EMAIL;
+    const user = yield services_1.authService.login(email, password, authType);
     const tokens = yield services_1.tokenService.generateAuthTokens(user.id);
     res.send({
         code: http_status_1.default.OK,
@@ -50,18 +57,24 @@ const refreshTokens = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void
     res.send(Object.assign({}, tokens));
 }));
 const forgotPassword = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const resetPasswordToken = yield services_1.tokenService.generateResetPasswordToken(req.body.email);
-    yield services_1.emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
-    res.status(http_status_1.default.NO_CONTENT).send();
+    const verificationCode = yield services_1.tokenService.generateResetPasswordCode(req.body.email);
+    yield services_1.emailService.sendResetPasswordEmail(req.body.email, verificationCode);
+    res.status(http_status_1.default.OK).send({
+        code: http_status_1.default.OK,
+        message: "Si un compte existe avec cet email, un email de réinitialisation de mot de passe a été envoyé",
+    });
 }));
 const resetPassword = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const token = yield services_1.tokenService.verifyToken(req.query.token, types_1.ETokenType.RESET_PASSWORD);
-    yield services_1.authService.resetPassword(token.user.toString(), req.body.password);
-    res.status(http_status_1.default.NO_CONTENT).send();
+    yield services_1.authService.resetPassword(req.body.token, req.body.password);
+    res.status(http_status_1.default.OK).send({
+        code: http_status_1.default.OK,
+        message: "Mot de passe réinitialisé avec succès",
+    });
 }));
 const sendVerificationEmail = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const verifyEmailToken = yield services_1.tokenService.generateVerifyEmailCode(req.user);
-    yield services_1.emailService.sendVerificationEmail(req.user.email, verifyEmailToken);
+    const token = yield services_1.tokenService.generateVerifyEmailCode(req.user);
+    const loggedUser = yield services_1.userService.getUserById(req.user);
+    yield services_1.emailService.sendVerificationEmail(loggedUser.email, token);
     res.status(http_status_1.default.NO_CONTENT).send();
 }));
 const verifyEmail = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {

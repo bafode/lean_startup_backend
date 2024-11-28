@@ -22,10 +22,9 @@ const createPost = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0,
         throw new utils_1.ApiError(http_status_1.default.BAD_REQUEST, "No files uploaded");
     }
     const files = req.files;
+    // Map over the files and extract their Cloudinary URLs
     data.media = files.map((file) => {
-        const isImage = file.mimetype.startsWith("image/");
-        const pathPrefix = isImage ? "uploads/images" : "uploads/files";
-        return `${pathPrefix}/${file.filename}`;
+        return file.path; // The Cloudinary URL is in the `path` property of each file
     });
     const post = yield services_1.postService.createPost(data);
     res.status(http_status_1.default.CREATED).send({
@@ -50,13 +49,16 @@ const getOnePost = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0,
     if (!post) {
         throw new utils_1.ApiError(http_status_1.default.NOT_FOUND, "Post not found");
     }
-    res.send(post);
+    res.status(http_status_1.default.OK).send(post);
 }));
 const updatePost = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let updatedPostData = Object.assign({}, req.body);
     if (req.files) {
         const files = req.files;
-        updatedPostData.media = files.map((file) => `uploads/images/${file.filename}`);
+        // Map over the files and extract their Cloudinary URLs
+        updatedPostData.media = files.map((file) => {
+            return file.path; // Cloudinary URL is available in the `path` property
+        });
     }
     const post = yield services_1.postService.updatePostById(req.params.postId, updatedPostData);
     res.send(post);
@@ -67,6 +69,10 @@ const deletePost = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0,
 }));
 const addCommentToPost = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
+    const loggedInUser = yield services_1.userService.getUserById(req.user.toString());
+    data.userFirstName = loggedInUser.firstname;
+    data.userLastName = loggedInUser.lastname;
+    data.userAvatar = loggedInUser.avatar;
     const post = yield services_1.postService.addCommentToPost(req.params.postId, data);
     res.status(http_status_1.default.CREATED).send(post);
 }));

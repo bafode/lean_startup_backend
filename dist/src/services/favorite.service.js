@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils");
+const types_1 = require("../types");
 const models_1 = require("../models");
 const http_status_1 = __importDefault(require("http-status"));
 const getFavorites = (filter, options) => __awaiter(void 0, void 0, void 0, function* () {
@@ -37,11 +38,14 @@ const toggleFavorite = (postId, userId) => __awaiter(void 0, void 0, void 0, fun
     yield models_1.Favorite.create({ post: postId, user: userId });
     return { message: "Favorite added" };
 });
-const getLoggedUserFavorites = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield models_1.Favorite.find({ user: userId }).sort({ createdAt: -1 }).populate([
-        { path: "post" },
-        { path: "user", select: "firstname lastname email avatar" },
-    ]);
+const getLoggedUserFavorites = (filter, options) => __awaiter(void 0, void 0, void 0, function* () {
+    options.sortBy = "createdAt:desc";
+    options.populate = [
+        { path: "post", model: types_1.EModelNames.POST, },
+        { path: "post.author", select: "firstname lastname email avatar", model: types_1.EModelNames.USER, },
+        { path: "post.likes", select: "firstname lastname email avatar", model: types_1.EModelNames.USER },
+    ];
+    return yield models_1.Favorite.paginate(filter, options);
 });
 exports.default = {
     getFavorites,

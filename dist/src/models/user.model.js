@@ -37,7 +37,7 @@ const userSchema = new mongoose_1.Schema({
     },
     avatar: {
         type: String,
-        default: 'uploads/default.png'
+        default: 'https://res.cloudinary.com/dtqimnssm/image/upload/v1730063749/images/media-1730063756706.jpg'
     },
     description: {
         type: String,
@@ -62,6 +62,43 @@ const userSchema = new mongoose_1.Schema({
     accountClosed: {
         type: Boolean,
         default: false,
+    },
+    city: {
+        type: String,
+        default: 'No city'
+    },
+    school: {
+        type: String,
+        default: 'No school'
+    },
+    fieldOfStudy: {
+        type: String,
+        default: 'No field of study'
+    },
+    levelOfStudy: {
+        type: String,
+        default: 'No level of study'
+    },
+    categories: {
+        type: [String],
+        default: [],
+    },
+    phone: {
+        type: String,
+        default: 'No phone'
+    },
+    online: {
+        type: Boolean,
+        default: false,
+    },
+    open_id: {
+        type: String,
+        default: 'No openID'
+    },
+    authType: {
+        type: String,
+        enum: types_1.EAuthType,
+        default: types_1.EAuthType.EMAIL,
     },
 }, {
     timestamps: true,
@@ -92,7 +129,7 @@ userSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         const user = this;
-        if (user.isModified('password')) {
+        if (user.isModified('password') && user.get('authType') === types_1.EAuthType.EMAIL) {
             const hashedPass = yield bcryptjs_1.default.hash(user.get('password'), 8);
             user.set('password', hashedPass);
         }

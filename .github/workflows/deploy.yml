@@ -1,0 +1,33 @@
+name: Deploy Beehive to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: 🐳 Build
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧑‍💻 SSH to VPS and Deploy Docker Image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.vps99456.serveur-vps.net }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Arrêter et supprimer l'ancien conteneur s'il existe
+            docker stop beehive-container || true
+            docker rm beehive-container || true
+            
+            # Tirer la dernière image depuis Docker Hub
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/beehive:production
+            
+            # Démarrer un nouveau conteneur avec l'image tirée
+            docker run -d --name beehive-container -p 4000:4000 ${{ secrets.DOCKER_HUB_USERNAME }}/beehive:production
