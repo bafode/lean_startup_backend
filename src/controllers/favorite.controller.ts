@@ -8,8 +8,11 @@ import httpStatus from "http-status";
 const toggleFavorite = catchReq(async (req: IAppRequest, res: Response) => {
     const postId = req.body.postId;
     const userId = req.user.toString();
-    const favorite = await favoriteService.toggleFavorite(postId, userId);
-    res.status(httpStatus.OK).send(favorite);
+    await favoriteService.toggleFavorite(postId, userId);
+    res.status(httpStatus.OK).send({
+        code: httpStatus.OK,
+        message: "Favorite toggled",
+    });
 });
 
 const getFavorites = catchReq(async (req: Request, res: Response) => {
@@ -20,8 +23,11 @@ const getFavorites = catchReq(async (req: Request, res: Response) => {
 });
 
 const getLoggedUserFavorites = catchReq(async (req: IAppRequest, res: Response) => {
+    const filter = pick(req.query, ["user", "post"]);
+    req.query.user = req.user.toString();
+    const options = pick(req.query, ["sortBy", "limit", "page"]);
     const userId = req.user.toString();
-    const result = await favoriteService.getLoggedUserFavorites(userId);
+    const result = await favoriteService.getLoggedUserFavorites(filter, options);
     res.send(result);
 });
 
