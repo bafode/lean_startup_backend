@@ -2,5 +2,6 @@ version: '3'
 
 services:
   node-app:
+    image: beehive-backend-test
     container_name: res-node-beehive-backend-test
     command: yarn test

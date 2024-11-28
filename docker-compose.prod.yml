@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   beehive-backend-prod:
+    image: beehive-backend-prod
     container_name: beehive-backend-prod
     build: 
       context: .
