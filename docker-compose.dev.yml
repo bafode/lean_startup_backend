@@ -14,4 +14,4 @@ services:
       - ./:/usr/share/nginx/html
       - ./node_modules:/node_modules/ 
     ports:
-      - "${PORT}:${PORT}"
+      - "4000:4000"
