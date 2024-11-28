@@ -32,10 +32,20 @@ const postCommentSchema = new mongoose_1.Schema({
         trim: true,
         required: [true, "Please provide comment content"],
     },
-    user: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: types_1.EModelNames.USER,
-        required: [true, "Please provide user"],
+    userFirstName: {
+        type: String,
+        trim: true,
+        required: [true, "Please provide user first name"],
+    },
+    userLastName: {
+        type: String,
+        trim: true,
+        required: [true, "Please provide user last name"],
+    },
+    userAvatar: {
+        type: String,
+        trim: true,
+        required: [true, "Please provide user avatar"],
     },
 });
 const postSchema = new mongoose_1.Schema({

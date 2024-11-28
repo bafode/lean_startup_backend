@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ETokenType = exports.EGender = exports.EUserRole = exports.EModelNames = exports.ENodeEnv = void 0;
+exports.EAuthType = exports.ETokenType = exports.EGender = exports.EUserRole = exports.EModelNames = exports.ENodeEnv = void 0;
 var ENodeEnv;
 (function (ENodeEnv) {
     ENodeEnv["DEV"] = "development";
@@ -33,4 +33,11 @@ var ETokenType;
     ETokenType["RESET_PASSWORD"] = "resetPassword";
     ETokenType["VERIFY_EMAIL"] = "verifyEmail";
 })(ETokenType = exports.ETokenType || (exports.ETokenType = {}));
+var EAuthType;
+(function (EAuthType) {
+    EAuthType["EMAIL"] = "email";
+    EAuthType["GOOGLE"] = "google";
+    EAuthType["FACEBOOK"] = "facebook";
+    EAuthType["Apple"] = "apple";
+})(EAuthType = exports.EAuthType || (exports.EAuthType = {}));
 //# sourceMappingURL=app.enum.js.map

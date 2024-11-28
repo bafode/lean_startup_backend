@@ -18,8 +18,11 @@ const http_status_1 = __importDefault(require("http-status"));
 const toggleFavorite = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const postId = req.body.postId;
     const userId = req.user.toString();
-    const favorite = yield services_1.favoriteService.toggleFavorite(postId, userId);
-    res.status(http_status_1.default.OK).send(favorite);
+    yield services_1.favoriteService.toggleFavorite(postId, userId);
+    res.status(http_status_1.default.OK).send({
+        code: http_status_1.default.OK,
+        message: "Favorite toggled",
+    });
 }));
 const getFavorites = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const filter = (0, utils_1.pick)(req.query, ["user", "post"]);
@@ -28,8 +31,11 @@ const getFavorites = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 
     res.send(result);
 }));
 const getLoggedUserFavorites = (0, utils_1.catchReq)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const filter = (0, utils_1.pick)(req.query, ["user", "post"]);
+    req.query.user = req.user.toString();
+    const options = (0, utils_1.pick)(req.query, ["sortBy", "limit", "page"]);
     const userId = req.user.toString();
-    const result = yield services_1.favoriteService.getLoggedUserFavorites(userId);
+    const result = yield services_1.favoriteService.getLoggedUserFavorites(filter, options);
     res.send(result);
 }));
 exports.default = {
