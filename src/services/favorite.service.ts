@@ -1,5 +1,5 @@
 import { ApiError } from "../utils";
-import { IFavorite, IPaginateOption } from "../types";
+import { EModelNames, IFavorite, IPaginateOption } from "../types";
 import { Favorite, Post } from "../models";
 import { FilterQuery } from "mongoose";
 import httpStatus from "http-status";
@@ -34,11 +34,15 @@ const toggleFavorite = async (postId: string, userId: string) => {
     return { message: "Favorite added" };
 };
 
-const getLoggedUserFavorites = async (userId: string) => {
-    return await Favorite.find({ user: userId }).sort({ createdAt: -1 }).populate([
-        { path: "post" },
-        { path: "user", select: "firstname lastname email avatar" },
-    ]);
+const getLoggedUserFavorites = async (filter: FilterQuery<IFavorite>,
+    options: IPaginateOption) => {
+    options.sortBy = "createdAt:desc";
+    options.populate = [
+        { path: "post", model: EModelNames.POST, },
+        { path: "post.author", select: "firstname lastname email avatar", model: EModelNames.USER, },
+        { path: "post.likes", select: "firstname lastname email avatar", model: EModelNames.USER }, 
+    ];
+    return await Favorite.paginate(filter, options);
 };
 
 export default {
