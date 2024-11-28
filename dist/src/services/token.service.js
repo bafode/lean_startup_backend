@@ -111,6 +111,14 @@ const generateVerifyEmailCode = (userId) => __awaiter(void 0, void 0, void 0, fu
     yield saveToken(verifyTelCode.toString(), userId, expires, types_1.ETokenType.VERIFY_EMAIL);
     return verifyTelCode;
 });
+const generateResetPasswordCode = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield _1.userService.getOneUser({ email });
+    const userId = user.id;
+    const expires = (0, moment_1.default)().add(config_1.config.jwt.verifyEmailExpirationMinutes, 'minutes');
+    const verifyTelCode = generateCode();
+    yield saveToken(verifyTelCode.toString(), userId, expires, types_1.ETokenType.RESET_PASSWORD);
+    return verifyTelCode;
+});
 const verifyCode = (code, type) => __awaiter(void 0, void 0, void 0, function* () {
     let tokenDoc = {};
     tokenDoc = yield models_1.Token.findOne({ token: code, type });
@@ -127,6 +135,7 @@ exports.default = {
     generateResetPasswordToken,
     generateVerifyEmailToken,
     generateVerifyEmailCode,
+    generateResetPasswordCode,
     verifyCode,
 };
 //# sourceMappingURL=token.service.js.map

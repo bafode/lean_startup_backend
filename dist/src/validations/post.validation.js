@@ -53,7 +53,6 @@ const addComment = {
     }),
     body: joi_1.default.object().keys({
         content: joi_1.default.string().required(),
-        user: joi_1.default.string().custom(_1.validation.objectId),
     }),
 };
 exports.default = {

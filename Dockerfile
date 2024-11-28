@@ -1,15 +1,44 @@
-FROM node:alpine
+# Dev stage
+FROM node:lts-alpine as dev
 
-RUN mkdir -p /usr/src/node-app && chown -R node:node /usr/src/node-app
+LABEL maintainer="bafode.camara@my-digital-school.org"
 
-WORKDIR /usr/src/node-app
+WORKDIR /app
 
-COPY package.json ./
+COPY package.json yarn.lock ./
+
+# Add necessary build tools for native dependencies
+RUN apk add --no-cache python3 make g++ \
+    && yarn install --pure-lockfile \
+    && yarn cache clean
 
 USER node
-
-RUN yarn install --pure-lockfile
 
 COPY --chown=node:node . .
 
 EXPOSE 4000
+
+# Build stage
+FROM node:lts-alpine as build
+
+WORKDIR /src
+
+ENV PATH /node_modules/.bin:$PATH
+
+COPY package.json yarn.lock ./
+
+# Install dependencies with the necessary build tools
+RUN apk add --no-cache python3 make g++ \
+    && yarn install --pure-lockfile \
+    && yarn cache clean
+
+COPY . ./
+
+RUN yarn run build
+
+# Prod stage
+FROM nginx:alpine as prod
+
+COPY --from=build /src/dist /usr/share/nginx/html
+
+EXPOSE 80

@@ -14,13 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createPost = void 0;
 const utils_1 = require("../utils");
+const types_1 = require("../types");
 const models_1 = require("../models");
 const http_status_1 = __importDefault(require("http-status"));
 const getPosts = (filter, options) => __awaiter(void 0, void 0, void 0, function* () {
     options.sortBy = "createdAt:desc";
     options.populate = [
-        { path: "author", select: "firstname lastname email avatar" },
-        { path: "likes", select: "firstname lastname email avatar" },
+        { path: "author", select: "firstname lastname email avatar", model: types_1.EModelNames.USER },
+        { path: "likes", select: "firstname lastname email avatar", model: types_1.EModelNames.USER },
+        // { path: "likes", select: "firstname lastname email avatar" },
     ];
     const posts = yield models_1.Post.paginate(filter, options);
     return posts;
@@ -29,7 +31,9 @@ const getPostByAuthorId = (authorId) => __awaiter(void 0, void 0, void 0, functi
     return yield models_1.Post.find({ author: authorId }).sort({ createdAt: -1 });
 });
 const getPostById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(id);
     return yield models_1.Post.findById(id).populate([
+        { path: "likes", select: "firstname lastname email avatar" },
         { path: "author", select: "firstname lastname email avatar" },
     ]);
 });
@@ -81,7 +85,10 @@ const toggleLikePost = (postId, userId) => __awaiter(void 0, void 0, void 0, fun
         post.likes.push(userId);
     }
     yield post.save();
-    return post;
+    return post.populate([
+        { path: "likes", select: "firstname lastname email avatar" },
+        { path: "author", select: "firstname lastname email avatar" },
+    ]);
 });
 exports.default = {
     createPost: exports.createPost,
