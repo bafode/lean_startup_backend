@@ -23,16 +23,24 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            # Arrêter et supprimer l'ancien conteneur s'il existe
-            docker stop $(docker ps -aq)
-            docker rm $(docker ps -aq)
-            docker rmi $(docker images -aq)
+            # Arrêter et supprimer les conteneurs existants
+            docker stop $(docker ps -aq) || true
+            docker rm $(docker ps -aq) || true
 
-            # Supprimer les anciennes images inutilisées
-            docker image prune -f || true
+            # Nettoyer les anciennes images et conteneurs inutilisés
+            docker system prune -af || true
             
             # Tirer la dernière image depuis Docker Hub
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
+
+            # Créer un dossier pour le fichier .env (si nécessaire)
+            mkdir -p /home/beehive-backend
+
+            # Ajouter le fichier .env au VPS
+            echo "${{ secrets.ENV_FILE_CONTENT }}" > /home/beehive-backend/.env
             
-            # Démarrer un nouveau conteneur avec l'image tirée
-            docker run -d --name beehive-container -p 4000:4000 ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
+            # Lancer un nouveau conteneur avec l'image tirée et le fichier .env
+            docker run -d --name beehive-container \
+              --env-file /home/beehive-backend/.env \
+              -p 4000:4000 \
+              ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
