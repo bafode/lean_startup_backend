@@ -44,6 +44,7 @@ jobs:
           docker compose -f docker-compose.dev.yml build 
           docker tag beehive-backend-dev bafode/beehive-backend-dev:latest
           docker push bafode/beehive-backend-dev:latest
+
         env:
           DOCKER_BUILDKIT: 1
 
