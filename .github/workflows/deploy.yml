@@ -24,8 +24,9 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             # Arrêter et supprimer l'ancien conteneur s'il existe
-            docker stop beehive-container || true
-            docker rm beehive-container || true
+            docker stop $(docker ps -aq)
+            docker rm $(docker ps -aq)
+            docker rmi $(docker images -aq)
 
             # Supprimer les anciennes images inutilisées
             docker image prune -f || true
