@@ -18,6 +18,8 @@ COPY --chown=node:node . .
 
 EXPOSE 4000
 
+CMD ["yarn", "run", "dev"]
+
 # Build stage
 FROM node:lts-alpine as build
 
@@ -42,3 +44,5 @@ FROM nginx:alpine as prod
 COPY --from=build /src/dist /usr/share/nginx/html
 
 EXPOSE 80
+
+CMD ["yarn", "start"]
