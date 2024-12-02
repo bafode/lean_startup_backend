@@ -19,7 +19,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.vps99456.serveur-vps.net }}
+          username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             # Arrêter et supprimer l'ancien conteneur s'il existe
