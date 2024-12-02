@@ -11,8 +11,8 @@ services:
     command: yarn run dev -L
     env_file:
       - .env
-    volumes:
-      - ./:/usr/share/nginx/html
-      - ./node_modules:/node_modules/ 
     ports:
       - "4000:4000"
+    volumes:
+      - .:/app
+      - /app/node_modules

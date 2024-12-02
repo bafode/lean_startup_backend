@@ -27,7 +27,10 @@ jobs:
             docker rm beehive-container || true
             
             # Tirer la dernière image depuis Docker Hub
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/beehive:production
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
             
             # Démarrer un nouveau conteneur avec l'image tirée
-            docker run -d --name beehive-container -p 4000:4000 ${{ secrets.DOCKER_HUB_USERNAME }}/beehive:production
+            docker run -d --name beehive-container -p 4000:4000 ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
+
+            # Accéder au conteneur et exécuter la commande yarn
+            docker exec -it beehive-container yarn run dev
