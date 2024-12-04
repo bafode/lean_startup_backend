@@ -32,7 +32,10 @@ const getPostById = async (id: string) => {
 };
 
 export const createPost = async (post: IPost) => {
-  return await Post.create(post);
+  return (await Post.create(post)).populate([
+    { path: "author", select: "firstname lastname email avatar", model: EModelNames.USER },
+    { path: "likes", select: "firstname lastname email avatar", model: EModelNames.USER },
+  ]);
 };
 
 const updatePostById = async (
