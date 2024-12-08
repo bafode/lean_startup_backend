@@ -1,4 +1,4 @@
-import { Schema, model, Model, FilterQuery } from 'mongoose';
+import mongoose, { Schema, model, Model, FilterQuery } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { toJSON, paginate } from './plugins';
 import { EAuthType, EGender, EModelNames, EUserRole, IPaginateOption, IUserDocument } from '../types';
@@ -78,6 +78,11 @@ const userSchema: Schema<IUserDocument> = new Schema(
       type: [String],
       default: [],
     },
+    favorites: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: EModelNames.POST,
+      default: [],
+    },
     phone: {
       type: String,
       default: 'No phone'
@@ -95,6 +100,7 @@ const userSchema: Schema<IUserDocument> = new Schema(
       enum: EAuthType,
       default: EAuthType.EMAIL,
     },
+    
   },
   {
     timestamps: true,
