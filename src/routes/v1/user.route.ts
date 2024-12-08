@@ -17,7 +17,14 @@ router
     auth(EUserRole.ADMIN),
     validate(userValidation.createUser),
     userController.createUser
-  );
+);
+  
+router.get(
+  "/favorites",
+  auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.getFavorites),
+  userController.getFavorites
+);
 
 router
   .route("/:userId")
@@ -36,7 +43,13 @@ router
     auth(EUserRole.ADMIN, EUserRole.USER),
     validate(userValidation.deleteUser),
     userController.deleteUser
-  );
+);
+  
+router.patch(
+  "/:postId/favorites",
+  auth(EUserRole.ADMIN, EUserRole.USER),
+  userController.toggleUserFavorites
+)
 
 /**
  * @swagger

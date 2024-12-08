@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { IUser } from "../types";
-import { authService, userService } from "../services";
+import { IAppRequest, IUser } from "../types";
+import { authService, postService, userService } from "../services";
 import { ApiError, catchReq, pick } from "../utils";
 
 const createUser = catchReq(async (req: Request, res: Response) => {
@@ -14,6 +14,13 @@ const getUsers = catchReq(async (req: Request, res: Response) => {
   const filter = pick(req.query, ["role"]);
   const options = pick(req.query, ["sortBy", "limit", "page"]);
   const result = await userService.getUsers(filter, options);
+  res.send(result);
+});
+
+const getFavorites = catchReq(async (req: IAppRequest, res: Response) => {
+  const filter = pick(req.query, ["role"]);
+  const options = pick(req.query, ["sortBy", "limit", "page"]);
+  const result = await postService.getFavorites(req.user,filter, options);
   res.send(result);
 });
 
@@ -44,10 +51,17 @@ const deleteUser = catchReq(async (req: Request, res: Response) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const toggleUserFavorites = catchReq(async (req: IAppRequest, res: Response) => {
+  const user = await userService.toggleUserFavorites(req.params.postId, req.user.toString());
+  res.status(httpStatus.CREATED).send(user);
+});
+
 export default {
   createUser,
   getUsers,
   getOneUser,
   updateUser,
   deleteUser,
+  toggleUserFavorites,
+  getFavorites
 };

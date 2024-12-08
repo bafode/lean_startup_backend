@@ -51,6 +51,9 @@ export interface ILevelOfStudy {
 export interface ICategories {
   categories: string[];
 }
+export interface IFavorites{
+  favorites: mongoose.Types.ObjectId[];
+}
 export interface IPhone { 
   phone: string;
 }
@@ -70,6 +73,7 @@ export interface IUser extends
   Partial<IEmail>,
   Partial<IAvatar>,
   Partial<IDescription>,
+  Partial<IFavorites>,
   Partial<IGender>,
   Partial<IRole>,
   Partial<IIsEmailVerified>,
