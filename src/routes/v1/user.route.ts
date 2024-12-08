@@ -26,6 +26,13 @@ router.get(
   userController.getFavorites
 );
 
+router.patch(
+  "/:followId/follow",
+  auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.toggleFollowUser),
+  userController.toggleFollowUser
+);
+
 router
   .route("/:userId")
   .get(
@@ -48,8 +55,10 @@ router
 router.patch(
   "/:postId/favorites",
   auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.toggleUserFavorites),
   userController.toggleUserFavorites
 )
+
 
 /**
  * @swagger

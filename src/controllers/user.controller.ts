@@ -56,6 +56,11 @@ const toggleUserFavorites = catchReq(async (req: IAppRequest, res: Response) => 
   res.status(httpStatus.CREATED).send(user);
 });
 
+const toggleFollowUser = catchReq(async (req: IAppRequest, res: Response) => {
+  const user = await userService.toggleFollowUser(req.user.toString(), req.params.followId);
+  res.status(httpStatus.CREATED).send(user);
+ });
+
 export default {
   createUser,
   getUsers,
@@ -63,5 +68,6 @@ export default {
   updateUser,
   deleteUser,
   toggleUserFavorites,
-  getFavorites
+  getFavorites,
+  toggleFollowUser
 };

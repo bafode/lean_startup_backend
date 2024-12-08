@@ -71,11 +71,34 @@ const toggleUserFavorites = async (postStringId: string, userId:string ) => {
   return user
 }
 
+const toggleFollowUser = async (userId: string, followId: string) => { 
+  const user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+  const followUser = await getUserById(followId);
+  if (!followUser) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Follow user not found");
+  }
+  const followIndex = user.following.indexOf(new mongoose.Types.ObjectId(followId));
+  if (followIndex > -1) {
+    user.following.splice(followIndex, 1);
+    followUser.followers.splice(followUser.followers.indexOf(new mongoose.Types.ObjectId(userId)), 1);
+  } else {
+    user.following.push(new mongoose.Types.ObjectId(followId));
+    followUser.followers.push(new mongoose.Types.ObjectId(userId));
+  }
+  await user.save();
+  await followUser.save();
+  return user;
+}
+
 export default {
   getUserById,
   updateUserById,
   deleteUserById,
   getOneUser,
   getUsers,
-  toggleUserFavorites
+  toggleUserFavorites,
+  toggleFollowUser
 };

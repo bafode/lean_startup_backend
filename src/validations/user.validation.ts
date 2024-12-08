@@ -66,6 +66,18 @@ const deleteUser = {
   }),
 };
 
+const toggleUserFavorites= {
+  params: Joi.object().keys({
+    postId: Joi.string().custom(validation.objectId),
+  }),
+};
+
+const toggleFollowUser = {
+  params: Joi.object().keys({
+    followId: Joi.string().custom(validation.objectId),
+  }),
+};
+
 export default {
   getUsers,
   getOneUser,
@@ -73,4 +85,6 @@ export default {
   deleteUser,
   createUser,
   getFavorites,
+  toggleUserFavorites,
+  toggleFollowUser,
 };
