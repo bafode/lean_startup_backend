@@ -24,6 +24,13 @@ const getUsers = {
   }),
 };
 
+const getFavorites = {
+  query: Joi.object().keys({
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+  }),
+};
+
 const getOneUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(validation.objectId),
@@ -65,4 +72,5 @@ export default {
   updateUser,
   deleteUser,
   createUser,
+  getFavorites,
 };

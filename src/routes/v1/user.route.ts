@@ -22,6 +22,7 @@ router
 router.get(
   "/favorites",
   auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.getFavorites),
   userController.getFavorites
 );
 
