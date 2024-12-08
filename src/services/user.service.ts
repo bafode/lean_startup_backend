@@ -1,5 +1,5 @@
 import httpStatus from "http-status";
-import { FilterQuery } from "mongoose";
+import mongoose, { FilterQuery } from "mongoose";
 import { User } from "../models";
 import { IUserDocument, IPaginateOption } from "../types";
 import { ApiError } from "../utils";
@@ -53,10 +53,29 @@ const deleteUserById = async (userId: string) => {
   return user;
 };
 
+const toggleUserFavorites = async (postStringId: string, userId:string ) => {
+  
+  const user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+  const postId =new  mongoose.Types.ObjectId(postStringId);
+ 
+  const postIndex = user.favorites.indexOf(postId);
+  if (postIndex > -1) {
+    user.favorites.splice(postIndex, 1);
+  } else {
+    user.favorites.push(postId);
+  }
+  await user.save();
+  return user
+}
+
 export default {
   getUserById,
   updateUserById,
   deleteUserById,
   getOneUser,
   getUsers,
+  toggleUserFavorites
 };

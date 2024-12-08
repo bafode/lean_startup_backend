@@ -1,7 +1,7 @@
 import { ApiError } from "../utils";
 import { EModelNames, IComment, IPaginateOption, IPost } from "../types";
-import { Post } from "../models";
-import mongoose, { FilterQuery } from "mongoose";
+import { Post, User } from "../models";
+import mongoose, { FilterQuery, Schema } from "mongoose";
 import httpStatus from "http-status";
 
 const getPosts = async (
@@ -17,6 +17,28 @@ const getPosts = async (
   const posts = await Post.paginate(filter, options);
   return posts;
 };
+
+const getFavorites = async (
+  userId: Schema.Types.ObjectId,
+  filter: FilterQuery<IPost>,
+  options: IPaginateOption
+) => {
+
+  const user = await User.findById(userId).select("favorites").lean();
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+  // Add favorites to the filter
+  filter._id = { $in: user.favorites };
+  options.sortBy = "createdAt:desc";
+  options.populate = [
+    { path: "author", select: "firstname lastname email avatar", model: EModelNames.USER },
+    { path: "likes", select: "firstname lastname email avatar", model: EModelNames.USER },
+  ];
+  const posts = await Post.paginate(filter, options);
+  return posts;
+};
+
 
 
 const getPostByAuthorId = async (authorId: string) => {
@@ -103,4 +125,5 @@ export default {
   getPostByAuthorId,
   addCommentToPost,
   toggleLikePost,
+  getFavorites
 };
