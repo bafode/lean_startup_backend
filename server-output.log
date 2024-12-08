@@ -376,9 +376,12 @@
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 10:17:32"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 10:20:19"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 10:49:04"}
+<<<<<<< HEAD
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 13:33:48"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 13:34:06"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 13:35:44"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 13:51:05"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 13:51:41"}
 {"level":"info","message":"🚀 Server listening to port 4000","timestamp":"2024-12-08 13:51:49"}
+=======
+>>>>>>> 26f2cdb8861c9ac53f3b3f557e8867af5dd55ed6
