@@ -83,6 +83,17 @@ const userSchema: Schema<IUserDocument> = new Schema(
       ref: EModelNames.POST,
       default: [],
     },
+    followers: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: EModelNames.USER,
+      default: [],
+    },
+    following: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: EModelNames.USER,
+      default: [],
+    },
+
     phone: {
       type: String,
       default: 'No phone'

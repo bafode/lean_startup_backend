@@ -54,6 +54,14 @@ export interface ICategories {
 export interface IFavorites{
   favorites: mongoose.Types.ObjectId[];
 }
+
+export interface IFollowers {
+  followers: mongoose.Types.ObjectId[];
+}
+export interface IFollowing {
+  following: mongoose.Types.ObjectId[];
+}
+
 export interface IPhone { 
   phone: string;
 }
@@ -74,6 +82,8 @@ export interface IUser extends
   Partial<IAvatar>,
   Partial<IDescription>,
   Partial<IFavorites>,
+  Partial<IFollowers>,
+  Partial<IFollowing>,
   Partial<IGender>,
   Partial<IRole>,
   Partial<IIsEmailVerified>,
