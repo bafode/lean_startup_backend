@@ -34,13 +34,13 @@ jobs:
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
 
             # Créer un dossier pour le fichier .env (si nécessaire)
-            mkdir -p /home/beehive-backend
+            mkdir -p /home/beehive-config
 
             # Ajouter le fichier .env au VPS
-            echo "${{ secrets.ENV_FILE_CONTENT }}" > /home/beehive-backend/.env
+            echo "${{ secrets.ENV_FILE_CONTENT }}" > /home/beehive-config/.env
             
             # Lancer un nouveau conteneur avec l'image tirée et le fichier .env
             docker run -d --name beehive-container \
-              --env-file /home/beehive-backend/.env \
+              --env-file /home/beehive-config/.env \
               -p 4000:4000 \
               ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
