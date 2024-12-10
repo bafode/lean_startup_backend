@@ -26,6 +26,13 @@ router.get(
   userController.getFavorites
 );
 
+router.get(
+  "/me/posts",
+  auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.getLoggedUserPost),
+  userController.getLoggedUserPost
+);
+
 router.patch(
   "/:followId/follow",
   auth(EUserRole.ADMIN, EUserRole.USER),

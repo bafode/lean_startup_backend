@@ -31,6 +31,13 @@ const getFavorites = {
   }),
 };
 
+const getLoggedUserPost = {
+  query: Joi.object().keys({
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+  }),
+};
+
 const getOneUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(validation.objectId),
@@ -87,4 +94,5 @@ export default {
   getFavorites,
   toggleUserFavorites,
   toggleFollowUser,
+  getLoggedUserPost,
 };

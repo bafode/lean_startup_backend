@@ -38,7 +38,20 @@ const getFavorites = async (
   const posts = await Post.paginate(filter, options);
   return posts;
 };
-
+const getLoggedUserPost = async (
+  userId: Schema.Types.ObjectId,
+  filter: FilterQuery<IPost>,
+  options: IPaginateOption
+) => { 
+  filter.author = userId;
+  options.sortBy = "createdAt:desc";
+  options.populate = [
+    { path: "author", select: "firstname lastname email avatar", model: EModelNames.USER },
+    { path: "likes", select: "firstname lastname email avatar", model: EModelNames.USER },
+  ];
+  const posts = await Post.paginate(filter, options);
+  return posts;
+}
 
 
 const getPostByAuthorId = async (authorId: string) => {
@@ -125,5 +138,6 @@ export default {
   getPostByAuthorId,
   addCommentToPost,
   toggleLikePost,
-  getFavorites
+  getFavorites,
+  getLoggedUserPost
 };
