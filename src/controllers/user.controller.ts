@@ -24,6 +24,13 @@ const getFavorites = catchReq(async (req: IAppRequest, res: Response) => {
   res.send(result);
 });
 
+const getLoggedUserPost = catchReq(async (req: IAppRequest, res: Response) => {
+  const filter = pick(req.query, ["role"]);
+  const options = pick(req.query, ["sortBy", "limit", "page"]);
+  const result = await postService.getLoggedUserPost(req.user, filter, options);
+  res.send(result);
+});
+
 const getOneUser = catchReq(async (req: Request, res: Response) => {
   const user = await userService.getUserById(req.params.userId);
   if (!user) {
@@ -69,5 +76,6 @@ export default {
   deleteUser,
   toggleUserFavorites,
   getFavorites,
-  toggleFollowUser
+  toggleFollowUser,
+  getLoggedUserPost,
 };
