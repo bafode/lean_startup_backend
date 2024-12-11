@@ -96,6 +96,39 @@ const sendVerificationEmail = async (to: string, token: number) => {
   await sendEmail(to, 'beehiveappcontact@gmail.com', subject, text, html);
 };
 
+const sendWelcomeEmail = async (to: string) => {
+  const subject = '🎉 Bienvenue dans notre communauté !';
+  const text = `Bonjour,
+  Merci de vous être inscrit à notre newsletter ! Nous sommes ravis de vous compter parmi nous.
+  Restez à l'écoute pour recevoir les dernières actualités, astuces et contenus exclusifs directement dans votre boîte mail.
+  À très bientôt !
+  
+  L'équipe Beehive`;
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f8f8f8;">
+      <div style="background-color: #5e17eb; padding: 20px; border-top-left-radius: 10px; border-top-right-radius: 10px; text-align: center;">
+        <h2 style="color: #ffffff; margin: 0;">Bienvenue dans notre communauté !</h2>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 16px; color: #333;">Bonjour,</p>
+        <p style="font-size: 16px; color: #333; line-height: 1.6;">
+          Merci de vous être inscrit à notre newsletter ! Nous sommes ravis de vous compter parmi nous. 
+        </p>
+        <p style="font-size: 16px; color: #333; line-height: 1.6;">
+          Restez à l'écoute pour recevoir des actualités exclusives, des conseils pratiques et bien plus encore directement dans votre boîte mail.
+        </p>
+        <p style="font-size: 16px; color: #333; margin-top: 30px;">Cordialement,<br>L'équipe Beehive</p>
+      </div>
+      <div style="background-color: #ffaf35; padding: 10px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; text-align: center;">
+        <p style="font-size: 14px; color: #ffffff; margin: 0;">Merci de faire partie de notre communauté. Nous avons hâte de partager avec vous !</p>
+      </div>
+    </div>
+  `;
+
+  await sendEmail(to, 'beehiveappcontact@gmail.com', subject, text, html);
+};
+
 
 
 
@@ -104,4 +137,5 @@ export default {
   sendEmail,
   sendResetPasswordEmail,
   sendVerificationEmail,
+  sendWelcomeEmail,
 };

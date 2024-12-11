@@ -22,3 +22,4 @@ export { ResponseT } from "./interfaces/response.interface";
 export { IFavorite } from "./interfaces/favorite.interface";
 export { IMessage } from "./interfaces/message.interface";
 export { IChat } from "./interfaces/chat.interface";
+export { ILandingContact } from "./interfaces/landing-contact.interface";

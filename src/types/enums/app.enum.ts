@@ -11,6 +11,7 @@ export enum EModelNames {
   FAVORITE = "Favorite",
   MESSAGE = "Message",
   CHAT = "Chat",
+  LANDING_CONTACT = "LandingContact",
 }
 
 export enum EUserRole {
