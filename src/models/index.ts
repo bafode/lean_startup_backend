@@ -4,3 +4,4 @@ export { default as Post } from "./post.model";
 export { default as Favorite } from "./favorite.model";
 export { default as Message } from "./message.model";
 export { default as Chat } from "./chat.model";
+export {default as LandingContact } from "./landing-contact.model";
