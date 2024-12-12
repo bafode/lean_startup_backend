@@ -42,9 +42,15 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Enable request logging for development and production debugging
 app.use(morgan("dev"));
 
-// enable cors
-app.use(cors());
-app.options("*", cors());
+const corsOptions = {
+  origin: "https://www.beehiveapp.fr",  // Frontend React
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,  // Si vous utilisez des cookies ou de l'authentification
+};
+
+app.use(cors(corsOptions));  // Appliquez cette configuration CORS à toutes les requêtes
+app.options("*", cors(corsOptions));   
 
 // routes
 app.use("/v1", routeV1);
