@@ -6,7 +6,6 @@ import { catchReq, pick } from "../utils";
 import httpStatus from "http-status";
 
 const createLandingContact = catchReq(async (req: IAppRequest, res: Response) => {
-    console.log(req.body);
     let data: ILandingContact = { ...req.body };
     const contact = await landingContactService.createLandingContact(data);
     emailService.sendWelcomeEmail(contact.email);
