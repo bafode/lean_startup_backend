@@ -42,20 +42,9 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Enable request logging for development and production debugging
 app.use(morgan("dev"));
 
-app.use((req, res, next) => {
-  console.log(`CORS Debug: Origin=${req.headers.origin}, Method=${req.method}`);
-  next();
-});
-
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://www.beehiveapp.fr'], // Autorisez les origines nécessaires
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // Permet les cookies entre les domaines
-  optionsSuccessStatus: 200, // Code 200 pour les anciennes implémentations CORS
-}));
-
-
+// enable cors
+app.use(cors());
+app.options("*", cors());
 
 // routes
 app.use("/v1", routeV1);

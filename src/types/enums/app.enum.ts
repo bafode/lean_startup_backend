@@ -37,3 +37,17 @@ export enum EAuthType {
   FACEBOOK = "facebook",
   Apple = "apple",
 }
+
+export enum EPostCategory {
+  INSPIRATION = "inspiration",
+  COMMUNAUTE = "communaute",
+  ALL = "all",
+}
+
+export enum EPostDomain {
+  DEV = "dev",
+  DA = "da",
+  UI_UX = "ui_ux",
+  MARKETING = "marketing",
+  ALL = "all",
+}

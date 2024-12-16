@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import moment, { Moment } from "moment";
 import httpStatus from "http-status";
-import crypto from 'crypto';
 import { config } from "../config";
 import { Token } from "../models";
 import { ApiError } from "../utils";

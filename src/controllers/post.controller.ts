@@ -26,7 +26,7 @@ const createPost = catchReq(async (req: IAppRequest, res: Response) => {
 });
 
 const getPosts = catchReq(async (req: Request, res: Response) => {
-  const filter = pick(req.query, ["title", "content", "category", "author"]);
+  const filter = pick(req.query, ["query","category"]);
   const options = pick(req.query, ["sortBy", "limit", "page"]);
   const result = await postService.getPosts(filter, options);
   res.send(result);

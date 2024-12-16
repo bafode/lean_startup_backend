@@ -1,3 +1,4 @@
+import { EPostCategory } from "enums/app.enum";
 import { Request, Response } from "express";
 import mongoose from "mongoose";
 export interface IComment {
@@ -12,12 +13,14 @@ export interface IPost {
   content: string;
   author: mongoose.Schema.Types.ObjectId;
   likes?: mongoose.Schema.Types.ObjectId[];
+  likesCount?: number;
   _id: string;
   media?: string[];
   comments?: IComment[];
+  domain?: string[];
   createdAt?: string;
   updatedAt?: string;
-  category?: string;
+  category?: EPostCategory;
 }
 
 export interface TPage {
