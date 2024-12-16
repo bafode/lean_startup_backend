@@ -5,6 +5,8 @@ export {
   EUserRole,
   ETokenType,
   EAuthType,
+  EPostCategory,
+  EPostDomain,
 } from "./enums/app.enum";
 
 // interfaces
