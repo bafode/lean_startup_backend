@@ -8,11 +8,30 @@ const getPosts = async (
   filter: FilterQuery<IPost>,
   options: IPaginateOption
 ) => {
-   options.sortBy = "createdAt:desc";
+  
+  if (filter.query!=null&&filter.query.length > 3) {
+    filter.$or = [
+      { title: { $regex: filter.query, $options: "i" } },
+      { content: { $regex: filter.query, $options: "i" } },
+    ];
+    delete filter.query
+  }
+
+  if (options.sortBy === "nouveaute") {
+    options.sortBy = "createdAt:desc";
+    console.log("nouveaute");
+  } else if (options.sortBy === "populaire") {
+    options.sortBy = "likesCount:-1";
+  } else if (options.sortBy === "domaine") { 
+    options.sortBy = "category";
+  } else {
+    options.sortBy = "createdAt:desc";
+  }
+  
+  console.log(options);
   options.populate = [
     { path: "author", select: "firstname lastname email avatar", model: EModelNames.USER },
     {path: "likes", select: "firstname lastname email avatar", model: EModelNames.USER},
-    // { path: "likes", select: "firstname lastname email avatar" },
   ];
   const posts = await Post.paginate(filter, options);
   return posts;
@@ -119,14 +138,23 @@ const toggleLikePost = async (postId: string, userId: mongoose.Schema.Types.Obje
   const userIndex = post.likes.indexOf(userId);
   if (userIndex > -1) {
     post.likes.splice(userIndex, 1);
+    post.likesCount = post.likesCount - 1;
   } else {
     post.likes.push(userId);
+    post.likesCount = post.likesCount + 1;
   }
   await post.save();
   return post.populate([
     { path: "likes", select: "firstname lastname email avatar" },
     { path: "author", select: "firstname lastname email avatar" },
   ]);
+}
+const updatePosts = async ()=>{
+  const posts = await Post.find();
+  posts.forEach(post => {
+    post.likesCount = post.likes.length;
+    post.save();
+  });
 }
 
 export default {

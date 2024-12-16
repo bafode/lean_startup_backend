@@ -1,7 +1,6 @@
 import mongoose, { FilterQuery, Model, Schema } from "mongoose";
-import { IPost, EModelNames, IPaginateOption, IComment } from "../types";
+import { IPost, EModelNames, IPaginateOption, IComment, EPostCategory, EPostDomain } from "../types";
 import { paginate, toJSON } from "./plugins";
-
 interface IPostModel extends Model<IPost> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   paginate?: (
@@ -59,11 +58,14 @@ const postSchema: Schema<IPost> = new Schema(
       ref: EModelNames.USER,
       default: [],
     },
+    likesCount: {
+      type: Number,
+      default: 0,
+    },
     category: {
       type: String,
-      lowercase: true,
-      enum: ["inspiration", "communauté", "all"],
-      default: "all",
+      default: EPostCategory.ALL,
+      enum:EPostCategory,
       trim: true,
     },
     media: {
@@ -73,6 +75,11 @@ const postSchema: Schema<IPost> = new Schema(
     comments: {
       type: [postCommentSchema],
       default: [],
+    },
+    domain: {
+      type: [String],
+      enum: EPostDomain,
+      default: [EPostDomain.ALL],
     },
   },
 

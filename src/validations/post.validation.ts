@@ -1,14 +1,15 @@
 import Joi from "joi";
 import { validation } from ".";
+import { EPostDomain } from "../types";
 
 const getPosts = {
   query: Joi.object().keys({
-    search: Joi.string(),
-    title: Joi.string(),
-    content: Joi.string(),
+    query: Joi.string().allow(""),
     category: Joi.string(),
+    domain: Joi.array().items(Joi.string()).default([EPostDomain.ALL]),
     author: Joi.string().custom(validation.objectId),
     sortBy: Joi.string(),
+    orderBy: Joi.string(),  
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
   }),
@@ -19,6 +20,7 @@ const createPost = {
     title: Joi.string().required(),
     content: Joi.string().required(),
     category: Joi.string().required(),
+    domain: Joi.array().items(Joi.string()).default([EPostDomain.ALL]),
   }),
 };
 
