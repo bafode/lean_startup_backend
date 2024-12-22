@@ -41,9 +41,9 @@ const getOneUser = catchReq(async (req: Request, res: Response) => {
 
 const updateUser = catchReq(async (req: Request, res: Response) => {
   let updatedUserData = { ...req.body };
-
   if (req.file) {
-    updatedUserData.avatar = `uploads/images/${req.file.filename}`;
+    req.file as Express.Multer.File;
+    updatedUserData.avatar = (req.file as Express.Multer.File).path;
   }
 
   const user = await userService.updateUserById(

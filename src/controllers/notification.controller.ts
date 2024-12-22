@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { notificationService, userService } from '../services';
 import { ApiError, catchReq } from '../utils';
 import { IAppRequest } from 'index';
-import { log } from 'winston';
 import httpStatus from 'http-status';
 
 
@@ -26,14 +25,12 @@ const send_notice = catchReq(async (req: IAppRequest, res: Response) => {
 });
 
 const uploadMedia = catchReq(async (req: IAppRequest, res: Response) => {
-
+    let filePath: string;
     if (!req.file) {
         throw new ApiError(httpStatus.BAD_REQUEST, "No files uploaded");
     }
     const file: Express.Multer.File = req.file as Express.Multer.File;
-    const isImage = file.mimetype.startsWith("image/");
-    const pathPrefix = isImage ? "uploads/images" : "uploads/files";
-    const filePath = `${pathPrefix}/${file.filename}`;
+    filePath = file.path;
     return res.status(httpStatus.OK).send({
         code: 0,
         msg: 'File Uploaded Succefully',
