@@ -26,6 +26,10 @@ router.get(
   userController.getFavorites
 );
 
+router
+  .route('/contacts')
+  .get(auth(EUserRole.ADMIN, EUserRole.USER), userController.getContacts);
+
 router.get(
   "/me/posts",
   auth(EUserRole.ADMIN, EUserRole.USER),

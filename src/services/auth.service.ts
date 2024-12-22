@@ -1,5 +1,7 @@
 import httpStatus from 'http-status';
+import { RtcRole, RtcTokenBuilder } from 'agora-access-token';
 import { tokenService, userService } from './';
+import { config } from '../config';
 import { Token, User } from '../models';
 import { ApiError } from '../utils';
 import { EAuthType, ETokenType, IUser } from '../types';
@@ -78,9 +80,43 @@ const verifyEmail = async (verifyEmailToken: string) => {
     await Token.deleteMany({ user: user.id, type: ETokenType.VERIFY_EMAIL });
     await userService.updateUserById(user.id, { isEmailVerified: true });
   } catch (error) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Email verification failed '+error);
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Email verification failed ' + error);
   }
 };
+
+const getAgoraToken = async (channelName: string) => {
+  console.log('getAgoraToken', channelName);
+  const privilegeExpiredTs = Math.floor(Date.now() / 1000) + 3600;
+  const uid = 0;
+  const role = RtcRole.PUBLISHER;
+  try {
+    const token = RtcTokenBuilder.buildTokenWithUid(
+      config.agora.appId,
+      config.agora.appCertificate,
+      channelName,
+      uid,
+      role,
+      privilegeExpiredTs
+    );
+    return token;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'internal server error');
+  }
+};
+
+const bind_fcmtoken = async (userId: string, fcmtoken: string) => {
+  try {
+    const user = await userService.getUserById(userId);
+    if (!user) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+    }
+    user.fcmtoken = fcmtoken;
+    await user.save();
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Role not found');
+  }
+};
+
 
 export default {
   register,
@@ -88,5 +124,7 @@ export default {
   refreshAuth,
   resetPassword,
   verifyEmail,
-  logout
+  logout,
+  getAgoraToken,
+  bind_fcmtoken
 };

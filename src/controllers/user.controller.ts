@@ -66,7 +66,28 @@ const toggleUserFavorites = catchReq(async (req: IAppRequest, res: Response) => 
 const toggleFollowUser = catchReq(async (req: IAppRequest, res: Response) => {
   const user = await userService.toggleFollowUser(req.user.toString(), req.params.followId);
   res.status(httpStatus.CREATED).send(user);
- });
+});
+ 
+const getContacts = catchReq(async (req: IAppRequest, res: Response) => {
+  const filter = pick(req.query, ['role']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const loggedUser = req.user.toString();
+  const result: any = await userService.getContacts(loggedUser, filter, options);
+
+  res.status(httpStatus.OK).json({
+    code: 0,
+    data: result.results.map((contact: IUser | any) => ({
+      avatar: contact.avatar ?? null,
+      description: contact.description ?? null,
+      online: contact.online ?? null,
+      token: contact.id ?? null,
+      firstname: contact.firstname ?? null,
+      lastname: contact.lastname ?? null,
+    })), // Return the array of users with fields set to `null` if missing
+    msg: 'User list retrieved successfully',
+  });
+});
+
 
 export default {
   createUser,
@@ -78,4 +99,5 @@ export default {
   getFavorites,
   toggleFollowUser,
   getLoggedUserPost,
+  getContacts
 };
