@@ -66,13 +66,16 @@ export interface IPhone {
   phone: string;
 }
 export interface IOnline {
-  online: boolean;
+  online: number;
 }
 export interface IOpenID { 
   open_id: string;
 }
 export interface IAuthType{
   authType: EAuthType;
+}
+export interface IFcmToken {
+  fcmtoken?: string;
 }
 
 export interface IUser extends
@@ -97,7 +100,8 @@ export interface IUser extends
   Partial<IPhone>,
   Partial<IOnline>,
   Partial<IOpenID>,
-  Partial<IAuthType>
+  Partial<IAuthType>,
+  Partial<IFcmToken>
 {}
 
 export interface IUserDocument extends mongoose.Document, IUser

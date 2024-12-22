@@ -93,6 +93,16 @@ const toggleFollowUser = async (userId: string, followId: string) => {
   return user;
 }
 
+
+const getContacts = async (userId: String, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
+  const users = await User.paginate(
+    { _id: { $ne: userId }, ...filter }, // Combine le filtre d'exclusion avec les autres filtres
+    options
+  );
+  return users;
+};
+
+
 export default {
   getUserById,
   updateUserById,
@@ -100,5 +110,6 @@ export default {
   getOneUser,
   getUsers,
   toggleUserFavorites,
-  toggleFollowUser
+  toggleFollowUser,
+  getContacts
 };

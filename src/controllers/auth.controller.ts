@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { authService, tokenService, emailService,userService } from "../services";
-import { EAuthType, EUserRole, IUser } from "../types";
+import { EAuthType, EUserRole, IAppRequest, IUser } from "../types";
 import { catchReq } from "../utils";
 
 const register = catchReq(async (req: Request, res: Response) => {
@@ -86,6 +86,29 @@ const verifyEmail = catchReq(async (req, res) => {
   });
 });
 
+
+const getAgoraToken = catchReq(async (req, res) => {
+
+  const token = await authService.getAgoraToken(req.query.channel_name);
+  res.status(httpStatus.OK).json({
+    code: 0,
+    data: token,
+    msg: 'Token retrieved successfully',
+  });
+});
+
+
+const bind_fcmtoken = catchReq(async (req: IAppRequest, res: Response) => {
+  const userId = req.user;
+  const { fcmtoken } = req.query;
+  await authService.bind_fcmtoken(userId.toString(), fcmtoken as string);
+  res.status(httpStatus.OK).json({
+    code: 0,
+    data: "",
+    msg: 'FCM token binded successfully',
+  });
+});
+
 export default {
   register,
   login,
@@ -95,4 +118,6 @@ export default {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  getAgoraToken,
+  bind_fcmtoken
 };

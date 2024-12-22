@@ -99,8 +99,8 @@ const userSchema: Schema<IUserDocument> = new Schema(
       default: 'No phone'
     },
     online: {
-      type: Boolean,
-      default: false,
+      type: Number,
+      default: 0,
     },
     open_id: {
       type: String,
@@ -110,6 +110,9 @@ const userSchema: Schema<IUserDocument> = new Schema(
       type: String,
       enum: EAuthType,
       default: EAuthType.EMAIL,
+    },
+    fcmtoken: {
+      type: String,
     },
     
   },

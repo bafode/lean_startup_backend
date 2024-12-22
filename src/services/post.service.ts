@@ -19,7 +19,6 @@ const getPosts = async (
 
   if (options.sortBy === "nouveaute") {
     options.sortBy = "createdAt:desc";
-    console.log("nouveaute");
   } else if (options.sortBy === "populaire") {
     options.sortBy = "likesCount:-1";
   } else if (options.sortBy === "domaine") { 
@@ -28,7 +27,6 @@ const getPosts = async (
     options.sortBy = "createdAt:desc";
   }
   
-  console.log(options);
   options.populate = [
     { path: "author", select: "firstname lastname email avatar", model: EModelNames.USER },
     {path: "likes", select: "firstname lastname email avatar", model: EModelNames.USER},

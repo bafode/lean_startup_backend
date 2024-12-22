@@ -33,6 +33,21 @@ const envVarsSchema = Joi.object()
     SENDGRID_API_KEY: Joi.string()
       .required()
       .description("Sendgrid api key required"),
+    AGORA_APP_ID: Joi.string().required().description('Agora app id required'),
+    AGORA_APP_CERTIFICATE: Joi.string().required().description('Agora app certificate required'),
+    FIREBASE_DATABASE_URL: Joi.string().required().description('Firebase database url required'),
+    FIREBASE_TYPE: Joi.string().required().description('Firebase type required'),
+    FIREBASE_PROJECT_ID: Joi.string().required().description('Firebase project id required'),
+    FIREBASE_PRIVATE_KEY_ID: Joi.string().required().description('Firebase private key id required'),
+    FIREBASE_PRIVATE_KEY: Joi.string().required().description('Firebase private key required'),
+    FIREBASE_CLIENT_EMAIL: Joi.string().required().description('Firebase client email required'),
+    FIREBASE_CLIENT_ID: Joi.string().required().description('Firebase client id required'),
+    FIREBASE_AUTH_URI: Joi.string().required().description('Firebase auth uri required'),
+    FIREBASE_TOKEN_URI: Joi.string().required().description('Firebase token uri required'),
+    FIREBASE_AUTH_PROVIDER_CERT_URL: Joi.string().required().description('Firebase auth provider cert url required'),
+    FIREBASE_CLIENT_CERT_URL: Joi.string().required().description('Firebase client cert url required'),
+    FIREBASE_UNIVERSE_DOMAIN: Joi.string().required().description('Firebase universe domain required'),
+
   })
   .unknown();
 
@@ -73,5 +88,23 @@ export default {
     cloud_name: envVars.CLOUDINARY_CLOUD_NAME,
     api_key: envVars.CLOUDINARY_API_KEY,
     api_secret: envVars.CLOUDINARY_API_SECRET,
+  },
+  agora: {
+    appId: envVars.AGORA_APP_ID,
+    appCertificate: envVars.AGORA_APP_CERTIFICATE
+  },
+  firebase: {
+    databaseURL: envVars.FIREBASE_DATABASE_URL,
+    type: envVars.FIREBASE_TYPE,
+    projectId: envVars.FIREBASE_PROJECT_ID,
+    privateKeyId: envVars.FIREBASE_PRIVATE_KEY_ID,
+    privateKey: envVars.FIREBASE_PRIVATE_KEY,
+    clientEmail: envVars.FIREBASE_CLIENT_EMAIL,
+    clientId: envVars.FIREBASE_CLIENT_ID,
+    authUri: envVars.FIREBASE_AUTH_URI,
+    tokenUri: envVars.FIREBASE_TOKEN_URI,
+    authProviderCertUrl: envVars.FIREBASE_AUTH_PROVIDER_CERT_URL,
+    clientCertUrl: envVars.FIREBASE_CLIENT_CERT_URL,
+    universeDomain: envVars.FIREBASE_UNIVERSE_DOMAIN,
   },
 };

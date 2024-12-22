@@ -9,6 +9,7 @@ import favoriteRoute from "./favorite.route";
 import chatRoute from "./chat.route";
 import messageRoute from "./message.route";
 import landingContactRoute from "./landing-contact.route";
+import notRoute from "./notification.route";  
 
 const routes = express.Router();
 
@@ -19,6 +20,7 @@ routes.use("/favorites", favoriteRoute);
 routes.use("/chats", chatRoute);
 routes.use("/messages", messageRoute);
 routes.use("/landing-contacts", landingContactRoute);
+routes.use('/notifications', notRoute);
 
 
 if (config.env === ENodeEnv.DEV) {

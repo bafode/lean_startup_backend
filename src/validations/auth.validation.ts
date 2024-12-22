@@ -11,7 +11,7 @@ const register = {
     authType: Joi.string().allow(null),
     description: Joi.string().allow(null),
     phone: Joi.string().allow(null),
-    avatar: Joi.string().uri().allow(null),
+    avatar: Joi.string().allow(null),
     open_id: Joi.string().allow(null),
     online: Joi.boolean().allow(null),
     gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
@@ -30,7 +30,7 @@ const login = {
     lastname: Joi.string().allow(null).empty(''),
     description: Joi.string().allow(null),
     phone: Joi.string().allow(null),
-    avatar: Joi.string().uri().allow(null),
+    avatar: Joi.string().allow(null),
     open_id: Joi.string().allow(null),
     online: Joi.boolean().allow(null),
   }),
@@ -66,6 +66,17 @@ const verifyEmail = {
     token: Joi.string().required(),
   }),
 };
+const get_rtc_token = {
+  query: Joi.object().keys({
+    channel_name: Joi.string().required().description('The channel name'),
+  })
+};
+const bind_fcmtoken = {
+  query: Joi.object().keys({
+    fcmtoken: Joi.string().required().description('The channel name'),
+  })
+};
+
 
 export default {
   register,
@@ -74,5 +85,7 @@ export default {
   refreshTokens,
   forgotPassword,
   resetPassword,
-  verifyEmail
+  verifyEmail,
+  get_rtc_token,
+  bind_fcmtoken
 };
