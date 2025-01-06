@@ -1,8 +1,9 @@
 import httpStatus from "http-status";
-import mongoose, { FilterQuery } from "mongoose";
+import mongoose, { FilterQuery, ObjectId } from "mongoose";
 import { User } from "../models";
 import { IUserDocument, IPaginateOption } from "../types";
 import { ApiError } from "../utils";
+import userService from "./user.service";
 
 const getUsers = async (
   filter: FilterQuery<IUserDocument>,
@@ -94,13 +95,42 @@ const toggleFollowUser = async (userId: string, followId: string) => {
 }
 
 
-const getContacts = async (userId: String, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
+const getContacts = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
   const users = await User.paginate(
     { _id: { $ne: userId }, ...filter }, // Combine le filtre d'exclusion avec les autres filtres
     options
   );
   return users;
 };
+
+const getFollowers = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
+  const user =await userService.getUserById(userId);
+  let followersIds: mongoose.Types.ObjectId[];
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+  followersIds = user.followers
+  const users = await User.paginate(
+    { _id: { $in: followersIds }, ...filter }, 
+    options
+  );
+  return users??[];
+};
+
+const getFollowings = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
+  const user = await userService.getUserById(userId);
+  let followersIds: mongoose.Types.ObjectId[];
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+  followersIds = user.following
+  const users = await User.paginate(
+    { _id: { $in: followersIds }, ...filter },
+    options
+  );
+  return users ?? [];
+};
+
 
 
 export default {
@@ -111,5 +141,7 @@ export default {
   getUsers,
   toggleUserFavorites,
   toggleFollowUser,
-  getContacts
+  getContacts,
+  getFollowers,
+  getFollowings
 };

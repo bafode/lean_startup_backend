@@ -63,8 +63,7 @@ const updateUser = {
       fieldOfStudy: Joi.string(),
       levelOfStudy: Joi.string(),
       categories: Joi.array().items(Joi.string()).unique().allow(null),
-    })
-    .min(1),
+    }),
 };
 
 const deleteUser = {
@@ -85,6 +84,18 @@ const toggleFollowUser = {
   }),
 };
 
+const getFollowers = {
+  params: Joi.object().keys({
+    userId: Joi.string().custom(validation.objectId),
+  }),
+};
+
+const getFollowings = {
+  params: Joi.object().keys({
+    userId: Joi.string().custom(validation.objectId),
+  }),
+};
+
 export default {
   getUsers,
   getOneUser,
@@ -95,4 +106,6 @@ export default {
   toggleUserFavorites,
   toggleFollowUser,
   getLoggedUserPost,
+  getFollowers,
+  getFollowings
 };

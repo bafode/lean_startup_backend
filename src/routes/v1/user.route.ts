@@ -37,6 +37,20 @@ router.get(
   userController.getLoggedUserPost
 );
 
+router.get(
+  "/:userId/followers",
+  auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.getFollowers),
+  userController.getFollowers
+);
+
+router.get(
+  "/:userId/following",
+  auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.getFollowings),
+  userController.getFollowings
+);
+
 router.patch(
   "/:followId/follow",
   auth(EUserRole.ADMIN, EUserRole.USER),

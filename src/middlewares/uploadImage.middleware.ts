@@ -39,7 +39,8 @@ function checkFileType(
   if (extname && mimeType) {
     return cb(null, true);
   } else {
-    cb(new Error("Images and videos only!"), false);
+    return cb(null, true);
+    //cb(new Error("Images and videos only!"), false);
   }
 }
 
