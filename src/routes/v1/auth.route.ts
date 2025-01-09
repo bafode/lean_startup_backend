@@ -37,7 +37,8 @@ router.post('/verify-email', validate(authValidation.verifyEmail), authControlle
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - firstName
+ *               - lastName
  *               - email
  *               - password
  *             properties:
@@ -53,7 +54,8 @@ router.post('/verify-email', validate(authValidation.verifyEmail), authControlle
  *                 minLength: 8
  *                 description: At least one number and one letter
  *             example:
- *               name: fake name
+ *               firstName: Fake
+ *               lastName: User
  *               email: fake@example.com
  *               password: password1
  *     responses:
