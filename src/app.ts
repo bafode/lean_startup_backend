@@ -42,20 +42,9 @@ app.use(morgan("dev"));
 // enable cors
 app.use(bodyParser.json());
 app.use(cookieParser());
-<<<<<<< HEAD
-
-=======
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE,PATCH, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.status(204).end();
-});
->>>>>>> 4f5210cfab6c3f2fe00b806eee2a0402f2e1eb97
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://www.beehiveapp.fr', 'https://beehive-api.fr'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200, // Code pour les requêtes OPTIONS réussies
