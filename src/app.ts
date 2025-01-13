@@ -44,13 +44,36 @@ app.use(morgan("dev"));
 // enable cors
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(helmet());
-app.use(
-  cors({
-    origin: '',
-    credentials: true,
-  })
-);
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE,PATCH, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.status(204).end();
+});
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://www.beehiveapp.fr', 'https://beehive-api.fr'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200, // Code pour les requêtes OPTIONS réussies
+};
+
+// CORS Middleware
+app.use(cors(corsOptions));
+
+// Helmet configuration (si nécessaire)
+app.use(helmet({
+  crossOriginEmbedderPolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "default-src": ["'self'"],
+      "img-src": ["'self'", "data:"],
+      "script-src": ["'self'", "'unsafe-inline'"],
+    },
+  },
+}));
 
 app.use(MetricsMiddleware);
 metricsLoader(app);
