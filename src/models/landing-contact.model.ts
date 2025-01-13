@@ -12,10 +12,30 @@ interface ILandingContactModel extends Model<ILandingContact> {
 
 const landingContactSchema: Schema<ILandingContact> = new Schema(
     {
+        firstName: {
+            type: String,
+            trim: true,
+        },
+        lastName: {
+            type: String,
+            trim: true,
+        },
         email: {
             type: String,
             trim: true,
             required: [true, "Please provide email"],
+        },
+        subject: {
+            type: String,
+            trim: true,
+        },
+        message: {
+            type: String,
+            trim: true,
+        },
+        terms: {
+            type: Boolean,
+            default: false,
         },
     },
     {
