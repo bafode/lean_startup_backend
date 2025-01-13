@@ -51,7 +51,7 @@ app.options('*', (req, res) => {
 });
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://www.beehiveapp.fr', 'https://beehive-api.fr'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200, // Code pour les requêtes OPTIONS réussies
