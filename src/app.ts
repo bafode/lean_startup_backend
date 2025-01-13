@@ -9,8 +9,6 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import bodyParser from 'body-parser';
 import { createServer } from "http";
-import { config } from "./config";
-import { ENodeEnv } from "./types";
 import { routeV1 } from "./routes";
 import { ApiError } from "./utils";
 import httpStatus from "http-status";
@@ -44,16 +42,9 @@ app.use(morgan("dev"));
 // enable cors
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE,PATCH, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.status(204).end();
-});
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://www.beehiveapp.fr', 'https://beehive-api.fr'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200, // Code pour les requêtes OPTIONS réussies
