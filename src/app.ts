@@ -6,27 +6,26 @@ import xss from "xss-clean";
 import mongoSanitize from "express-mongo-sanitize";
 import compression from "compression";
 import path from "path";
+import cookieParser from "cookie-parser";
+import bodyParser from 'body-parser';
 import { createServer } from "http";
 import { config } from "./config";
 import { ENodeEnv } from "./types";
 import { routeV1 } from "./routes";
 import { ApiError } from "./utils";
 import httpStatus from "http-status";
-import { errorConverter, errorHandler } from "./middlewares";
+import { errorConverter, errorHandler, MetricsMiddleware } from "./middlewares";
 import setupSocket from "./socket";
+import metricsLoader from "./metrics.loader";
 
 const app = express();
 
-// set security HTTP headers
-if (config.env === ENodeEnv.PROD) {
-  app.use(helmet());
-}
 
 // parse json request body
 app.use(express.json());
 
 // parse urlencoded request body
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 // sanitize request data
 app.use(xss());
@@ -43,22 +42,18 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(morgan("dev"));
 
 // enable cors
-app.use(helmet({
-  crossOriginEmbedderPolicy: false, // Exemple
-  contentSecurityPolicy: false,    // Si nécessaire
-}));
-app.use((req, res, next) => {
-  console.log(`CORS Debug: Origin=${req.headers.origin}, Method=${req.method}`);
-  next();
-});
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(helmet());
+app.use(
+  cors({
+    origin: '',
+    credentials: true,
+  })
+);
 
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://www.beehiveapp.fr', "https://beehive-api.fr"],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 200,
-}));
+app.use(MetricsMiddleware);
+metricsLoader(app);
 
 
 
