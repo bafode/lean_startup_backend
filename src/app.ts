@@ -42,6 +42,14 @@ app.use(morgan("dev"));
 // enable cors
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(204);
+});
+
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://www.beehiveapp.fr', 'https://beehive-api.fr'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -50,8 +58,16 @@ const corsOptions = {
   optionsSuccessStatus: 200, // Code pour les requêtes OPTIONS réussies
 };
 
-// CORS Middleware
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.originalUrl}`);
+  console.log('Origin:', req.headers.origin);
+  console.log('Request Headers:', req.headers);
+  next();
+});
+
+// CORS Middleware
 
 // Helmet configuration (si nécessaire)
 app.use(helmet({
