@@ -9,8 +9,6 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import bodyParser from 'body-parser';
 import { createServer } from "http";
-import { config } from "./config";
-import { ENodeEnv } from "./types";
 import { routeV1 } from "./routes";
 import { ApiError } from "./utils";
 import httpStatus from "http-status";
@@ -44,13 +42,30 @@ app.use(morgan("dev"));
 // enable cors
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(helmet());
-app.use(
-  cors({
-    origin: '',
-    credentials: true,
-  })
-);
+
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://www.beehiveapp.fr', 'https://beehive-api.fr'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200, // Code pour les requêtes OPTIONS réussies
+};
+
+// CORS Middleware
+app.use(cors(corsOptions));
+
+// Helmet configuration (si nécessaire)
+app.use(helmet({
+  crossOriginEmbedderPolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "default-src": ["'self'"],
+      "img-src": ["'self'", "data:"],
+      "script-src": ["'self'", "'unsafe-inline'"],
+    },
+  },
+}));
 
 app.use(MetricsMiddleware);
 metricsLoader(app);
