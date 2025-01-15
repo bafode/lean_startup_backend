@@ -1,5 +1,5 @@
 import { ApiError } from "../utils";
-import { EModelNames, IComment, IPaginateOption, IPost } from "../types";
+import { EModelNames, ESearchIndex, IComment, IPaginateOption, IPost } from "../types";
 import { Post, User } from "../models";
 import mongoose, { FilterQuery, Schema } from "mongoose";
 import httpStatus from "http-status";
@@ -8,15 +8,9 @@ const getPosts = async (
   filter: FilterQuery<IPost>,
   options: IPaginateOption
 ) => {
-  
-  if (filter.query!=null&&filter.query.length > 3) {
-    filter.$or = [
-      { title: { $regex: filter.query, $options: "i" } },
-      { content: { $regex: filter.query, $options: "i" } },
-    ];
-    delete filter.query
+  if (filter.query && filter.query !== "" && filter.query.length > 2) {
+    filter.searchIndex =ESearchIndex.POST;
   }
-
   if (options.sortBy === "nouveaute") {
     options.sortBy = "createdAt:desc";
   } else if (options.sortBy === "populaire") {

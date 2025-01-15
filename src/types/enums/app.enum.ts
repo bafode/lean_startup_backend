@@ -9,6 +9,7 @@ export enum EModelNames {
   TOKEN = "Token",
   POST = "Post",
   FAVORITE = "Favorite",
+  COMMENT= "Comment",
   MESSAGE = "Message",
   CHAT = "Chat",
   LANDING_CONTACT = "LandingContact",
@@ -22,6 +23,10 @@ export enum EUserRole {
 export enum EGender {
   MALE = "male",
   FEMALE = "female",
+}
+
+export enum ESearchIndex{
+  POST = "postsearch",
 }
 
 export enum ETokenType {
