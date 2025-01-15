@@ -5,10 +5,10 @@ export interface IPaginateOption {
   page?: number;
 }
 
-interface IPaginatePopulate {
+export interface IPaginatePopulate {
   path: string;
   select?: string;
   model?: string;
-  populate?: { path: string; model?: string, select?: string, populate?: { path: string, model?: string, select?: string } };
+  populate?: IPaginatePopulate;
   match?: any;
 }

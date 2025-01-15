@@ -24,6 +24,10 @@ export enum EGender {
   FEMALE = "female",
 }
 
+export enum ESearchIndex{
+  POST = "postsearch",
+}
+
 export enum ETokenType {
   ACCESS = "access",
   REFRESH = "refresh",

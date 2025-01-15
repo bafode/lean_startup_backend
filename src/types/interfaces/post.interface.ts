@@ -21,6 +21,7 @@ export interface IPost {
   createdAt?: string;
   updatedAt?: string;
   category?: EPostCategory;
+  searchIndex?: string;
 }
 
 export interface TPage {

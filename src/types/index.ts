@@ -7,10 +7,11 @@ export {
   EAuthType,
   EPostCategory,
   EPostDomain,
+  ESearchIndex,
 } from "./enums/app.enum";
 
 // interfaces
-export { IPaginateOption } from "./interfaces/utils.interface";
+export { IPaginateOption, IPaginatePopulate } from "./interfaces/utils.interface";
 export { IUserDocument, IUser } from "./interfaces/user.interface";
 export {
   IPost,
