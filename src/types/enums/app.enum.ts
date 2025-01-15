@@ -9,6 +9,7 @@ export enum EModelNames {
   TOKEN = "Token",
   POST = "Post",
   FAVORITE = "Favorite",
+  COMMENT= "Comment",
   MESSAGE = "Message",
   CHAT = "Chat",
   LANDING_CONTACT = "LandingContact",

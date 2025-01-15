@@ -55,6 +55,14 @@ const paginate = (schema: any) => {
         },
         { $skip: skip },
         { $limit: limit },
+        {
+          $addFields: {
+            id: { $toString: "$_id" },
+          },
+        },
+        {
+          $unset: "_id", // Supprime le champ _id
+        },
         { $sort: { createdAt: -1 } },
       ];
 
@@ -64,7 +72,7 @@ const paginate = (schema: any) => {
       const countPipeline = [
         {
           $search: {
-            index: 'postsearch',
+            index: filter.searchIndex, // Replace with your Atlas Search index name
             text: {
               query: filter.query,
               path: {
@@ -78,10 +86,12 @@ const paginate = (schema: any) => {
         },
       ];
 
+    
+
       const aggregateResult = await this.aggregate(aggregationPipeline).exec();
       const results=await this.populate(aggregateResult, options.populate);
       const countResult = await this.aggregate(countPipeline).exec();
-      const totalResults = countResult.length > 0 ? countResult[0].totalCount : 0; // Adjust this for `$search` if needed
+      const totalResults = countResult.length > 0 ? countResult[0].totalCount : 0;
       const totalPages = Math.ceil(totalResults / limit);
 
       return {

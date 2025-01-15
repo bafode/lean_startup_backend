@@ -90,10 +90,10 @@ const postSchema: Schema<IPost> = new Schema(
 );
 
 // Plugin that converts mongoose to json
-postSchema.plugin(toJSON);
 postSchema.plugin(paginate);
+postSchema.plugin(toJSON);
+//postCommentSchema.plugin(paginate);
 postCommentSchema.plugin(toJSON);
-postCommentSchema.plugin(paginate);
 
 
 const Post = mongoose.model<IPost, IPostModel>(EModelNames.POST, postSchema);
