@@ -1,33 +1,50 @@
-- name: 🧑‍💻 SSH to VPS and Deploy Docker Image
-  uses: appleboy/ssh-action@master
-  with:
-    host: ${{ secrets.VPS_IP }}
-    username: ${{ secrets.VPS_USERNAME }}
-    password: ${{ secrets.VPS_PASSWORD }}
-    port: ${{ secrets.VPS_PORT }}
-    script: |
-      # Arrêter et supprimer les conteneurs existants
-      docker stop $(docker ps -aq) || true
-      docker rm $(docker ps -aq) || true
+name: Deploy Beehive to VPS
 
-      # Nettoyer les anciennes images et conteneurs inutilisés
-      docker system prune -af || true
-      
-      # Tirer la dernière image depuis Docker Hub
-      docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
+on:
+  push:
+    branches:
+      - main
 
-      # Créer un dossier pour les configurations, si nécessaire
-      mkdir -p /home/beehive-config
-      
-      # Ajouter le fichier .env au VPS
-      echo "${{ secrets.ENV_FILE_CONTENT }}" > /home/beehive-config/.env
-      
-      # Assurez-vous que le fichier service-account.json est en place
-      cp /home/beehive-config/service-account.json ./src/config/service-account.json
+jobs:
+  build:
+    name: 🐳 Build
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
 
-      # Lancer un nouveau conteneur avec l'image tirée, en incluant le fichier .env
-      docker run -d --name beehive-container \
-        --env-file /home/beehive-config/.env \
-        -v /home/beehive-config/service-account.json:/usr/src/app/src/config/service-account.json:ro \
-        -p 4000:4000 \
-        ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧑‍💻 SSH to VPS and Deploy Docker Image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            # Arrêter et supprimer les conteneurs existants
+            docker stop $(docker ps -aq) || true
+            docker rm $(docker ps -aq) || true
+
+            # Nettoyer les anciennes images et conteneurs inutilisés
+            docker system prune -af || true
+            
+            # Tirer la dernière image depuis Docker Hub
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
+
+            # Créer un dossier pour le fichier .env (si nécessaire)
+            mkdir -p /home/beehive-config
+
+            # Ajouter le fichier .env au VPS
+            echo "${{ secrets.ENV_FILE_CONTENT }}" > /home/beehive-config/.env
+
+            # Assurez-vous que le fichier service-account.json est en place
+            cp /home/beehive-config/service-account.json ./src/config/service-account.json
+            
+            # Lancer un nouveau conteneur avec l'image tirée et le fichier .env
+            docker run -d --name beehive-container \
+              --env-file /home/beehive-config/.env \
+              -v /home/beehive-config/service-account.json:/app/src/config/service-account.json \
+              -p 4000:4000 \
+              ${{ secrets.DOCKER_HUB_USERNAME }}/beehive-backend-dev:latest
