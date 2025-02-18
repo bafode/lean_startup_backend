@@ -14,6 +14,12 @@ router.get(
     landingContactController.getLandingContacts
 );
 
+router.get(
+    "/mails",
+    auth(EUserRole.ADMIN, EUserRole.USER),
+    landingContactController.getAllAddressMails
+);
+
 router.post(
     "/",
     validate(landingContactValidation.createLandingContact),

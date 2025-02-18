@@ -20,7 +20,7 @@ const createPost = {
     title: Joi.string().required(),
     content: Joi.string().required(),
     category: Joi.string().required(),
-    domain: Joi.array().items(Joi.string()).default([EPostDomain.ALL]),
+    domain: Joi.array().items(Joi.string()).allow(null),
   }),
 };
 

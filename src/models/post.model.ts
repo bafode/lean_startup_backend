@@ -78,8 +78,6 @@ const postSchema: Schema<IPost> = new Schema(
     },
     domain: {
       type: [String],
-      enum: EPostDomain,
-      default: [EPostDomain.ALL],
     },
   },
 

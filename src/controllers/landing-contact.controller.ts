@@ -28,6 +28,11 @@ const getLandingContactById = catchReq(async (req: IAppRequest, res: Response) =
     res.send(result);
 });
 
+const getAllAddressMails = catchReq(async (req: IAppRequest, res: Response) => {
+    const result = await landingContactService.getAllMailAddresses();
+    res.send(result);
+});
+
 
 const updateLandingContactById = catchReq(async (req: Request, res: Response) => {
     let updatedData: ILandingContact = { ...req.body };
@@ -52,5 +57,6 @@ export default {
     getLandingContacts,
     getLandingContactById,
     updateLandingContactById,
-    deleteLandingContactById
+    deleteLandingContactById,
+    getAllAddressMails
 };
