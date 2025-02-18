@@ -54,7 +54,10 @@ const updateUser = catchReq(async (req: Request, res: Response) => {
 
 const deleteUser = catchReq(async (req: Request, res: Response) => {
   await userService.deleteUserById(req.params.userId);
-  res.status(httpStatus.NO_CONTENT).send();
+  res.status(httpStatus.OK).send({
+      code: httpStatus.OK,
+      message: "User Deleted Successfully",
+    });
 });
 
 const toggleUserFavorites = catchReq(async (req: IAppRequest, res: Response) => {

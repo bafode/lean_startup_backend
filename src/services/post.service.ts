@@ -69,6 +69,11 @@ const getPostByAuthorId = async (authorId: string) => {
   return await Post.find({ author: authorId }).sort({ createdAt: -1 });
 };
 
+const deletePostsByAuthorId = async (authorId: string) => { 
+  await Post.deleteMany({ author: authorId });
+  return true;
+}
+
 const getPostById = async (id: string) => {
   console.log(id);
   return await Post.findById(id).populate([
@@ -159,5 +164,6 @@ export default {
   addCommentToPost,
   toggleLikePost,
   getFavorites,
-  getLoggedUserPost
+  getLoggedUserPost,
+  deletePostsByAuthorId,
 };

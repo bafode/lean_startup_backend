@@ -4,6 +4,7 @@ import { User } from "../models";
 import { IUserDocument, IPaginateOption } from "../types";
 import { ApiError } from "../utils";
 import userService from "./user.service";
+import postService from "./post.service";
 
 const getUsers = async (
   filter: FilterQuery<IUserDocument>,
@@ -51,6 +52,7 @@ const deleteUserById = async (userId: string) => {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
   await user.remove();
+  await postService.deletePostsByAuthorId(userId);
   return user;
 };
 
