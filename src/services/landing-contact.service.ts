@@ -20,6 +20,11 @@ const getLandingContactById = async (id: string) => {
     return await LandingContact.findById(id);
 };
 
+const getAllMailAddresses = async (
+) => { 
+    return await LandingContact.find({}).select('email');
+}
+
 export const createLandingContact = async (contact: ILandingContact) => {
     return (await LandingContact.create(contact));
 };
@@ -60,4 +65,5 @@ export default {
     createLandingContact,
     updateLandingContactById,
     deleteLandingContactById,
+    getAllMailAddresses
 };
