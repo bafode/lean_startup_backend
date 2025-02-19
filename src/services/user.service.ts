@@ -62,13 +62,11 @@ const toggleUserFavorites = async (postStringId: string, userId:string ) => {
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
-  const postId =new  mongoose.Types.ObjectId(postStringId);
- 
-  const postIndex = user.favorites.indexOf(postId);
+  const postIndex = user.favorites.findIndex((id) => id.toString() === postStringId);
   if (postIndex > -1) {
     user.favorites.splice(postIndex, 1);
   } else {
-    user.favorites.push(postId);
+    user.favorites.push(new mongoose.Types.ObjectId(postStringId));
   }
   await user.save();
   return user
@@ -83,10 +81,13 @@ const toggleFollowUser = async (userId: string, followId: string) => {
   if (!followUser) {
     throw new ApiError(httpStatus.NOT_FOUND, "Follow user not found");
   }
-  const followIndex = user.following.indexOf(new mongoose.Types.ObjectId(followId));
+  const followIndex = user.following.findIndex((id) => id.toString() === followId);
   if (followIndex > -1) {
     user.following.splice(followIndex, 1);
-    followUser.followers.splice(followUser.followers.indexOf(new mongoose.Types.ObjectId(userId)), 1);
+    const followerIndex = followUser.followers.findIndex((id) => id.toString() === userId);
+    if (followerIndex > -1) {
+      followUser.followers.splice(followerIndex, 1);
+    }
   } else {
     user.following.push(new mongoose.Types.ObjectId(followId));
     followUser.followers.push(new mongoose.Types.ObjectId(userId));
@@ -106,7 +107,7 @@ const getContacts = async (userId: string, filter: FilterQuery<IUserDocument>, o
 };
 
 const getFollowers = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
-  const user =await userService.getUserById(userId);
+  const user = await getUserById(userId);
   let followersIds: mongoose.Types.ObjectId[];
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
@@ -120,7 +121,7 @@ const getFollowers = async (userId: string, filter: FilterQuery<IUserDocument>, 
 };
 
 const getFollowings = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
-  const user = await userService.getUserById(userId);
+  const user = await getUserById(userId);
   let followersIds: mongoose.Types.ObjectId[];
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");

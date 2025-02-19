@@ -132,13 +132,13 @@ const toggleLikePost = async (postId: string, userId: mongoose.Schema.Types.Obje
   if (!post) {
     throw new ApiError(httpStatus.NOT_FOUND, "Post not found");
   }
-  const userIndex = post.likes.indexOf(userId);
+  const userIndex = post.likes.findIndex((id) => id.toString() === userId.toString());
   if (userIndex > -1) {
     post.likes.splice(userIndex, 1);
-    post.likesCount = post.likesCount - 1;
+    post.likesCount = Math.max(0, post.likesCount - 1);
   } else {
     post.likes.push(userId);
-    post.likesCount = post.likesCount + 1;
+    post.likesCount = (post.likesCount || 0) + 1;
   }
   await post.save();
   return post.populate([
