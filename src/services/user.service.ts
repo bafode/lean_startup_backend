@@ -1,9 +1,8 @@
 import httpStatus from "http-status";
-import mongoose, { FilterQuery, ObjectId } from "mongoose";
+import mongoose, { FilterQuery} from "mongoose";
 import { User } from "../models";
 import { IUserDocument, IPaginateOption } from "../types";
 import { ApiError } from "../utils";
-import userService from "./user.service";
 import postService from "./post.service";
 
 const getUsers = async (
@@ -99,6 +98,7 @@ const toggleFollowUser = async (userId: string, followId: string) => {
 
 
 const getContacts = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
+  options.limit= 200;
   const users = await User.paginate(
     { _id: { $ne: userId }, ...filter }, // Combine le filtre d'exclusion avec les autres filtres
     options
@@ -107,6 +107,7 @@ const getContacts = async (userId: string, filter: FilterQuery<IUserDocument>, o
 };
 
 const getFollowers = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
+  options.limit = 200;
   const user = await getUserById(userId);
   let followersIds: mongoose.Types.ObjectId[];
   if (!user) {
@@ -121,6 +122,7 @@ const getFollowers = async (userId: string, filter: FilterQuery<IUserDocument>, 
 };
 
 const getFollowings = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
+  options.limit = 200;
   const user = await getUserById(userId);
   let followersIds: mongoose.Types.ObjectId[];
   if (!user) {
