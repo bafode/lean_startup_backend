@@ -22,7 +22,7 @@ const getLandingContactById = async (id: string) => {
 
 const getAllMailAddresses = async (
 ) => { 
-    return await LandingContact.find({}).select('email');
+    return await LandingContact.find({}).select('email message');
 }
 
 export const createLandingContact = async (contact: ILandingContact) => {

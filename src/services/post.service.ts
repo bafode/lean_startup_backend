@@ -22,7 +22,7 @@ const getPosts = async (
   }
   
   options.populate = [
-    { path: "author", select: "firstname lastname email avatar", model: EModelNames.USER },
+    { path: "author", select: "firstname lastname email school avatar", model: EModelNames.USER },
     {path: "likes", select: "firstname lastname email avatar", model: EModelNames.USER},
   ];
   const posts = await Post.paginate(filter, options);
@@ -57,7 +57,7 @@ const getLoggedUserPost = async (
   filter.author = userId;
   options.sortBy = "createdAt:desc";
   options.populate = [
-    { path: "author", select: "firstname lastname email avatar", model: EModelNames.USER },
+    { path: "author", select: "firstname lastname email school avatar", model: EModelNames.USER },
     { path: "likes", select: "firstname lastname email avatar", model: EModelNames.USER },
   ];
   const posts = await Post.paginate(filter, options);
@@ -75,11 +75,11 @@ const deletePostsByAuthorId = async (authorId: string) => {
 }
 
 const getPostById = async (id: string) => {
-  console.log(id);
-  return await Post.findById(id).populate([
+  const post = await Post.findById(id).populate([
     { path: "likes", select: "firstname lastname email avatar" },
-    { path: "author", select: "firstname lastname email avatar" },
+    { path: "author", select: "firstname lastname email school avatar" },
   ]);
+  return post;
 };
 
 export const createPost = async (post: IPost) => {
@@ -128,23 +128,60 @@ const addCommentToPost = async (postId: string, comment: IComment) => {
 };
 
 const toggleLikePost = async (postId: string, userId: mongoose.Schema.Types.ObjectId) => {
-  const post = await getPostById(postId);
-  if (!post) {
-    throw new ApiError(httpStatus.NOT_FOUND, "Post not found");
+  try {
+    // Valider les paramètres d'entrée
+    if (!postId || !userId) {
+      throw new ApiError(httpStatus.BAD_REQUEST, "Post ID and User ID are required");
+    }
+
+    // Rechercher et mettre à jour le post en une seule opération
+    const post = await Post.findById(postId);
+    if (!post) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Post not found");
+    }
+
+    // Vérifier si l'utilisateur a déjà liké le post
+    const hasLiked = post.likes.includes(userId);
+
+    // Utiliser l'opérateur $pull ou $push selon le cas
+    const updateOperation = hasLiked
+      ? { $pull: { likes: userId }, $inc: { likesCount: -1 } }
+      : { $push: { likes: userId }, $inc: { likesCount: 1 } };
+
+    // Mettre à jour le document et récupérer la nouvelle version
+    const updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      updateOperation,
+      {
+        new: true,
+        runValidators: true
+      }
+    ).populate([
+      {
+        path: "likes",
+        select: "firstname lastname email avatar",
+      },
+      {
+        path: "author",
+        select: "firstname lastname email avatar"
+      }
+    ]);
+
+    if (!updatedPost) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Post not found after update");
+    }
+
+    return updatedPost;
+
+  } catch (error) {
+    if (error instanceof ApiError) {
+      throw error;
+    }
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      "An error occurred while toggling like"
+    );
   }
-  const userIndex = post.likes.findIndex((id) => id.toString() === userId.toString());
-  if (userIndex > -1) {
-    post.likes.splice(userIndex, 1);
-    post.likesCount = Math.max(0, post.likesCount - 1);
-  } else {
-    post.likes.push(userId);
-    post.likesCount = (post.likesCount || 0) + 1;
-  }
-  await post.save();
-  return post.populate([
-    { path: "likes", select: "firstname lastname email avatar" },
-    { path: "author", select: "firstname lastname email avatar" },
-  ]);
 }
 const updatePosts = async ()=>{
   const posts = await Post.find();
