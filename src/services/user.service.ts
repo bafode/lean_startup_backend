@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 import mongoose, { FilterQuery} from "mongoose";
-import { User } from "../models";
+import { Post, User } from "../models";
 import { IUserDocument, IPaginateOption } from "../types";
 import { ApiError } from "../utils";
 import postService from "./post.service";
@@ -55,46 +55,104 @@ const deleteUserById = async (userId: string) => {
   return user;
 };
 
-const toggleUserFavorites = async (postStringId: string, userId:string ) => {
-  
-  const user = await getUserById(userId);
-  if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
-  }
-  const postIndex = user.favorites.findIndex((id) => id.toString() === postStringId);
-  if (postIndex > -1) {
-    user.favorites.splice(postIndex, 1);
-  } else {
-    user.favorites.push(new mongoose.Types.ObjectId(postStringId));
-  }
-  await user.save();
-  return user
-}
-
-const toggleFollowUser = async (userId: string, followId: string) => { 
-  const user = await getUserById(userId);
-  if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
-  }
-  const followUser = await getUserById(followId);
-  if (!followUser) {
-    throw new ApiError(httpStatus.NOT_FOUND, "Follow user not found");
-  }
-  const followIndex = user.following.findIndex((id) => id.toString() === followId);
-  if (followIndex > -1) {
-    user.following.splice(followIndex, 1);
-    const followerIndex = followUser.followers.findIndex((id) => id.toString() === userId);
-    if (followerIndex > -1) {
-      followUser.followers.splice(followerIndex, 1);
+const toggleUserFavorites = async (postId: string, userId: string) => {
+  try {
+    // Vérifier l'existence du post avant de procéder
+    const post = await Post.findById(postId);
+    if (!post) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Post not found");
     }
-  } else {
-    user.following.push(new mongoose.Types.ObjectId(followId));
-    followUser.followers.push(new mongoose.Types.ObjectId(userId));
+
+    // Vérifier l'existence de l'utilisateur
+    const user = await getUserById(userId);
+    if (!user) {
+      throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    // Utiliser directement les opérateurs MongoDB pour la mise à jour
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        [user.favorites.includes(new mongoose.Types.ObjectId(postId)) ? '$pull' : '$addToSet']: {
+          favorites: postId
+        }
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Failed to update user favorites");
+    }
+
+    return updatedUser;
+  } catch (error) {
+    throw error instanceof ApiError
+      ? error
+      : new ApiError(
+        httpStatus.INTERNAL_SERVER_ERROR,
+        `Failed to toggle favorite: ${error.message}`
+      );
   }
-  await user.save();
-  await followUser.save();
-  return user;
-}
+};
+
+const toggleFollowUser = async (userId: string, followId: string) => {
+  try {
+    // Vérifier que l'utilisateur ne tente pas de se suivre lui-même
+    if (userId === followId) {
+      throw new ApiError(httpStatus.BAD_REQUEST, "Users cannot follow themselves");
+    }
+
+    // Récupérer les deux utilisateurs en parallèle pour de meilleures performances
+    const [user, followUser] = await Promise.all([
+      getUserById(userId),
+      getUserById(followId)
+    ]);
+
+    // Vérifier l'existence des utilisateurs
+    if (!user || !followUser) {
+      throw new ApiError(
+        httpStatus.NOT_FOUND,
+        !user ? "User not found" : "Follow user not found"
+      );
+    }
+
+    // Utiliser les méthodes MongoDB natives pour une meilleure performance
+    const isFollowing = user.following.includes(new mongoose.Types.ObjectId(followId));
+
+    if (isFollowing) {
+      // Retirer les relations en utilisant $pull
+      await Promise.all([
+        User.findByIdAndUpdate(userId, {
+          $pull: { following: followId }
+        }),
+        User.findByIdAndUpdate(followId, {
+          $pull: { followers: userId }
+        })
+      ]);
+    } else {
+      // Ajouter les relations en utilisant $addToSet pour éviter les doublons
+      await Promise.all([
+        User.findByIdAndUpdate(userId, {
+          $addToSet: { following: followId }
+        }),
+        User.findByIdAndUpdate(followId, {
+          $addToSet: { followers: userId }
+        })
+      ]);
+    }
+
+    // Retourner l'utilisateur mis à jour
+    return await getUserById(userId);
+  } catch (error) {
+    // Propager l'erreur avec plus de contexte
+    throw error instanceof ApiError
+      ? error
+      : new ApiError(
+        httpStatus.INTERNAL_SERVER_ERROR,
+        `Failed to toggle follow relationship: ${error.message}`
+      );
+  }
+};
 
 
 const getContacts = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
