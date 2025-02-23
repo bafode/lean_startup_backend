@@ -1,7 +1,7 @@
 import express from "express";
 
 import { postController } from "../../controllers";
-import { auth, upload, validate } from "../../middlewares";
+import { auth, handleUploadError, upload, validate } from "../../middlewares";
 import { EUserRole } from "../../types";
 import { postValidation } from "../../validations";
 
@@ -28,6 +28,7 @@ router.post(
   "/",
   auth(EUserRole.ADMIN, EUserRole.USER),
   upload.array("media", 10),
+  handleUploadError,
   validate(postValidation.createPost),
   postController.createPost
 );
@@ -41,6 +42,8 @@ router.patch(
   "/:postId",
   auth(EUserRole.ADMIN, EUserRole.USER),
   upload.array("media", 10),
+  handleUploadError,
+  validate(postValidation.updatePost),
   postController.updatePost
 );
 

@@ -1,6 +1,6 @@
 import express from "express";
 import { userValidation } from "../../validations";
-import { auth, upload, validate } from "../../middlewares";
+import { auth, handleUploadError, upload, validate } from "../../middlewares";
 import { userController } from "../../controllers";
 import { EUserRole } from "../../types";
 
@@ -68,6 +68,7 @@ router
   .patch(
     auth(EUserRole.ADMIN, EUserRole.USER),
     upload.single("image"),
+    handleUploadError,
     validate(userValidation.updateUser),
     userController.updateUser
   )
