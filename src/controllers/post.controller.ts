@@ -1,9 +1,10 @@
-import { Request, Response} from "express";
+import { NextFunction, Request, Response} from "express";
 
 import { postService, userService } from "../services";
 import { IPost, IAppRequest, IComment } from "../types";
 import { ApiError, catchReq, pick } from "../utils";
 import httpStatus from "http-status";
+import { deleteMultipleCloudinaryFiles } from "../middlewares";
 
 const createPost = catchReq(async (req: IAppRequest, res: Response) => {
   let data: IPost = { ...req.body };
@@ -64,7 +65,16 @@ const updatePost = catchReq(async (req: Request, res: Response) => {
   res.send(post);
 });
 
-const deletePost = catchReq(async (req: Request, res: Response) => {
+const deletePost = catchReq(async (req: Request, res: Response,) => {
+  const post = await postService.getPostById(req.params.postId);
+  if (!post) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Post not found");
+  }
+  // Ajouter les URLs des médias à la requête
+  if (post.media && post.media.length > 0) {
+   await deleteMultipleCloudinaryFiles(post.media);
+  }
+
   await postService.deletePostById(req.params.postId);
   res.status(httpStatus.NO_CONTENT).send();
 });
