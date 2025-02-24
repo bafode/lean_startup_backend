@@ -16,14 +16,14 @@ cloudinary.config({
 const ALLOWED_FILES = {
   images: {
     extensions: /jpg|jpeg|png|gif|webp/,
-    mimeTypes: /^image\/(jpeg|jpg|png|gif|webp)$/,
+    mimeTypes: /^image\/(jpeg|jpg|png|gif|webp)$|^application\/octet-stream$/,
     cloudinaryResourceType: 'image',
     folder: 'images',
     maxSize: 25 * 1024 * 1024, // 25MB
   },
   videos: {
     extensions: /mp4|mov|avi|mkv|webm/,
-    mimeTypes: /^video\/(mp4|quicktime|x-msvideo|x-matroska|webm)$/,
+    mimeTypes: /^video\/(mp4|quicktime|x-msvideo|x-matroska|webm)$|^application\/octet-stream$/,
     cloudinaryResourceType: 'video',
     folder: 'videos',
     maxSize: 100 * 1024 * 1024, // 100MB
@@ -63,14 +63,28 @@ const storage = new CloudinaryStorage({
 
 // Fonction pour déterminer le type de fichier
 function getFileType(file: Express.Multer.File): keyof typeof ALLOWED_FILES | null {
+  console.log("Checking file:", {
+    originalname: file.originalname,
+    mimetype: file.mimetype,
+    extension: path.extname(file.originalname).toLowerCase()
+  });
+
+  const extension = path.extname(file.originalname).toLowerCase();
+
+  // Vérifier d'abord par extension
   for (const [type, config] of Object.entries(ALLOWED_FILES)) {
-    if (
-      config.extensions.test(path.extname(file.originalname).toLowerCase()) &&
-      config.mimeTypes.test(file.mimetype)
-    ) {
+    if (config.extensions.test(extension)) {
+      // Si l'extension correspond, on accepte indépendamment du MIME type
       return type as keyof typeof ALLOWED_FILES;
     }
   }
+  // Si aucune extension ne correspond, on essaie avec le MIME type
+  for (const [type, config] of Object.entries(ALLOWED_FILES)) {
+    if (config.mimeTypes.test(file.mimetype)) {
+      return type as keyof typeof ALLOWED_FILES;
+    }
+  }
+
   return null;
 }
 
@@ -85,7 +99,7 @@ function checkFileType(
     return cb(
       new Error(
         `Type de fichier non supporté. Types acceptés: ${Object.keys(ALLOWED_FILES)
-          .map(type => ALLOWED_FILES[type as keyof typeof ALLOWED_FILES].extensions.source.slice(1).split('|').join(', '))
+          .map(type => ALLOWED_FILES[type as keyof typeof ALLOWED_FILES].extensions.source.slice(0).split('|').join(', '))
           .join(', ')}`
       ),
       false

@@ -3,6 +3,7 @@ import httpStatus from "http-status";
 import { IAppRequest, IUser } from "../types";
 import { authService, postService, userService } from "../services";
 import { ApiError, catchReq, pick } from "../utils";
+import { deleteCloudinaryFile } from "../middlewares";
 
 const createUser = catchReq(async (req: Request, res: Response) => {
   const data: IUser = req.body;
@@ -42,6 +43,7 @@ const getOneUser = catchReq(async (req: Request, res: Response) => {
 const updateUser = catchReq(async (req: Request, res: Response) => {
   let updatedUserData = { ...req.body };
   if (req.file) {
+    await deleteCloudinaryFile(updatedUserData.avatar);
     updatedUserData.avatar = (req.file as Express.Multer.File).path;
   }
 
