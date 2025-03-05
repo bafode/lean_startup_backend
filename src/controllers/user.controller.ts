@@ -4,6 +4,7 @@ import { IAppRequest, IUser } from "../types";
 import { authService, postService, userService } from "../services";
 import { ApiError, catchReq, pick } from "../utils";
 import { deleteCloudinaryFile } from "../middlewares";
+import mongoose from "mongoose";
 
 const createUser = catchReq(async (req: Request, res: Response) => {
   const data: IUser = req.body;
@@ -25,10 +26,26 @@ const getFavorites = catchReq(async (req: IAppRequest, res: Response) => {
   res.send(result);
 });
 
+const getOneUserFavorite = catchReq(async (req: IAppRequest, res: Response) => {
+  const filter = pick(req.query, ["role"]);
+  const options = pick(req.query, ["sortBy", "limit", "page"]);
+  const userId = new mongoose.Types.ObjectId(req.params.userId);
+  const result = await postService.getFavorites(userId, filter, options);
+  res.send(result);
+});
+
 const getLoggedUserPost = catchReq(async (req: IAppRequest, res: Response) => {
   const filter = pick(req.query, ["role"]);
   const options = pick(req.query, ["sortBy", "limit", "page"]);
   const result = await postService.getLoggedUserPost(req.user, filter, options);
+  res.send(result);
+});
+
+const getUserPosts = catchReq(async (req: IAppRequest, res: Response) => {
+  const filter = pick(req.query, ["role"]);
+  const options = pick(req.query, ["sortBy", "limit", "page"]);
+  const userId=new mongoose.Types.ObjectId(req.params.userId);
+  const result = await postService.getLoggedUserPost(userId, filter, options);
   res.send(result);
 });
 
@@ -143,5 +160,7 @@ export default {
   getLoggedUserPost,
   getContacts,
   getFollowers,
-  getFollowings
+  getFollowings,
+  getUserPosts,
+  getOneUserFavorite
 };
