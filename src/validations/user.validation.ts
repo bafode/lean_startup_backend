@@ -90,6 +90,28 @@ const getFollowers = {
   }),
 };
 
+const getUserPosts = {
+  query: Joi.object().keys({
+    sortBy: Joi.string(),
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+  }),
+  params: Joi.object().keys({
+    userId: Joi.string().custom(validation.objectId),
+  }),
+};
+
+const getOneUserFavorite = {
+  query: Joi.object().keys({
+    sortBy: Joi.string(),
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+  }),
+  params: Joi.object().keys({
+    userId: Joi.string().custom(validation.objectId),
+  }),
+};
+
 const getFollowings = {
   params: Joi.object().keys({
     userId: Joi.string().custom(validation.objectId),
@@ -107,5 +129,7 @@ export default {
   toggleFollowUser,
   getLoggedUserPost,
   getFollowers,
-  getFollowings
+  getFollowings,
+  getOneUserFavorite,
+  getUserPosts,
 };

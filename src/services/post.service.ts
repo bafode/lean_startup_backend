@@ -1,24 +1,32 @@
 import { ApiError } from "../utils";
 import { EModelNames, ESearchIndex, IComment, IPaginateOption, IPost } from "../types";
 import { Post, User } from "../models";
-import mongoose, { FilterQuery, Schema } from "mongoose";
+import mongoose, { FilterQuery, Mongoose, Schema } from "mongoose";
 import httpStatus from "http-status";
 
 const getPosts = async (
   filter: FilterQuery<IPost>,
   options: IPaginateOption
 ) => {
+  // Apply search index filter if query is present and valid
   if (filter.query && filter.query !== "" && filter.query.length > 2) {
-    filter.searchIndex =ESearchIndex.POST;
+    filter.searchIndex = ESearchIndex.POST;
   }
-  if (options.sortBy === "nouveaute") {
-    options.sortBy = "createdAt:desc";
-  } else if (options.sortBy === "populaire") {
-    options.sortBy = "likesCount:-1";
-  } else if (options.sortBy === "domaine") { 
-    options.sortBy = "category";
-  } else {
-    options.sortBy = "createdAt:desc";
+
+  // Apply sorting options
+  switch (options.sortBy) {
+    case "nouveaute":
+      options.sortBy = "createdAt:desc";
+      break;
+    case "populaire":
+      options.sortBy = "likesCount:-1";
+      break;
+    case "domaine":
+      options.sortBy = "category";
+      break;
+    default:
+      options.sortBy = "createdAt:desc";
+      break;
   }
   
   options.populate = [
@@ -30,7 +38,7 @@ const getPosts = async (
 };
 
 const getFavorites = async (
-  userId: Schema.Types.ObjectId,
+  userId: Schema.Types.ObjectId | mongoose.Types.ObjectId,
   filter: FilterQuery<IPost>,
   options: IPaginateOption
 ) => {
@@ -50,7 +58,7 @@ const getFavorites = async (
   return posts;
 };
 const getLoggedUserPost = async (
-  userId: Schema.Types.ObjectId,
+  userId: Schema.Types.ObjectId | mongoose.Types.ObjectId,
   filter: FilterQuery<IPost>,
   options: IPaginateOption
 ) => { 

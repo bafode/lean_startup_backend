@@ -5,3 +5,4 @@ export { default as isValidMongooseObjectId } from "./isValidMongooseObjectId";
 export { default as response } from "./response";
 export { default as sendEmail } from "./sendEmail";
 export { default as cloudinary } from "./cloudinary";
+export { default as formatErrorForClient } from "./errorFormatter";

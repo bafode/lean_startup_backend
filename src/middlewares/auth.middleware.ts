@@ -35,16 +35,16 @@ export default (...requiredRoles: EUserRole[]) =>
           "⛔ You don't have access to this ressource!"
         );
       }
-      req.user = user._id;
-
-      if (req.params.userId && user.role !== EUserRole.ADMIN) {
-        if (user._id != req.params.userId) {
-          throw new ApiError(
-            httpStatus.FORBIDDEN,
-            "⛔ You don't have access to this ressource!"
-          );
-        }
-      }
+       req.user = user._id;
+      // console.log(req.params.userId, user.role);
+      // if (req.params.userId && user.role !== EUserRole.ADMIN) {
+      //   if (user._id != req.params.userId) {
+      //     throw new ApiError(
+      //       httpStatus.FORBIDDEN,
+      //       "⛔ You don't have access to this ressource!"
+      //     );
+      //   }
+      // }
       next();
     } catch (error) {
       next(error);

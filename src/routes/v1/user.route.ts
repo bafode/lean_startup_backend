@@ -51,6 +51,19 @@ router.get(
   userController.getFollowings
 );
 
+router.get(
+  "/:userId/posts",
+  auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.getUserPosts),
+  userController.getUserPosts
+);
+
+router.get(
+  "/:userId/favorites",
+  auth(EUserRole.ADMIN, EUserRole.USER),
+  validate(userValidation.getOneUserFavorite),
+  userController.getOneUserFavorite);
+
 router.patch(
   "/:followId/follow",
   auth(EUserRole.ADMIN, EUserRole.USER),
