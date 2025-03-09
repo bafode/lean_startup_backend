@@ -13,6 +13,7 @@ export enum EModelNames {
   MESSAGE = "Message",
   CHAT = "Chat",
   LANDING_CONTACT = "LandingContact",
+  NOTIFICATION = "Notification",
 }
 
 export enum EUserRole {

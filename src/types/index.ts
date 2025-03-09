@@ -10,6 +10,11 @@ export {
   ESearchIndex,
 } from "./enums/app.enum";
 
+export {
+  ENotificationType,
+  ENotificationStatus
+} from "./enums/notification.enum";
+
 // interfaces
 export { IPaginateOption, IPaginatePopulate } from "./interfaces/utils.interface";
 export { IUserDocument, IUser } from "./interfaces/user.interface";
@@ -26,3 +31,9 @@ export { IFavorite } from "./interfaces/favorite.interface";
 export { IMessage } from "./interfaces/message.interface";
 export { IChat } from "./interfaces/chat.interface";
 export { ILandingContact } from "./interfaces/landing-contact.interface";
+export { 
+  INotificationBase, 
+  INotificationSocial, 
+  INotificationPush, 
+  INotificationDocument 
+} from "./interfaces/notification.interface";

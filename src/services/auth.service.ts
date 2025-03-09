@@ -36,7 +36,8 @@ const logout = async (refreshToken: string) => {
   if (!refreshTokenDoc) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
   }
-  await refreshTokenDoc.remove();
+  await Token.deleteMany({ user: refreshTokenDoc.user, type: ETokenType.REFRESH });
+  //await refreshTokenDoc.remove();
 };
 
 /**
