@@ -38,14 +38,14 @@ const notificationSchema: Schema<INotificationDocument> = new Schema(
     },
     targetType: {
       type: String,
-      enum: [EModelNames.POST, EModelNames.COMMENT, EModelNames.USER, 'message'],
+      enum: [EModelNames.POST, EModelNames.COMMENT, EModelNames.USER, 'message', 'call'],
     },
     message: {
       type: String,
     },
     callType: {
       type: String,
-      enum: ['voice', 'video', 'text', 'cancel',"message"],
+      enum: ['voice', 'video', 'text', 'cancel', 'accept'],
     },
     docId: {
       type: String,

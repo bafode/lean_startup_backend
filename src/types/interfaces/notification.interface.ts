@@ -15,7 +15,7 @@ export interface INotificationSocial extends INotificationBase {
   targetStringId?: string; // ID de la ressource concernée si ce n'est pas un ObjectId MongoDB
   targetType?: string; // Type de la ressource (post, commentaire, etc.)
   message?: string; // Message personnalisé
-  callType?: 'voice' | 'video' | 'text' | 'cancel';
+  callType?: 'voice' | 'video' | 'text' | 'cancel' | 'accept';
   docId?: string;
 }
 
@@ -28,7 +28,7 @@ export interface INotificationPush {
   toFirstname?: string;
   toLastname?: string;
   toAvatar?: string;
-  callType?: 'voice' | 'video' | 'text' | 'cancel';
+  callType?: 'voice' | 'video' | 'text' | 'cancel' | 'accept';
   docId?: string;
   
   // Champs pour les notifications sociales

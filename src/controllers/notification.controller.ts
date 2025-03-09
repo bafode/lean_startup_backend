@@ -32,7 +32,7 @@ const send_notice = catchReq(async (req: IAppRequest, res: Response) => {
  */
 const sendSocialNotification = catchReq(async (req: IAppRequest, res: Response) => {
     const loggedUser = await userService.getUserById(req.user.toString());
-    const { to_token, type, target_id, target_type, message } = req.body;
+    const { to_token, type, call_type, target_id, target_type, message } = req.body;
     const response = await notificationService.sendPushNotification({
         userToken: loggedUser.id,
         userAvatar: loggedUser.avatar,
@@ -40,6 +40,7 @@ const sendSocialNotification = catchReq(async (req: IAppRequest, res: Response) 
         userLastName: loggedUser.lastname,
         toToken: to_token,
         type,
+        callType: call_type, // Ajouter le call_type pour les notifications d'appel
         targetId: target_id,
         targetType: target_type,
         message

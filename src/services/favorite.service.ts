@@ -27,7 +27,7 @@ const toggleFavorite = async (postId: string, userId: string) => {
     }
     const favorite = await Favorite.findOne({ post: postId, user: userId });
     if (favorite) {
-        await Favorite.findByIdAndRemove(favorite._id);
+        await Favorite.findByIdAndDelete(favorite._id);
         return { message: "Favorite removed" };
     }
     await Favorite.create({ post: postId, user: userId });

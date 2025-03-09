@@ -53,7 +53,7 @@ const deleteLandingContactById = async (contactId: string) => {
     if (!contact) {
         throw new ApiError(httpStatus.NOT_FOUND, "Contact not found");
     }
-    await LandingContact.findByIdAndRemove(contactId);
+    await LandingContact.findByIdAndDelete(contactId);
     return contact;
 };
 

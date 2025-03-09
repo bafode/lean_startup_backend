@@ -1,10 +1,17 @@
 export enum ENotificationType {
-  // Types de notifications d'appel existants
+  // Types de notifications d'appel uniformisés avec le frontend
+  VOICE = 'voice',
+  VIDEO = 'video',
+  TEXT = 'text',
+  CANCEL = 'cancel',
+  ACCEPT = 'accept',
+  
+  // Anciens types pour la compatibilité
   VOICE_CALL = 'voice_call',
   VIDEO_CALL = 'video_call',
   TEXT_MESSAGE = 'text_message',
   CALL_CANCELED = 'call_canceled',
-  ACCEPT_CALL="accept_call",
+  ACCEPT_CALL = 'accept_call',
   
   // Types de notifications de médias sociaux
   LIKE = 'like',

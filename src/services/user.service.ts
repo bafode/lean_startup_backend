@@ -50,7 +50,7 @@ const deleteUserById = async (userId: string) => {
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
-  await user.remove();
+  await User.deleteOne({ _id: userId });
   await postService.deletePostsByAuthorId(userId);
   return user;
 };

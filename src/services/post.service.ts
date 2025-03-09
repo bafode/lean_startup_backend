@@ -121,7 +121,7 @@ const deletePostById = async (postId: string) => {
   if (!post) {
     throw new ApiError(httpStatus.NOT_FOUND, "Post not found");
   }
-  await Post.findByIdAndRemove(postId);
+  await Post.findByIdAndDelete(postId);
   return post;
 };
 

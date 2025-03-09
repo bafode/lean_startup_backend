@@ -25,10 +25,18 @@ const sendPushNotification = async (data: INotificationPush) => {
         await messaging.send(message);
         
         // Si c'est une notification sociale, on la sauvegarde en base de données
-        if (data.type && data.type !== ENotificationType.VOICE_CALL && 
+        if (data.type && 
+            data.type !== ENotificationType.VOICE && 
+            data.type !== ENotificationType.VIDEO && 
+            data.type !== ENotificationType.TEXT && 
+            data.type !== ENotificationType.CANCEL && 
+            data.type !== ENotificationType.ACCEPT &&
+            // Pour la compatibilité avec les anciens types
+            data.type !== ENotificationType.VOICE_CALL && 
             data.type !== ENotificationType.VIDEO_CALL && 
             data.type !== ENotificationType.TEXT_MESSAGE && 
-            data.type !== ENotificationType.CALL_CANCELED) {
+            data.type !== ENotificationType.CALL_CANCELED &&
+            data.type !== ENotificationType.ACCEPT_CALL) {
             
             const notificationData: Partial<INotificationDocument> = {
                 sender: new mongoose.Types.ObjectId(data.userToken),
@@ -100,6 +108,12 @@ const createPushMessage = (data: INotificationPush, deviceToken: string): admin.
                 notificationBody = 'The call has been canceled';
                 sound = 'task_cancel.caf';
                 channelId = 'com.beehiveapp.beehivecancel';
+                break;
+            case 'accept':
+                notificationTitle = 'Call accepted';
+                notificationBody = `${userFirstName} ${userLastName} accepted your call`;
+                sound = 'default';
+                channelId = 'com.beehiveapp.beehiveaccept';
                 break;
         }
     } else if (type) {
@@ -228,7 +242,7 @@ const getUserNotifications = async (userId: string, options: { limit?: number; p
         const notificationObj = notification.toJSON();
         // Si targetStringId existe, l'utiliser comme targetId dans la réponse
         if (notificationObj.targetStringId && !notificationObj.targetId) {
-            notificationObj.targetId = notificationObj.targetStringId;
+            notificationObj.targetId = new mongoose.Types.ObjectId(notificationObj.targetStringId);
         }
         return notificationObj;
     });
