@@ -12,8 +12,6 @@ export enum ENotificationType {
   TEXT_MESSAGE = 'text_message',
   CALL_CANCELED = 'call_canceled',
   ACCEPT_CALL = 'accept_call',
-  
-  // Types de notifications de médias sociaux
   LIKE = 'like',
   COMMENT = 'comment',
   FOLLOW = 'follow',

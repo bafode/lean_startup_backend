@@ -156,9 +156,17 @@ const toggleFollowUser = async (userId: string, followId: string) => {
 
 
 const getContacts = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
-  options.limit= 200;
+  options.limit = 200;
+  const user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+
+  // Combine followers and following lists and remove duplicates
+  const contactIds = [...new Set([...user.followers, ...user.following])];
+
   const users = await User.paginate(
-    { _id: { $ne: userId }, ...filter }, // Combine le filtre d'exclusion avec les autres filtres
+    { _id: { $in: contactIds, $ne: userId }, ...filter },
     options
   );
   return users;

@@ -32,7 +32,7 @@ const send_notice = catchReq(async (req: IAppRequest, res: Response) => {
  */
 const sendSocialNotification = catchReq(async (req: IAppRequest, res: Response) => {
     const loggedUser = await userService.getUserById(req.user.toString());
-    const { to_token, type, call_type, target_id, target_type, message } = req.body;
+    const { to_token, type, call_type, target_id, target_type, message,doc_id } = req.body;
     const response = await notificationService.sendPushNotification({
         userToken: loggedUser.id,
         userAvatar: loggedUser.avatar,
@@ -43,7 +43,8 @@ const sendSocialNotification = catchReq(async (req: IAppRequest, res: Response) 
         callType: call_type, // Ajouter le call_type pour les notifications d'appel
         targetId: target_id,
         targetType: target_type,
-        message
+        message,
+        docId: doc_id
     });
     
     return res.status(response.code === 0 ? 200 : 400).json(response);
@@ -80,12 +81,18 @@ const getUserNotifications = catchReq(async (req: IAppRequest, res: Response) =>
 const markAsRead = catchReq(async (req: IAppRequest, res: Response) => {
     const userId = req.user.toString();
     const { notification_ids } = req.body;
+    let result;
     
-    if (!notification_ids || !Array.isArray(notification_ids)) {
+    if (!notification_ids ) {
         throw new ApiError(httpStatus.BAD_REQUEST, 'notification_ids must be an array');
     }
+
+    if (!Array.isArray(notification_ids)) {
+        result = await notificationService.markOneNotificationAsRead(notification_ids, userId);
+    } else {
+         result = await notificationService.markNotificationsAsRead(notification_ids, userId);
+     }
     
-    const result = await notificationService.markNotificationsAsRead(notification_ids, userId);
     
     return res.status(httpStatus.OK).json({
         code: 0,

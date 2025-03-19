@@ -11,7 +11,7 @@ import mongoose from 'mongoose';
  */
 const sendPushNotification = async (data: INotificationPush) => {
     const { toToken } = data;
-
+    console.log('Sending notification to:', data);
     // Cherche l'utilisateur avec `toToken`, qui devrait être l'ID MongoDB
     const user = await User.findById(toToken) as IUserDocument | null;
     if (!user || !user.fcmtoken) {
@@ -23,41 +23,20 @@ const sendPushNotification = async (data: INotificationPush) => {
 
     try {
         await messaging.send(message);
-        
-        // Si c'est une notification sociale, on la sauvegarde en base de données
-        if (data.type && 
-            data.type !== ENotificationType.VOICE && 
-            data.type !== ENotificationType.VIDEO && 
-            data.type !== ENotificationType.TEXT && 
-            data.type !== ENotificationType.CANCEL && 
-            data.type !== ENotificationType.ACCEPT &&
-            // Pour la compatibilité avec les anciens types
-            data.type !== ENotificationType.VOICE_CALL && 
-            data.type !== ENotificationType.VIDEO_CALL && 
-            data.type !== ENotificationType.TEXT_MESSAGE && 
-            data.type !== ENotificationType.CALL_CANCELED &&
-            data.type !== ENotificationType.ACCEPT_CALL) {
+        if (data.type &&
+            data.type !== ENotificationType.CANCEL &&
+            data.type !== ENotificationType.ACCEPT 
+        ) {
             
             const notificationData: Partial<INotificationDocument> = {
                 sender: new mongoose.Types.ObjectId(data.userToken),
                 recipient: new mongoose.Types.ObjectId(toToken),
                 type: data.type,
                 status: ENotificationStatus.UNREAD,
+                docId: data.docId,
                 targetType: data.targetType,
                 message: data.message
             };
-            
-            // Vérifier si targetId est un ObjectId MongoDB valide
-            if (data.targetId) {
-                try {
-                    // Essayer de créer un ObjectId
-                    notificationData.targetId = new mongoose.Types.ObjectId(data.targetId);
-                } catch (error) {
-                    // Si ce n'est pas un ObjectId valide, le stocker comme chaîne
-                    notificationData.targetStringId = data.targetId;
-                }
-            }
-            
             await createNotification(notificationData);
         }
         
@@ -75,13 +54,12 @@ const sendPushNotification = async (data: INotificationPush) => {
  * @returns Message formaté pour FCM
  */
 const createPushMessage = (data: INotificationPush, deviceToken: string): admin.messaging.Message => {
-    const { userToken, userAvatar, userFirstName, userLastName, callType, type, message } = data;
-
+    const { userToken, userAvatar, userFirstName, userLastName, callType, type, message,docId } = data;
+    
     let notificationTitle = '';
     let notificationBody = '';
     let sound = 'default';
     let channelId = 'com.beehiveapp.beehive.notification';
-
     // Déterminer le contenu de la notification en fonction du type
     if (callType) {
         // Notifications d'appel (ancien système)
@@ -261,6 +239,25 @@ const getUserNotifications = async (userId: string, options: { limit?: number; p
 };
 
 /**
+ * Marque une notification comme lue
+ * @param notificationId ID de notification à marquer
+ * @param userId ID de l'utilisateur propriétaire des notifications
+ * @returns Nombre de notifications mises à jour
+ */
+const markOneNotificationAsRead = async (notificationId: string, userId: string) => {
+    const result = await Notification.updateOne(
+        {
+            _id: notificationId,
+            recipient: userId,
+            status: ENotificationStatus.UNREAD
+        },
+        { status: ENotificationStatus.READ }
+    );
+
+    return { updatedCount: result.modifiedCount };
+};
+
+/**
  * Marque des notifications comme lues
  * @param notificationIds IDs des notifications à marquer
  * @param userId ID de l'utilisateur propriétaire des notifications
@@ -332,5 +329,6 @@ export default {
     markNotificationsAsRead,
     markAllNotificationsAsRead,
     deleteNotification,
-    countUnreadNotifications
+    countUnreadNotifications,
+    markOneNotificationAsRead,
 };
