@@ -8,7 +8,14 @@ on:
         description: The tag to push to the Docker registry.
 
 jobs:
+
+  test:
+    name: 🧪 Test
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+
   build:
+    needs: test # Ajout de la dépendance explicite
     name: 🐳 Build
     if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
     runs-on: ubuntu-latest
