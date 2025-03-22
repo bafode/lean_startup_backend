@@ -17,13 +17,15 @@ const getFavorites = async (
     return favorites;
 };
 
-
-
-
 const toggleFavorite = async (postId: string, userId: string) => {
     const post = await Post.findById(postId);
     if (!post) {
-        throw new ApiError(httpStatus.NOT_FOUND, "Post not found");
+        throw new ApiError(httpStatus.NOT_FOUND, 'Validation Error', [
+            {
+                field: 'postId',
+                message: 'Post not found',
+            },
+        ]);
     }
     const favorite = await Favorite.findOne({ post: postId, user: userId });
     if (favorite) {

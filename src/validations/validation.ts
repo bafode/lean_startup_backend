@@ -1,13 +1,20 @@
+import Joi from "joi/lib";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const password = (value: string, helpers: any) => {
-  if (value.length < 8) {
-    return helpers.message('password must be at least 8 characters');
-  }
-  if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-    return helpers.message('password must contain at least 1 letter and 1 number');
-  }
-  return value;
-};
+const passwordSchema = Joi.string()
+  .min(8)
+  .regex(/(?=.*[a-zA-Z])(?=.*\d)/) // At least one letter and one number
+  .regex(/(?=.*[@$!%*?&])/)
+  .messages({
+    'string.min': 'le mot de passe doit comporter au moins 8 caractères',
+    'string.pattern.base': 'le mot de passe doit comporter au moins une lettre, un chiffre et un caractère spécial',
+  });
+
+const objectIdSchema = Joi.string()
+  .regex(/^[0-9a-fA-F]{24}$/)
+  .messages({
+    'string.pattern.base': '"{{#label}}" must be a valid MongoDB ObjectId',
+  });
 
 const objectId = (value: string, helpers: any) => {
   if (!value.match(/^[0-9a-fA-F]{24}$/)) {
@@ -17,5 +24,5 @@ const objectId = (value: string, helpers: any) => {
 };
 
 
-export default { objectId, password };
+export default { objectId, passwordSchema };
   

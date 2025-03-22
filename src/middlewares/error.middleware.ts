@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 import { config, logger } from '../config';
-import { ApiError, formatErrorForClient } from '../utils';
+import { ApiError } from '../utils';
 import { NextFunction, Request, Response } from 'express';
 import { ENodeEnv } from '../types';
 
@@ -8,22 +8,20 @@ import { ENodeEnv } from '../types';
 const errorConverter = (err: any, req: Request, res: Response, next: NextFunction) => {
   let error = err;
   if (!(error instanceof ApiError)) {
-    const statusCode =
-      error.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
-    const message = error.message ;
-    error = new ApiError(statusCode, message, false, err.stack);
+    const statusCode = error.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
+    const message = err.message || httpStatus[statusCode as keyof typeof httpStatus];
+    error = new ApiError(statusCode, message, undefined, false);
   }
   next(error);
 };
 
 // eslint-disable-next-line no-unused-vars
-const errorHandler = (err: ApiError, req: Request, res: Response) => {
+const errorHandler = (err: ApiError, req: Request, res: Response, next: NextFunction) => {
   // In production, hide error details for non-operational errors
   if (config.env === ENodeEnv.PROD && !err.isOperational) {
     err = new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,
-      httpStatus[httpStatus.INTERNAL_SERVER_ERROR].toString(),
-      false
+      httpStatus[httpStatus.INTERNAL_SERVER_ERROR] as string
     );
   }
 
@@ -32,16 +30,15 @@ const errorHandler = (err: ApiError, req: Request, res: Response) => {
   logger.error(err);
 
   // Format the error for client consumption
-  const formattedError = formatErrorForClient(err);
-  
-  // Add stack trace in development mode
   const response = {
-    ...formattedError,
-    ...(config.env === ENodeEnv.DEV && { stack: err.stack }),
+    code: err.statusCode,
+    message: err.message.split('\n')[0], // Ensure the message contains only the first line
+    details: err.details || [], // Include details if available
+    ...(config.env === ENodeEnv.DEV && { stack: err.stack }), // Include stack trace only in development
   };
 
   // Send the response
-  res.status(formattedError.code).send(response);
+  res.status(err.statusCode).send(response);
 };
 
 export { errorConverter, errorHandler };
