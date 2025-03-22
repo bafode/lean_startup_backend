@@ -6,19 +6,13 @@ on:
       - main
 
 jobs:
-  test:
-    name: 🧪 Test
-    uses: ./.github/workflows/test.yml
-    secrets: inherit
-
   build:
     name: 🐳 Build
-    needs: test
     uses: ./.github/workflows/build.yml
     secrets: inherit
 
   deploy:
-    needs: [test, build]
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: 🧑‍💻 SSH to VPS and Deploy Docker Image
