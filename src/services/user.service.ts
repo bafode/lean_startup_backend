@@ -27,13 +27,23 @@ const updateUserById = async (
 ) => {
   const user = await getUserById(userId);
   if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+    throw new ApiError(httpStatus.NOT_FOUND, 'Validation Error', [
+      {
+        field: 'userId',
+        message: 'User not found',
+      },
+    ]);
   }
   if (
     updateBody.email &&
     (await User.isEmailTaken(updateBody.email.toString(), userId))
   ) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Validation Error', [
+      {
+        field: 'email',
+        message: 'Email already taken',
+      },
+    ]);
   }
   Object.assign(user, updateBody);
   await user.save();
@@ -96,64 +106,58 @@ const toggleUserFavorites = async (postId: string, userId: string) => {
 };
 
 const toggleFollowUser = async (userId: string, followId: string) => {
-  try {
-    // Vérifier que l'utilisateur ne tente pas de se suivre lui-même
-    if (userId === followId) {
-      throw new ApiError(httpStatus.BAD_REQUEST, "Users cannot follow themselves");
-    }
-
-    // Récupérer les deux utilisateurs en parallèle pour de meilleures performances
-    const [user, followUser] = await Promise.all([
-      getUserById(userId),
-      getUserById(followId)
+  if (userId === followId) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Validation Error', [
+      {
+        field: 'followId',
+        message: 'Users cannot follow themselves',
+      },
     ]);
-
-    // Vérifier l'existence des utilisateurs
-    if (!user || !followUser) {
-      throw new ApiError(
-        httpStatus.NOT_FOUND,
-        !user ? "User not found" : "Follow user not found"
-      );
-    }
-
-    // Utiliser les méthodes MongoDB natives pour une meilleure performance
-    const isFollowing = user.following.includes(new mongoose.Types.ObjectId(followId));
-
-    if (isFollowing) {
-      // Retirer les relations en utilisant $pull
-      await Promise.all([
-        User.findByIdAndUpdate(userId, {
-          $pull: { following: followId }
-        }),
-        User.findByIdAndUpdate(followId, {
-          $pull: { followers: userId }
-        })
-      ]);
-    } else {
-      // Ajouter les relations en utilisant $addToSet pour éviter les doublons
-      await Promise.all([
-        User.findByIdAndUpdate(userId, {
-          $addToSet: { following: followId }
-        }),
-        User.findByIdAndUpdate(followId, {
-          $addToSet: { followers: userId }
-        })
-      ]);
-    }
-
-    // Retourner l'utilisateur mis à jour
-    return await getUserById(userId);
-  } catch (error) {
-    // Propager l'erreur avec plus de contexte
-    throw error instanceof ApiError
-      ? error
-      : new ApiError(
-        httpStatus.INTERNAL_SERVER_ERROR,
-        `Failed to toggle follow relationship: ${error.message}`
-      );
   }
-};
 
+  const [user, followUser] = await Promise.all([
+    getUserById(userId),
+    getUserById(followId),
+  ]);
+
+  if (!user || !followUser) {
+    throw new ApiError(
+      httpStatus.NOT_FOUND,
+      'Validation Error',
+      !user
+        ? [{ field: 'userId', message: 'User not found' }]
+        : [{ field: 'followId', message: 'Follow user not found' }]
+    );
+  }
+
+  // Utiliser les méthodes MongoDB natives pour une meilleure performance
+  const isFollowing = user.following.includes(new mongoose.Types.ObjectId(followId));
+
+  if (isFollowing) {
+    // Retirer les relations en utilisant $pull
+    await Promise.all([
+      User.findByIdAndUpdate(userId, {
+        $pull: { following: followId }
+      }),
+      User.findByIdAndUpdate(followId, {
+        $pull: { followers: userId }
+      })
+    ]);
+  } else {
+    // Ajouter les relations en utilisant $addToSet pour éviter les doublons
+    await Promise.all([
+      User.findByIdAndUpdate(userId, {
+        $addToSet: { following: followId }
+      }),
+      User.findByIdAndUpdate(followId, {
+        $addToSet: { followers: userId }
+      })
+    ]);
+  }
+
+  // Retourner l'utilisateur mis à jour
+  return await getUserById(userId);
+};
 
 const getContacts = async (userId: string, filter: FilterQuery<IUserDocument>, options: IPaginateOption) => {
   options.limit = 200;
@@ -201,8 +205,6 @@ const getFollowings = async (userId: string, filter: FilterQuery<IUserDocument>,
   );
   return users ?? [];
 };
-
-
 
 export default {
   getUserById,

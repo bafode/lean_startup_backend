@@ -6,3 +6,4 @@ export { default as response } from "./response";
 export { default as sendEmail } from "./sendEmail";
 export { default as cloudinary } from "./cloudinary";
 export { default as formatErrorForClient } from "./errorFormatter";
+export { isStrongPassword } from "./validation.util";

@@ -24,7 +24,7 @@ const register = catchReq(async (req: Request, res: Response) => {
 
 const login = catchReq(async (req, res) => {
   const { email, password } = req.body;
-  let authType = req.body.authType || EAuthType.EMAIL;
+  const authType = req.body.authType || EAuthType.EMAIL;
   const user = await authService.login(email, password, authType);
   const tokens = await tokenService.generateAuthTokens(user.id);
   res.send({
@@ -49,8 +49,6 @@ const refreshTokens = catchReq(async (req, res) => {
 });
 
 const forgotPassword = catchReq(async (req, res) => {
-
-
   const verificationCode = await tokenService.generateResetPasswordCode(req.body.email);
   await emailService.sendResetPasswordEmail(req.body.email, verificationCode);
   res.status(httpStatus.OK).send({
@@ -61,18 +59,14 @@ const forgotPassword = catchReq(async (req, res) => {
 
 const resetPassword = catchReq(async (req, res) => {
   await authService.resetPassword(req.body.token, req.body.password);
-  res.status(httpStatus.OK).send(
-    {
-      code: httpStatus.OK,
-      message: "Mot de passe réinitialisé avec succès",
-    }
-  );
+  res.status(httpStatus.OK).send({
+    code: httpStatus.OK,
+    message: "Mot de passe réinitialisé avec succès",
+  });
 });
 
 const sendVerificationEmail = catchReq(async (req, res) => {
-  const token = await tokenService.generateVerifyEmailCode(
-    req.user
-  );
+  const token = await tokenService.generateVerifyEmailCode(req.user);
   const loggedUser = await userService.getUserById(req.user);
   await emailService.sendVerificationEmail(loggedUser.email, token);
   res.status(httpStatus.NO_CONTENT).send();
@@ -86,9 +80,7 @@ const verifyEmail = catchReq(async (req, res) => {
   });
 });
 
-
 const getAgoraToken = catchReq(async (req, res) => {
-
   const token = await authService.getAgoraToken(req.query.channel_name);
   res.status(httpStatus.OK).json({
     code: 0,
@@ -96,7 +88,6 @@ const getAgoraToken = catchReq(async (req, res) => {
     msg: 'Token retrieved successfully',
   });
 });
-
 
 const bind_fcmtoken = catchReq(async (req: IAppRequest, res: Response) => {
   const userId = req.user;

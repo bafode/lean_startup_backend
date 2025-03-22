@@ -1,6 +1,7 @@
 import { EGender, EUserRole } from "../types";
 import Joi from "joi";
 import { validation } from ".";
+import { isStrongPassword } from "../utils";
 
 const createUser = {
   body: Joi.object().keys({
@@ -51,7 +52,7 @@ const updateUser = {
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
-      password: Joi.string().custom(validation.password),
+      password: Joi.string().custom(isStrongPassword),
       firstname: Joi.string(),
       lastname: Joi.string(),
       avatar: Joi.string(),

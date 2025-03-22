@@ -7,7 +7,7 @@ const register = {
     firstname: Joi.string().allow(null).empty(''),
     lastname: Joi.string().allow(null).empty(''),
     email: Joi.string().required().email(),
-    password: Joi.string().custom(validation.password).allow(null),
+    password: validation.passwordSchema.allow(null),
     authType: Joi.string().allow(null),
     description: Joi.string().allow(null),
     phone: Joi.string().allow(null),
@@ -57,7 +57,7 @@ const forgotPassword = {
 const resetPassword = {
   body: Joi.object().keys({
     token: Joi.string().required().description('The generated reset password token getted from forgotPassword request'),
-    password: Joi.string().required().custom(validation.password).description('Generated verify email token'),
+    password: validation.passwordSchema.required().description('The new password'),
   }),
 };
 
