@@ -3,8 +3,7 @@ import Joi from "joi/lib";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const passwordSchema = Joi.string()
   .min(8)
-  .regex(/(?=.*[a-zA-Z])(?=.*\d)/) // At least one letter and one number
-  .regex(/(?=.*[@$!%*?&])/)
+  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) 
   .messages({
     'string.min': 'le mot de passe doit comporter au moins 8 caractères',
     'string.pattern.base': 'le mot de passe doit comporter au moins une lettre, un chiffre et un caractère spécial',

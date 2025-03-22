@@ -78,8 +78,6 @@ export const deleteMultipleCloudinaryFiles=async(fileUrls:string[])=> {
                 return null;
             });
             await Promise.all(deletePromises);
-
-            console.log(`${fileUrls.length} fichiers Cloudinary supprimés`);
         } catch (error) {
             console.error("Erreur lors de la suppression des fichiers Cloudinary:", error);
         }

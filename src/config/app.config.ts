@@ -14,6 +14,7 @@ const envVarsSchema = Joi.object()
     MONGODB_URL_DEV: Joi.string()
       .required()
       .description("url for mongodb in development"),
+    MONGODB_URL_TEST: Joi.string(),
     TOKEN_SECRET: Joi.string().required().description("JWT secret key"),
     TOKEN_ACCESS_EXPIRATION_MINUTES: Joi.number()
       .default(30)
@@ -64,11 +65,9 @@ export default {
   port: envVars.PORT,
   host: envVars.HOST,
   mongoose: {
-    url:
-      envVars.NODE_ENV === ENodeEnv.PROD
-        ? envVars.MONGODB_URL
-        : envVars.MONGODB_URL_DEV +
-        (envVars.NODE_ENV === ENodeEnv.TEST ? "-test" : ""),
+    testUrl: envVars.MONGODB_URL_TEST,
+    devUrl: envVars.MONGODB_URL_DEV,
+    prodUrl: envVars.MONGODB_URL,
     options: {
       autoIndex: true,
     },

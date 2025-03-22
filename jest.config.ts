@@ -36,7 +36,24 @@ export default {
   preset: 'ts-jest',
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
-  }
+  },
+  
+  // Mock modules that cause issues
+  moduleNameMapper: {
+    '^axios$': '<rootDir>/tests/mocks/axios.js',
+    '^@sendgrid/(.*)$': '<rootDir>/tests/mocks/sendgrid.js',
+    '^firebase-admin$': '<rootDir>/tests/mocks/firebase-admin.js',
+    '^socket.io$': '<rootDir>/tests/mocks/socket-io.js'
+  },
+  
+  // Détecte et ferme les open handles
+  detectOpenHandles: true,
+  
+  // Définit un timeout pour forcer la fermeture des tests
+  forceExit: true,
+  
+  // Augmente le timeout pour les tests
+  testTimeout: 30000
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [

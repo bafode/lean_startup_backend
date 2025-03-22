@@ -2,7 +2,7 @@ import httpStatus from "http-status";
 import mongoose, { FilterQuery} from "mongoose";
 import { Post, User } from "../models";
 import { IUserDocument, IPaginateOption } from "../types";
-import { ApiError } from "../utils";
+import { ApiError, isStrongPassword } from "../utils";
 import postService from "./post.service";
 
 const getUsers = async (
@@ -45,6 +45,17 @@ const updateUserById = async (
       },
     ]);
   }
+  if (updateBody.password&&!isStrongPassword(updateBody.password)) {
+     throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de Validation', [
+          {
+            field: 'password',
+            message: 'Le mot de passe doit comporter au moins 8 caractères, inclure une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.',
+          },
+        ]);
+
+  }
+
+
   Object.assign(user, updateBody);
   await user.save();
   return user;
