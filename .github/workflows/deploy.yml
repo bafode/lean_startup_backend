@@ -12,7 +12,7 @@ jobs:
     secrets: inherit
 
   deploy:
-    needs: build # Ajout de la dépendance explicite
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: 🧑‍💻 SSH to VPS and Deploy Docker Image
