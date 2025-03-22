@@ -52,7 +52,7 @@ const updateUser = {
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
-      password: Joi.string().custom(isStrongPassword),
+      password: validation.passwordSchema.allow(null),
       firstname: Joi.string(),
       lastname: Joi.string(),
       avatar: Joi.string(),

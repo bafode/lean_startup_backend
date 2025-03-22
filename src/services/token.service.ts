@@ -157,6 +157,10 @@ const generateVerifyEmailCode = async (userId: string) => {
 
 const generateResetPasswordCode = async (email: string) => {
   const user = await userService.getOneUser({ email });
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'No users found with this email');
+  }
+  console.log(user);
   const userId = user.id;
   const expires = moment().add(config.jwt.verifyEmailExpirationMinutes, 'minutes');
   const verifyTelCode = generateCode();

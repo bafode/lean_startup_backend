@@ -8,7 +8,6 @@ import { EAuthType, ETokenType, IUser } from '../types';
 import { isStrongPassword } from '../utils/validation.util';
 
 const register = async (user: IUser) => {
-  console.log('Validating password:', user.password); // Debug log
 
   if (!isStrongPassword(user.password)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de Validation', [
@@ -94,6 +93,14 @@ const resetPassword = async (token: string, newPassword: string) => {
 
   try {
     const verifyEmailTokenDoc = await tokenService.verifyCode(token, ETokenType.RESET_PASSWORD);
+    if (!verifyEmailTokenDoc) {
+      throw new ApiError(httpStatus.UNAUTHORIZED, 'Erreur de Validation', [
+        {
+          field: 'token',
+          message: 'Token de réinitialisation invalide ou expiré',
+        },
+      ]);
+    }
     const user = await userService.getUserById(verifyEmailTokenDoc.user.toString());
     if (!user) {
       throw new ApiError(httpStatus.NOT_FOUND, 'Validation Error', [

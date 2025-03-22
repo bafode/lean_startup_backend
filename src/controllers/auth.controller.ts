@@ -53,7 +53,7 @@ const forgotPassword = catchReq(async (req, res) => {
   await emailService.sendResetPasswordEmail(req.body.email, verificationCode);
   res.status(httpStatus.OK).send({
     code: httpStatus.OK,
-    message: "Si un compte existe avec cet email, un email de réinitialisation de mot de passe a été envoyé",
+    message: `Un code de réinitialisation a été envoyé à ${req.body.email}`,
   });
 });
 

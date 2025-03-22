@@ -4,7 +4,7 @@ import faker from 'faker';
 import { EGender, EUserRole, IUser } from '../../src/types';
 import { User } from '../../src/models';
 
-const password = 'password1';
+const password = 'P@ssword1234';
 const salt = bcrypt.genSaltSync(8);
 const hashedPassword = bcrypt.hashSync(password, salt);
 

@@ -13,7 +13,6 @@ import { routeV1 } from "./routes";
 import { ApiError } from "./utils";
 import httpStatus from "http-status";
 import { errorConverter, errorHandler, MetricsMiddleware } from "./middlewares";
-import setupSocket from "./socket";
 import metricsLoader from "./metrics.loader";
 
 const app = express();
@@ -90,10 +89,6 @@ app.use(errorConverter);
 
 // handle error
 app.use(errorHandler);
-
-// Create HTTP server and integrate socket.io
-const server = createServer(app);
-setupSocket(server);
 
 
 export default app;

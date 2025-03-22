@@ -27,7 +27,7 @@ const errorHandler = (err: ApiError, req: Request, res: Response, next: NextFunc
 
   // Log the error
   res.locals.errorMessage = err.message;
-  logger.error(err);
+  //logger.error(err);
 
   // Format the error for client consumption
   const response = {
