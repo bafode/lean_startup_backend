@@ -79,8 +79,42 @@ describe('Auth routes', () => {
       await userUtil.insertUsers([userUtil.userOne]);
       newUser.email = userUtil.userOne.email;
 
-      await request(app).post('/v1/auth/register').send(newUser).expect(httpStatus.BAD_REQUEST);
+      const res = await request(app).post('/v1/auth/register').send(newUser).expect(httpStatus.BAD_REQUEST);
+      expect(res.body).toEqual({
+        code: httpStatus.BAD_REQUEST,
+        message: 'Erreur de Validation',
+        details: [
+          {
+            field: 'email',
+            message: 'L\'email est déjà utilisé',
+          },
+        ],
+      });
     });
+
+    test('should return 400 error if password is missing', async () => {
+      delete newUser.password;
+      const res= await request(app).post('/v1/auth/register').send(newUser).expect(httpStatus.BAD_REQUEST);
+
+      expect(res.body).toEqual({
+        code: httpStatus.BAD_REQUEST,
+        message: 'Erreur de Validation',
+        details: [
+          {
+            field: 'password',
+            message: 'Le mot de passe est obligatoire',
+          },
+        ],
+      });
+    });
+
+    test('should return 201 if auth type is google and no password set', async () => {
+      newUser.authType = EAuthType.GOOGLE;
+      newUser.email = faker.internet.email().toLowerCase();
+      delete newUser.password;
+      await request(app).post('/v1/auth/register').send(newUser).expect(httpStatus.CREATED);
+    });
+    
 
     test('should return 400 error if password does not meet strong password requirements', async () => {
       // Test password without uppercase

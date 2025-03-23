@@ -223,6 +223,16 @@ describe('Post routes', () => {
         .send()
         .expect(httpStatus.NOT_FOUND);
     });
+
+    test('should return 400 error if postId is not a valid mongo id', async () => {
+      await userUtil.insertUsers([userUtil.userOne]);
+      
+      await request(app)
+        .get('/v1/posts/invalidId')
+        .set('Authorization', `Bearer ${tokenUtil.userOneAccessToken}`)
+        .send()
+        .expect(httpStatus.INTERNAL_SERVER_ERROR);
+    });
   });
 
   describe('PATCH /v1/posts/:postId', () => {

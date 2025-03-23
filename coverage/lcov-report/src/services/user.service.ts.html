@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>63/231</span>
+                <span class='fraction'>77/231</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/11</span>
+                <span class='fraction'>13/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>5/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>63/231</span>
+                <span class='fraction'>77/231</span>
             </div>
         
             
@@ -302,16 +302,16 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -363,14 +363,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -532,13 +532,13 @@ import { IUserDocument, IPaginateOption } from "../types";
 import { ApiError, isStrongPassword } from "../utils";
 import postService from "./post.service";
 &nbsp;
-const getUsers = <span class="fstat-no" title="function not covered" >async (</span>
-<span class="cstat-no" title="statement not covered" >  filter: FilterQuery&lt;IUserDocument&gt;,</span>
-<span class="cstat-no" title="statement not covered" >  options: IPaginateOption</span>
-<span class="cstat-no" title="statement not covered" >) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const users = await User.paginate(filter, options);</span>
-<span class="cstat-no" title="statement not covered" >  return users;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+const getUsers = async (
+  filter: FilterQuery&lt;IUserDocument&gt;,
+  options: IPaginateOption
+) =&gt; {
+  const users = await User.paginate(filter, options);
+  return users;
+};
 &nbsp;
 const getUserById = async (id: string) =&gt; {
   return await User.findById(id);
@@ -593,15 +593,15 @@ const updateUserById = async (
  * @param {ObjectId} userId
  * @returns {Promise&lt;IUserDocument&gt;}
  */
-const deleteUserById = <span class="fstat-no" title="function not covered" >async (userId: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const user = await getUserById(userId);</span>
-<span class="cstat-no" title="statement not covered" >  if (!user) {</span>
-<span class="cstat-no" title="statement not covered" >    throw new ApiError(httpStatus.NOT_FOUND, "User not found");</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >  await User.deleteOne({ _id: userId });</span>
-<span class="cstat-no" title="statement not covered" >  await postService.deletePostsByAuthorId(userId);</span>
-<span class="cstat-no" title="statement not covered" >  return user;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+const deleteUserById = async (userId: string) =&gt; {
+  const user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+  await User.deleteOne({ _id: userId });
+  await postService.deletePostsByAuthorId(userId);
+  return user;
+};
 &nbsp;
 const toggleUserFavorites = <span class="fstat-no" title="function not covered" >async (postId: string, userId: string) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
@@ -763,7 +763,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-23T12:35:46.274Z
+                at 2025-03-23T19:36:48.539Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
