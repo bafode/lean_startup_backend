@@ -1,10 +1,6 @@
 name: 🧪 Test and Coverage
 
 on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
   workflow_call:
     secrets:
       ENV_FILE_CONTENT:
@@ -16,20 +12,18 @@ jobs:
   test:
     name: 🧪 Test
     runs-on: ubuntu-latest
-    
     services:
       mongodb:
         image: mongo:4.4
         ports:
           - 27017:27017
-
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.12.1
-
+      
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
-
+      
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v3
         with:
