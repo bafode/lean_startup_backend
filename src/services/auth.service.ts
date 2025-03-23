@@ -8,8 +8,15 @@ import { EAuthType, ETokenType, IUser } from '../types';
 import { isStrongPassword } from '../utils/validation.util';
 
 const register = async (user: IUser) => {
-
-  if (!isStrongPassword(user.password)) {
+  if (user.authType === EAuthType.EMAIL && !user.password) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de Validation', [
+      {
+        field: 'password',
+        message: 'Le mot de passe est obligatoire',
+      },
+    ]);
+  }
+  if (user.password&&!isStrongPassword(user.password)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de Validation', [
       {
         field: 'password',
