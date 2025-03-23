@@ -5,8 +5,6 @@ on:
     secrets:
       ENV_FILE_CONTENT:
         required: true
-      GITHUB_TOKEN:
-        required: true
 
 jobs:
   test:

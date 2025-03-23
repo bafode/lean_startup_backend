@@ -9,7 +9,8 @@ jobs:
   test:
     name: 🧪 Test and Coverage
     uses: ./.github/workflows/test.yml
-    secrets: inherit
+    secrets:
+      ENV_FILE_CONTENT: ${{ secrets.ENV_FILE_CONTENT }}
 
   build:
     name: 🐳 Build
