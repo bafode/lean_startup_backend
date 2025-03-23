@@ -143,6 +143,16 @@ describe('Auth routes', () => {
       await request(app).post('/v1/auth/login').send(loginCredentials).expect(httpStatus.UNAUTHORIZED);
     });
 
+    test('should return 401 error if there are no users with that email and auth type is google', async () => {
+      const loginCredentials = {
+        email: userUtil.userOne.email,
+        password: userUtil.userOne.password,
+        authType: EAuthType.GOOGLE
+      };
+
+      await request(app).post('/v1/auth/login').send(loginCredentials).expect(httpStatus.UNAUTHORIZED);
+    });
+
     test('should return 401 error if email is incorrect', async () => {
       await userUtil.insertUsers([userUtil.userOne]);
       const loginCredentials = {

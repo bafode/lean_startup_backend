@@ -31,7 +31,14 @@ const register = async (user: IUser) => {
 
 const login = async (email: string, password: string, authType: string) => {
   const user = await userService.getOneUser({ email });
-
+  if (!user && authType !== EAuthType.EMAIL) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Compte Inéxistant", [
+      {
+        field: 'email',
+        message: 'Utilisateur non trouvé, veuillez vous inscrire',
+      },
+    ]);
+   }
   if (!user) {
     throw new ApiError(httpStatus.UNAUTHORIZED, "Erreur d'Authentification", [
       {
