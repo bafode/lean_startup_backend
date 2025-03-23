@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.42% </span>
+                <span class="strong">39.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>66/152</span>
+                <span class='fraction'>68/173</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.42% </span>
+                <span class="strong">39.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>66/152</span>
+                <span class='fraction'>68/173</span>
             </div>
         
             
@@ -214,7 +214,28 @@
 <a name='L149'></a><a href='#L149'>149</a>
 <a name='L150'></a><a href='#L150'>150</a>
 <a name='L151'></a><a href='#L151'>151</a>
-<a name='L152'></a><a href='#L152'>152</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -257,6 +278,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -334,6 +363,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -353,6 +388,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -371,6 +413,8 @@ import { NextFunction, Request, Response } from "express";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { config } from "../config";
+import { ApiError } from "../utils";
+import httpStatus from "http-status/lib";
 &nbsp;
 // Configuration de Cloudinary
 cloudinary.config({
@@ -411,7 +455,13 @@ const storage = new CloudinaryStorage({
 <span class="cstat-no" title="statement not covered" >    // Déterminer le type de fichier</span>
 <span class="cstat-no" title="statement not covered" >    const fileType = getFileType(file);</span>
 <span class="cstat-no" title="statement not covered" >    if (!fileType) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error('Type de fichier non supporté');</span>
+<span class="cstat-no" title="statement not covered" >      throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de type', [</span>
+<span class="cstat-no" title="statement not covered" >           {</span>
+<span class="cstat-no" title="statement not covered" >             field: 'file',</span>
+<span class="cstat-no" title="statement not covered" >             message: 'Type de fichier non supporté!',</span>
+<span class="cstat-no" title="statement not covered" >           },</span>
+<span class="cstat-no" title="statement not covered" >         ]);</span>
+<span class="cstat-no" title="statement not covered" >      </span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    // Configuration spécifique pour chaque type de fichier</span>
@@ -464,11 +514,14 @@ const storage = new CloudinaryStorage({
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  if (!fileType) {</span>
 <span class="cstat-no" title="statement not covered" >    return cb(</span>
-<span class="cstat-no" title="statement not covered" >      new Error(</span>
-<span class="cstat-no" title="statement not covered" >        `Type de fichier non supporté. Types acceptés: ${Object.keys(ALLOWED_FILES)</span>
-<span class="cstat-no" title="statement not covered" >          .map(type =&gt; ALLOWED_FILES[type as keyof typeof ALLOWED_FILES].extensions.source.slice(0).split('|').join(', '))</span>
-<span class="cstat-no" title="statement not covered" >          .join(', ')}`</span>
-<span class="cstat-no" title="statement not covered" >      ),</span>
+<span class="cstat-no" title="statement not covered" >      new ApiError(httpStatus.BAD_REQUEST, 'Type de fichier non supporté', [</span>
+<span class="cstat-no" title="statement not covered" >           {</span>
+<span class="cstat-no" title="statement not covered" >             field: 'file',</span>
+<span class="cstat-no" title="statement not covered" >          message: `Type de fichier non supporté. Types acceptés: ${Object.keys(ALLOWED_FILES)</span>
+<span class="cstat-no" title="statement not covered" >            .map(type =&gt; ALLOWED_FILES[type as keyof typeof ALLOWED_FILES].extensions.source.slice(0).split('|').join(', '))</span>
+<span class="cstat-no" title="statement not covered" >            .join(', ')}`,</span>
+<span class="cstat-no" title="statement not covered" >           },</span>
+<span class="cstat-no" title="statement not covered" >         ]),</span>
 <span class="cstat-no" title="statement not covered" >      false</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
@@ -476,9 +529,12 @@ const storage = new CloudinaryStorage({
 <span class="cstat-no" title="statement not covered" >  // Vérification de la taille</span>
 <span class="cstat-no" title="statement not covered" >  if (file.size &gt; ALLOWED_FILES[fileType].maxSize) {</span>
 <span class="cstat-no" title="statement not covered" >    return cb(</span>
-<span class="cstat-no" title="statement not covered" >      new Error(</span>
-<span class="cstat-no" title="statement not covered" >        `La taille du fichier dépasse la limite autorisée de ${ALLOWED_FILES[fileType].maxSize / (1024 * 1024)}MB`</span>
-<span class="cstat-no" title="statement not covered" >      ),</span>
+<span class="cstat-no" title="statement not covered" >      new ApiError(httpStatus.BAD_REQUEST, 'Taille de fichier dépassée', [</span>
+<span class="cstat-no" title="statement not covered" >           {</span>
+<span class="cstat-no" title="statement not covered" >             field: 'file',</span>
+<span class="cstat-no" title="statement not covered" >             message: `La taille du fichier dépasse la limite autorisée de ${ALLOWED_FILES[fileType].maxSize / (1024 * 1024)}MB`,</span>
+<span class="cstat-no" title="statement not covered" >           },</span>
+<span class="cstat-no" title="statement not covered" >         ]),</span>
 <span class="cstat-no" title="statement not covered" >      false</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
@@ -505,13 +561,20 @@ const upload = multer({
 const handleUploadError = (error: any, req: Request, res: Response, next: NextFunction) =&gt; {
   if (error instanceof multer.MulterError) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    if (error.code === 'LIMIT_FILE_SIZE') {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(400).json({</span>
-<span class="cstat-no" title="statement not covered" >        error: 'Taille de fichier dépassée',</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      throw new ApiError(httpStatus.BAD_REQUEST, 'Taille de fichier dépassée', [</span>
+<span class="cstat-no" title="statement not covered" >            {</span>
+<span class="cstat-no" title="statement not covered" >              field: 'file',</span>
+<span class="cstat-no" title="statement not covered" >              message: `La taille du fichier dépasse la limite autorisée de ${ALLOWED_FILES.images.maxSize / (1024 * 1024)}MB`,</span>
+<span class="cstat-no" title="statement not covered" >            },</span>
+<span class="cstat-no" title="statement not covered" >      ]);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(400).json({</span>
-<span class="cstat-no" title="statement not covered" >      error: `Erreur d'upload: ${error.message}`,</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de fichier', [</span>
+<span class="cstat-no" title="statement not covered" >      {</span>
+<span class="cstat-no" title="statement not covered" >        field: 'file',</span>
+<span class="cstat-no" title="statement not covered" >        message: error.message,</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >    ]);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
   next(error);
 };
@@ -523,7 +586,7 @@ export { upload, handleUploadError };</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-22T21:21:01.653Z
+                at 2025-03-23T10:49:41.812Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

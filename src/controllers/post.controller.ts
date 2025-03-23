@@ -10,7 +10,12 @@ const createPost = catchReq(async (req: IAppRequest, res: Response) => {
   let data: IPost = { ...req.body };
   data.author = req.user;
   if (!req.files) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "No files uploaded");
+     throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de Media', [
+          {
+            field: 'media',
+            message: 'Veuillez ajouter des médias à votre post',
+          },
+        ]);
   }
   const files: Express.Multer.File[] = req.files as Express.Multer.File[];
  
