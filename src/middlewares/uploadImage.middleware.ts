@@ -71,11 +71,6 @@ const storage = new CloudinaryStorage({
 
 // Fonction pour déterminer le type de fichier
 function getFileType(file: Express.Multer.File): keyof typeof ALLOWED_FILES | null {
-  console.log("Checking file:", {
-    originalname: file.originalname,
-    mimetype: file.mimetype,
-    extension: path.extname(file.originalname).toLowerCase()
-  });
 
   const extension = path.extname(file.originalname).toLowerCase();
 
