@@ -4,6 +4,8 @@ import { NextFunction, Request, Response } from "express";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { config } from "../config";
+import { ApiError } from "../utils";
+import httpStatus from "http-status/lib";
 
 // Configuration de Cloudinary
 cloudinary.config({
@@ -44,7 +46,13 @@ const storage = new CloudinaryStorage({
     // Déterminer le type de fichier
     const fileType = getFileType(file);
     if (!fileType) {
-      throw new Error('Type de fichier non supporté');
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de type', [
+           {
+             field: 'file',
+             message: 'Type de fichier non supporté!',
+           },
+         ]);
+      
     }
 
     // Configuration spécifique pour chaque type de fichier
@@ -97,11 +105,14 @@ function checkFileType(
 
   if (!fileType) {
     return cb(
-      new Error(
-        `Type de fichier non supporté. Types acceptés: ${Object.keys(ALLOWED_FILES)
-          .map(type => ALLOWED_FILES[type as keyof typeof ALLOWED_FILES].extensions.source.slice(0).split('|').join(', '))
-          .join(', ')}`
-      ),
+      new ApiError(httpStatus.BAD_REQUEST, 'Type de fichier non supporté', [
+           {
+             field: 'file',
+          message: `Type de fichier non supporté. Types acceptés: ${Object.keys(ALLOWED_FILES)
+            .map(type => ALLOWED_FILES[type as keyof typeof ALLOWED_FILES].extensions.source.slice(0).split('|').join(', '))
+            .join(', ')}`,
+           },
+         ]),
       false
     );
   }
@@ -109,9 +120,12 @@ function checkFileType(
   // Vérification de la taille
   if (file.size > ALLOWED_FILES[fileType].maxSize) {
     return cb(
-      new Error(
-        `La taille du fichier dépasse la limite autorisée de ${ALLOWED_FILES[fileType].maxSize / (1024 * 1024)}MB`
-      ),
+      new ApiError(httpStatus.BAD_REQUEST, 'Taille de fichier dépassée', [
+           {
+             field: 'file',
+             message: `La taille du fichier dépasse la limite autorisée de ${ALLOWED_FILES[fileType].maxSize / (1024 * 1024)}MB`,
+           },
+         ]),
       false
     );
   }
@@ -138,13 +152,20 @@ const upload = multer({
 const handleUploadError = (error: any, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof multer.MulterError) {
     if (error.code === 'LIMIT_FILE_SIZE') {
-      return res.status(400).json({
-        error: 'Taille de fichier dépassée',
-      });
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Taille de fichier dépassée', [
+            {
+              field: 'file',
+              message: `La taille du fichier dépasse la limite autorisée de ${ALLOWED_FILES.images.maxSize / (1024 * 1024)}MB`,
+            },
+      ]);
+    
     }
-    return res.status(400).json({
-      error: `Erreur d'upload: ${error.message}`,
-    });
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Erreur de fichier', [
+      {
+        field: 'file',
+        message: error.message,
+      },
+    ]);
   }
   next(error);
 };

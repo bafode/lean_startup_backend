@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1742678461981" clover="3.2.0">
-  <project timestamp="1742678461981" name="All files">
-    <metrics statements="5955" coveredstatements="4133" conditionals="324" coveredconditionals="268" methods="167" coveredmethods="104" elements="6446" coveredelements="4505" complexity="0" loc="5955" ncloc="5955" packages="16" files="79" classes="79"/>
+<coverage generated="1742726982186" clover="3.2.0">
+  <project timestamp="1742726982186" name="All files">
+    <metrics statements="5980" coveredstatements="4134" conditionals="326" coveredconditionals="270" methods="167" coveredmethods="104" elements="6473" coveredelements="4508" complexity="0" loc="5980" ncloc="5980" packages="16" files="79" classes="79"/>
     <package name="src">
       <metrics statements="188" coveredstatements="176" conditionals="7" coveredconditionals="4" methods="2" coveredmethods="2"/>
       <file name="app.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\app.ts">
@@ -384,7 +384,7 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="678" coveredstatements="438" conditionals="62" coveredconditionals="59" methods="6" coveredmethods="6"/>
+      <metrics statements="683" coveredstatements="438" conditionals="64" coveredconditionals="61" methods="6" coveredmethods="6"/>
       <file name="auth.controller.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\controllers\auth.controller.ts">
         <metrics statements="114" coveredstatements="109" conditionals="21" coveredconditionals="19" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -806,7 +806,7 @@
         <line num="183" count="1" type="stmt"/>
       </file>
       <file name="post.controller.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\controllers\post.controller.ts">
-        <metrics statements="107" coveredstatements="86" conditionals="15" coveredconditionals="15" methods="0" coveredmethods="0"/>
+        <metrics statements="112" coveredstatements="86" conditionals="17" coveredconditionals="17" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -833,80 +833,80 @@
         <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="29" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="30" count="3" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="33" count="3" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
-        <line num="42" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="43" count="2" type="stmt"/>
-        <line num="44" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="50" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="52" count="2" type="stmt"/>
-        <line num="53" count="2" type="stmt"/>
-        <line num="54" count="2" type="stmt"/>
-        <line num="55" count="2" type="stmt"/>
+        <line num="47" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="49" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="56" count="2" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
         <line num="58" count="2" type="stmt"/>
         <line num="59" count="2" type="stmt"/>
         <line num="60" count="2" type="stmt"/>
         <line num="61" count="2" type="stmt"/>
-        <line num="62" count="2" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
         <line num="63" count="2" type="stmt"/>
         <line num="64" count="2" type="stmt"/>
         <line num="65" count="2" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="68" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="66" count="2" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
         <line num="69" count="2" type="stmt"/>
-        <line num="70" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="70" count="2" type="stmt"/>
         <line num="71" count="1" type="stmt"/>
         <line num="72" count="1" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="74" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="75" count="1" type="stmt"/>
+        <line num="73" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="75" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="76" count="1" type="stmt"/>
         <line num="77" count="1" type="stmt"/>
         <line num="78" count="1" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
+        <line num="79" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="80" count="1" type="stmt"/>
         <line num="81" count="1" type="stmt"/>
         <line num="82" count="1" type="stmt"/>
-        <line num="83" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="84" count="2" type="stmt"/>
-        <line num="85" count="2" type="stmt"/>
-        <line num="86" count="2" type="stmt"/>
-        <line num="87" count="2" type="stmt"/>
-        <line num="88" count="2" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="89" count="2" type="stmt"/>
         <line num="90" count="2" type="stmt"/>
-        <line num="91" count="1" type="stmt"/>
-        <line num="92" count="1" type="stmt"/>
-        <line num="93" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="94" count="3" type="stmt"/>
-        <line num="95" count="3" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="94" count="2" type="stmt"/>
+        <line num="95" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="96" count="1" type="stmt"/>
         <line num="97" count="1" type="stmt"/>
-        <line num="98" count="1" type="stmt"/>
-        <line num="99" count="1" type="stmt"/>
-        <line num="100" count="1" type="stmt"/>
+        <line num="98" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="99" count="3" type="stmt"/>
+        <line num="100" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="101" count="1" type="stmt"/>
         <line num="102" count="1" type="stmt"/>
         <line num="103" count="1" type="stmt"/>
@@ -914,6 +914,11 @@
         <line num="105" count="1" type="stmt"/>
         <line num="106" count="1" type="stmt"/>
         <line num="107" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
       </file>
       <file name="user.controller.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\controllers\user.controller.ts">
         <metrics statements="166" coveredstatements="92" conditionals="14" coveredconditionals="13" methods="0" coveredmethods="0"/>
@@ -1086,7 +1091,7 @@
       </file>
     </package>
     <package name="src.middlewares">
-      <metrics statements="503" coveredstatements="276" conditionals="48" coveredconditionals="32" methods="25" coveredmethods="17"/>
+      <metrics statements="524" coveredstatements="278" conditionals="48" coveredconditionals="32" methods="25" coveredmethods="17"/>
       <file name="auth.middleware.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\middlewares\auth.middleware.ts">
         <metrics statements="52" coveredstatements="52" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -1434,7 +1439,7 @@
         <line num="108" count="1" type="stmt"/>
       </file>
       <file name="uploadImage.middleware.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\middlewares\uploadImage.middleware.ts">
-        <metrics statements="152" coveredstatements="66" conditionals="3" coveredconditionals="2" methods="5" coveredmethods="1"/>
+        <metrics statements="173" coveredstatements="68" conditionals="3" coveredconditionals="2" methods="5" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -1478,8 +1483,8 @@
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
         <line num="43" count="1" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
@@ -1496,17 +1501,17 @@
         <line num="59" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
         <line num="73" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
@@ -1524,16 +1529,16 @@
         <line num="87" count="0" type="stmt"/>
         <line num="88" count="0" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
-        <line num="90" count="1" type="stmt"/>
-        <line num="91" count="1" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
         <line num="92" count="0" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
         <line num="94" count="0" type="stmt"/>
         <line num="95" count="0" type="stmt"/>
         <line num="96" count="0" type="stmt"/>
         <line num="97" count="0" type="stmt"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
         <line num="100" count="0" type="stmt"/>
         <line num="101" count="0" type="stmt"/>
         <line num="102" count="0" type="stmt"/>
@@ -1555,38 +1560,59 @@
         <line num="118" count="0" type="stmt"/>
         <line num="119" count="0" type="stmt"/>
         <line num="120" count="0" type="stmt"/>
-        <line num="121" count="1" type="stmt"/>
-        <line num="122" count="1" type="stmt"/>
-        <line num="123" count="1" type="stmt"/>
-        <line num="124" count="1" type="stmt"/>
-        <line num="125" count="1" type="stmt"/>
-        <line num="126" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="127" count="1" type="stmt"/>
-        <line num="128" count="1" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
         <line num="129" count="0" type="stmt"/>
         <line num="130" count="0" type="stmt"/>
         <line num="131" count="0" type="stmt"/>
         <line num="132" count="0" type="stmt"/>
         <line num="133" count="0" type="stmt"/>
-        <line num="134" count="1" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
         <line num="135" count="1" type="stmt"/>
         <line num="136" count="1" type="stmt"/>
         <line num="137" count="1" type="stmt"/>
-        <line num="138" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="139" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="140" count="0" type="stmt"/>
-        <line num="141" count="0" type="stmt"/>
-        <line num="142" count="0" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="139" count="1" type="stmt"/>
+        <line num="140" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="141" count="1" type="stmt"/>
+        <line num="142" count="1" type="stmt"/>
         <line num="143" count="0" type="stmt"/>
         <line num="144" count="0" type="stmt"/>
         <line num="145" count="0" type="stmt"/>
         <line num="146" count="0" type="stmt"/>
         <line num="147" count="0" type="stmt"/>
-        <line num="148" count="0" type="stmt"/>
+        <line num="148" count="1" type="stmt"/>
         <line num="149" count="1" type="stmt"/>
         <line num="150" count="1" type="stmt"/>
         <line num="151" count="1" type="stmt"/>
-        <line num="152" count="1" type="stmt"/>
+        <line num="152" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="153" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="156" count="0" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="162" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="165" count="0" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="168" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="171" count="1" type="stmt"/>
+        <line num="172" count="1" type="stmt"/>
+        <line num="173" count="1" type="stmt"/>
       </file>
       <file name="validate.middleware.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\middlewares\validate.middleware.ts">
         <metrics statements="23" coveredstatements="23" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
@@ -3196,7 +3222,7 @@
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="1444" coveredstatements="750" conditionals="106" coveredconditionals="83" methods="70" coveredmethods="34"/>
+      <metrics statements="1443" coveredstatements="749" conditionals="106" coveredconditionals="83" methods="70" coveredmethods="34"/>
       <file name="auth.service.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\services\auth.service.ts">
         <metrics statements="204" coveredstatements="155" conditionals="30" coveredconditionals="23" methods="8" coveredmethods="8"/>
         <line num="1" count="1" type="stmt"/>
@@ -4243,7 +4269,7 @@
         <line num="214" count="1" type="stmt"/>
       </file>
       <file name="token.service.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\services\token.service.ts">
-        <metrics statements="189" coveredstatements="138" conditionals="16" coveredconditionals="11" methods="10" coveredmethods="6"/>
+        <metrics statements="188" coveredstatements="137" conditionals="16" coveredconditionals="11" methods="10" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -4412,15 +4438,15 @@
         <line num="166" count="1" type="stmt"/>
         <line num="167" count="1" type="stmt"/>
         <line num="168" count="1" type="stmt"/>
-        <line num="169" count="1" type="stmt"/>
-        <line num="170" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="169" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="170" count="5" type="stmt"/>
         <line num="171" count="5" type="stmt"/>
-        <line num="172" count="5" type="stmt"/>
-        <line num="173" count="5" type="cond" truecount="0" falsecount="1"/>
+        <line num="172" count="5" type="cond" truecount="0" falsecount="1"/>
+        <line num="173" count="0" type="stmt"/>
         <line num="174" count="0" type="stmt"/>
-        <line num="175" count="0" type="stmt"/>
+        <line num="175" count="5" type="stmt"/>
         <line num="176" count="5" type="stmt"/>
-        <line num="177" count="5" type="stmt"/>
+        <line num="177" count="1" type="stmt"/>
         <line num="178" count="1" type="stmt"/>
         <line num="179" count="1" type="stmt"/>
         <line num="180" count="1" type="stmt"/>
@@ -4432,7 +4458,6 @@
         <line num="186" count="1" type="stmt"/>
         <line num="187" count="1" type="stmt"/>
         <line num="188" count="1" type="stmt"/>
-        <line num="189" count="1" type="stmt"/>
       </file>
       <file name="user.service.ts" path="C:\Users\camarab\Desktop\lean-startup\code\lean_startup_backend\src\services\user.service.ts">
         <metrics statements="231" coveredstatements="92" conditionals="18" coveredconditionals="16" methods="10" coveredmethods="5"/>
