@@ -1,4 +1,4 @@
-name: Deploy Beehive to VPS
+name: 🚀 Deploy Beehive to VPS
 
 on:
   push:
@@ -6,12 +6,19 @@ on:
       - main
 
 jobs:
+  test:
+    name: 🧪 Test and Coverage
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+
   build:
     name: 🐳 Build
+    needs: test
     uses: ./.github/workflows/build.yml
     secrets: inherit
 
   deploy:
+    name: 🚀 Deploy
     needs: build
     runs-on: ubuntu-latest
     steps:
