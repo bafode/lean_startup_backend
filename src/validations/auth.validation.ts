@@ -24,7 +24,7 @@ const register = {
 const login = {
   body: Joi.object().keys({
     email: Joi.string().required(),
-    password: Joi.string().allow(null),
+    password: Joi.string().allow(null).empty(''),
     authType: Joi.string().allow(null),
     firstname: Joi.string().allow(null).empty(''),
     lastname: Joi.string().allow(null).empty(''),
