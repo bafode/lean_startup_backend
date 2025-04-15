@@ -20,8 +20,10 @@ const getUsers = {
   query: Joi.object().keys({
     role: Joi.string().valid(EUserRole.ADMIN, EUserRole.USER),
     sortBy: Joi.string(),
-    limit: Joi.number().integer(),
-    page: Joi.number().integer(),
+     search: Joi.string().allow(""),
+     orderBy: Joi.string(),  
+     limit: Joi.number().integer(),
+     page: Joi.number().integer(),
   }),
 };
 

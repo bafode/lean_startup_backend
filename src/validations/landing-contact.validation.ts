@@ -7,6 +7,7 @@ const getLandingContacts = {
         firstName: Joi.string(),
         lastName: Joi.string(),
         sortBy: Joi.string(),
+        orderBy: Joi.string(),  
         limit: Joi.number().integer(),
         page: Joi.number().integer(),
     }),
