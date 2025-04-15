@@ -59,6 +59,8 @@ const updateUser = {
       lastname: Joi.string(),
       avatar: Joi.string(),
       description: Joi.string(),
+      accountClosed: Joi.boolean(),
+      isEmailVerified: Joi.boolean(),
       gender: Joi.string().valid(EGender.FEMALE, EGender.MALE),
       role: Joi.forbidden(),
       city: Joi.string(),

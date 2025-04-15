@@ -82,7 +82,7 @@ router
     auth(EUserRole.ADMIN, EUserRole.USER),
     upload.single("image"),
     handleUploadError,
-  //  validate(userValidation.updateUser),
+    validate(userValidation.updateUser),
     userController.updateUser
   )
   .delete(
