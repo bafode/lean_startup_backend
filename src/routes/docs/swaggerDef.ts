@@ -9,7 +9,7 @@ const swaggerDef = {
     description: 'This is the API documentation for the Lean Startup Backend.',
     license: {
       name: 'MIT',
-      url: 'https://github.com/djibril6/restapi-nodejs-boilerplate/blob/main/LICENSE',
+      url: 'https://github.com/bafode/lean_startup_backend/blob/main/LICENSE',
     },
   },
   servers: [
